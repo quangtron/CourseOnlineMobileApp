@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, ImageBackground, TextInput, StyleSheet, Image, Text, Button, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+
+import { Styles } from '../../Common'
 
 const Register = _ => {
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
-                <Text style={[styles.txt(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%', fontFamily: 'Bungee Outline'}]}>COURSE ONLINE</Text>
+                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
-                    <Text style={[styles.txt(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Register</Text>
+                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Register</Text>
                     <View>
                         <TextInput style={styles.inputLayout} placeholder='Enter your email' placeholderTextColor='#fff' />
                     </View>
@@ -22,10 +24,10 @@ const Register = _ => {
                         <TextInput style={styles.inputLayout} placeholder='Confirm your password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
                     <TouchableOpacity style={styles.btnLayout}>
-                        <Text style={styles.txt(20, '#000', 'normal')}>Register</Text>
+                        <Text style={Styles.text(20, '#000', 'normal')}>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{bottom: '-7%'}}>
-                        <Text style={styles.txt(14, '#FFF59D', 'normal')}>Back to Login!</Text>
+                        <Text style={Styles.text(14, '#FFF59D', 'normal')}>Back to Login!</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -74,13 +76,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-    },
-    txt: (size, color, fw) => {
-        return {
-            fontSize: size,
-            color: color,
-            fontWeight: fw,
-        }
     },
     btnLayout: {
         bottom: '-2%',

@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, ImageBackground, TextInput, StyleSheet, Image, Text, Button, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+
+import { Styles } from '../../Common'
 
 const Login = _ => {
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
-                <Text style={[styles.txt(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
+                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
-                    <Text style={[styles.txt(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Login</Text>
+                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Login</Text>
                     <View>
                         <TextInput style={styles.inputLayout} placeholder='Username' placeholderTextColor='#fff' />
                     </View>
@@ -16,14 +18,14 @@ const Login = _ => {
                         <TextInput style={styles.inputLayout} placeholder='Password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
                     <TouchableOpacity>
-                        <Text style={[styles.txt(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
+                        <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnLayout}>
-                        <Text style={styles.txt(20, '#000', 'normal')}>Login</Text>
+                        <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>
-                    <Text style={[styles.txt(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>
+                    <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>
                     <TouchableOpacity style={{bottom: '-16%'}}>
-                        <Text style={styles.txt(13, '#FFF59D', 'normal')}>Create New Account!</Text>
+                        <Text style={Styles.text(13, '#FFF59D', 'normal')}>Create New Account!</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -72,13 +74,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-    },
-    txt: (size, color, fw) => {
-        return {
-            fontSize: size,
-            color: color,
-            fontWeight: fw,
-        }
     },
     btnLayout: {
         bottom: '-10%',
