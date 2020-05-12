@@ -35,14 +35,6 @@ const Download = props => {
         },
     ];
 
-    const showListDownloads = listDownloads => {
-        let result = null;
-
-        result = listDownloads.map((item, index) => <DownloadItem key={index} item={item} />)
-
-        return result;
-    }
-
     const renderSeparator = _ => {
         return(
             <View

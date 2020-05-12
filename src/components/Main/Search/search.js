@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, SectionList, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 
-import SectionCourses from './SectionCourses/sectionCourses';
+import DownloadItem from '../Download/DownloadItem/downloadItem';
+import Styles from '../../Common/Styles';
 
-const Home = _ => {
-    const dataSections = [
+const Search = _ => {
+    const results = [
         {
             title: 'Courses',
             data: [
@@ -42,21 +43,17 @@ const Home = _ => {
             data: [
                 {
                     id: 1,
-                    title: 'Cisco SCOR (350 - 701) for CCNP Security',
+                    title: 'React',
                     img: require('../../../../assets/bgLogin.jpg'),
-                    courses: 5
+                    courses: 5,
+                    duration: '42 hours'
                 },
                 {
                     id: 2,
                     title: 'React Native 2',
                     img: require('../../../../assets/bgLogin.jpg'),
-                    courses: 6
-                },
-                {
-                    id: 3,
-                    title: 'React Native 3',
-                    img: require('../../../../assets/bgLogin.jpg'),
-                    courses: 7
+                    courses: 6,
+                    duration: '42 hours'
                 },
             ],
         },
@@ -126,23 +123,79 @@ const Home = _ => {
         },
     ];
 
+    const renderSeparator = _ => {
+        return(
+            <View
+                style={{
+                    height: 1,
+                    marginRight: 10,
+                    marginBottom: 20,
+                    backgroundColor: '#E0E0E0',
+                }}
+            />
+        );
+    }
+
+    const renderSearchView = _ => {
+        return(
+            <View style={styles.search}>
+                <TextInput
+                    style={styles.inputSearch}
+                    autoFocus={true}
+                    clearButtonMode='always'
+                    placeholder='Enter your keyword'
+                />
+                <TouchableOpacity>
+                    <Text style={[Styles.text(16, '#000', 'normal'), {paddingLeft: 10}]}>Cancle</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
     return(
-        <View style={styles.home}>
-            <ScrollView>
-                <SectionCourses dataSection={dataSections[0]} />
-                <SectionCourses dataSection={dataSections[1]} />
-                <SectionCourses dataSection={dataSections[2]} />
-                <SectionCourses dataSection={dataSections[3]} />
-            </ScrollView>
+        <View style={{margin: 20}}>
+            <View>
+                {renderSearchView()}
+            </View>
+            <SectionList
+                sections = {results}
+                renderItem = {({item}) => <DownloadItem item={item} />}
+                renderSectionHeader = {({section: {title, data}}) => 
+                    <View style={styles.headerSection}>
+                        <Text style={Styles.text(18, '#000', 'bold')}>{title}</Text>
+                        <TouchableOpacity>
+                            <Text style={Styles.text(14, '#000', 'normal')}>{`${data.length} results`} ></Text>
+                        </TouchableOpacity>
+                    </View>
+                }
+                ItemSeparatorComponent = {renderSeparator}
+                showsVerticalScrollIndicator={false}
+                // ListHeaderComponent = {_ => searchView()}
+            />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    home: {
+    headerSection: {
+        // marginTop: 10,
+        marginBottom: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#fff',
+    },
+    search: {
         marginTop: 40,
-        marginLeft: 15,
+        paddingBottom: 30,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    inputSearch: {
+        flex: 1,
+        backgroundColor: '#EEEEEE',
+        borderRadius: 6,
+        padding: 10,
     }
 })
 
-export default Home;
+export default Search;

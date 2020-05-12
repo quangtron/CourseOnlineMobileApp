@@ -4,7 +4,7 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Styles from '../../../Common/Styles';
 
 const SectionCoursesItem = props => {
-    const { title, author, level, released, duration, img } = props.item;
+    const { title, author, level, released, duration, img, courses } = props.item;
 
     return(
         <TouchableOpacity style={styles.item}>
@@ -14,8 +14,13 @@ const SectionCoursesItem = props => {
             />
             <View style={{margin: 10}}>
                 <Text>{title}</Text>
-                <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{author}</Text>
-                <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
+                {author ? 
+                    <View>
+                        <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 10}]}>{author}</Text>
+                        <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
+                    </View>
+                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses} courses`}</Text>
+                }
             </View>
         </TouchableOpacity>
     );
