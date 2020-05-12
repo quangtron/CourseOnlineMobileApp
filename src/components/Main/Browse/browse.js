@@ -11,10 +11,10 @@ const Browse = _ => {
     return(
         <ScrollView style={{marginTop: 50}}>
             <View style={{margin: 15}}>
-                <ImageButton title='NEW RELEASES' />
+                <ImageButton title='NEW RELEASES' img={require('../../../../assets/bgLogin.jpg')} />
             </View>
             <View style={{margin: 15, marginTop: 0}}>
-                <ImageButton title='RECOMMENDED FOR YOU' />
+                <ImageButton title='RECOMMENDED FOR YOU' img={require('../../../../assets/bgLogin.jpg')} />
             </View>
             <SectionPopularSkills title='Popular Skills' />
             <SectionSpecialized />

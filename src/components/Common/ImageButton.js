@@ -9,11 +9,11 @@ const ImageButton = props => {
             style={[styles.image,
                 {width: props.width || '100%', height: props.height || 100}
             ]}
-            source={require('../../../assets/bgLogin.jpg')}
+            source={props.img}
         >
             <TouchableOpacity style={styles.content}>
                 <Text style={[Styles.text(20, '#fff', 'bold'), {textTransform: 'uppercase'}]}>{props.title}</Text>
-                {props.txt ? <Text style={[Styles.text(11, '#fff', 'normal'), {textTransform: 'uppercase'}]}>{props.txt}</Text> : null}
+                {props.extraTitle ? <Text style={[Styles.text(11, '#fff', 'normal'), {textTransform: 'uppercase'}]}>{props.extraTitle}</Text> : null}
             </TouchableOpacity>
         </ImageBackground>
     );

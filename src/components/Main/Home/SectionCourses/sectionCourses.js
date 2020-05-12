@@ -10,6 +10,7 @@ const SectionCourses = props => {
         {
             id: 1,
             title: 'React Native 1',
+            img: require('../../../../../assets/bgLogin.jpg'),
             author: 'T1',
             level: 'Beginner',
             released: 'May 11, 2020',
@@ -18,6 +19,7 @@ const SectionCourses = props => {
         {
             id: 2,
             title: 'React Native 2',
+            img: require('../../../../../assets/bgLogin.jpg'),
             author: 'T2',
             level: 'Beginner',
             released: 'May 11, 2020',
@@ -26,6 +28,7 @@ const SectionCourses = props => {
         {
             id: 3,
             title: 'React Native 3',
+            img: require('../../../../../assets/bgLogin.jpg'),
             author: 'T3',
             level: 'Beginner',
             released: 'May 11, 2020',
@@ -67,7 +70,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4.5,
     },
     headerSection: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },

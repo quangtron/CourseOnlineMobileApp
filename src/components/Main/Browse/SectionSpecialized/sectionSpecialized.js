@@ -6,30 +6,44 @@ import ImageButton from '../../../Common/ImageButton';
 const SectionSpecialized = _ => {
     let list = [
         {
+            id: 1,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'conferences',
             extraTitle: '',
         },
         {
+            id: 2,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'business',
             extraTitle: 'professional',
         },
         {
+            id: 3,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: '<software>',
             extraTitle: 'development',
         },
         {
+            id: 4,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'design',
             extraTitle: 'development',
         },
         {
+            id: 5,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'conferences',
             extraTitle: 'professional',
         },
         {
+            id: 6,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'conferences',
             extraTitle: 'professional',
         },
         {
+            id: 7,
+            img: require('../../../../../assets/bgLogin.jpg'),
             mainTitle: 'conferences',
             extraTitle: 'professional',
         },
@@ -48,7 +62,8 @@ const SectionSpecialized = _ => {
                             title={item[0].mainTitle}
                             width={170}
                             height={70}
-                            txt={item[0].extraTitle}
+                            extraTitle={item[0].extraTitle}
+                            img={item[0].img}
                         />
                     </View>
                     {item.length > 1 ? 
@@ -57,7 +72,8 @@ const SectionSpecialized = _ => {
                                 title={item[1].mainTitle}
                                 width={170}
                                 height={70}
-                                txt={item[1].extraTitle}
+                                extraTitle={item[1].extraTitle}
+                                img={item[1].img}
                             />
                         </View> : null
                     }
@@ -71,7 +87,7 @@ const SectionSpecialized = _ => {
             data={arrays}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item, index}) => showListSpecialized(item)}
+            renderItem={({item}) => showListSpecialized(item)}
             style={{margin: 15, marginRight: 0}}
         />
     );

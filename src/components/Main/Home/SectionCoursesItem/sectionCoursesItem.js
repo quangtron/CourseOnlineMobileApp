@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../../Common/Styles';
 
 const SectionCoursesItem = props => {
-    const { title, author, level, released, duration } = props.item;
+    const { title, author, level, released, duration, img } = props.item;
 
     return(
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item}>
             <Image
-                source={require('../../../../../assets/bgLogin.jpg')}
+                source={img}
                 style={styles.image}
             />
             <View style={{margin: 10}}>
@@ -17,7 +17,7 @@ const SectionCoursesItem = props => {
                 <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{author}</Text>
                 <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 

@@ -1,22 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../../Common/Styles';
 
 const SectionPathsItem = props => {
-    const { title, courses } = props.item;
+    const { title, courses, img } = props.item;
 
     return(
-        <View style={styles.item}>
+        <TouchableOpacity style={styles.item}>
             <Image
-                source={require('../../../../../assets/bgLogin.jpg')}
+                source={img}
                 style={styles.image}
             />
             <View style={{margin: 10}}>
                 <Text>{title}</Text>
                 <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 5}]}>{`${courses} courses`}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 

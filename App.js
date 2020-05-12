@@ -5,11 +5,12 @@ import Login from './src/components/Authentication/Login/login';
 import Register from './src/components/Authentication/Register/register';
 import Home from './src/components/Main/Home/home';
 import Browse from './src/components/Main/Browse/browse';
+import Dowload from './src/components/Main/Download/download';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Browse />
+      <Dowload title='Downloads' />
     </View>
   );
 }
