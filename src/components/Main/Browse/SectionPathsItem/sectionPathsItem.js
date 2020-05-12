@@ -3,8 +3,8 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 
 import Styles from '../../../Common/Styles';
 
-const SectionCoursesItem = props => {
-    const { title, author, level, released, duration } = props.item;
+const SectionPathsItem = props => {
+    const { title, courses } = props.item;
 
     return(
         <View style={styles.item}>
@@ -14,8 +14,7 @@ const SectionCoursesItem = props => {
             />
             <View style={{margin: 10}}>
                 <Text>{title}</Text>
-                <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{author}</Text>
-                <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
+                <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 5}]}>{`${courses} courses`}</Text>
             </View>
         </View>
     );
@@ -30,8 +29,8 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 200,
-        height: 100,
+        height: 115,
     },
 })
 
-export default SectionCoursesItem;
+export default SectionPathsItem;

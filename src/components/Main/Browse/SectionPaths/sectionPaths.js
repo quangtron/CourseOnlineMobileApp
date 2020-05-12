@@ -1,48 +1,39 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-import SectionCoursesItem from '../SectionCoursesItem/sectionCoursesItem';
+import SectionPathsItem from '../SectionPathsItem/sectionPathsItem';
 
 import Styles from '../../../Common/Styles';
 
-const SectionCourses = props => {
-    const courses = [
+const SectionPaths = props => {
+    const paths = [
         {
             id: 1,
-            title: 'React Native 1',
-            author: 'T1',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
+            title: 'Cisco SCOR (350 - 701) for CCNP Security',
+            courses: 5
         },
         {
             id: 2,
             title: 'React Native 2',
-            author: 'T2',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
+            courses: 6
         },
         {
             id: 3,
             title: 'React Native 3',
-            author: 'T3',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
+            courses: 7
         },
     ];
 
-    const showListCoursesItem = courses => {
+    const showListPathsItem = paths => {
         let result = null;
 
-        result = courses.map((item, index) => <SectionCoursesItem key={index} item={item} />);
+        result = paths.map((item, index) => <SectionPathsItem key={index} item={item} />);
 
         return result;
     }
 
     return(
-        <View style={{marginTop: 30}}>
+        <View style={{margin: 15, marginRight: 0}}>
             <View style={[styles.headerSection, {paddingLeft: 5, paddingBottom: 5, paddingRight: 20}]}>
                 <Text style={Styles.text(16, '#000', 'bold')}>{props.title}</Text>
                 <TouchableOpacity style={Styles.btnLayout(70, 20, '#EEEEEE')}>
@@ -50,7 +41,7 @@ const SectionCourses = props => {
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>
-                {showListCoursesItem(courses)}
+                {showListPathsItem(paths)}
             </ScrollView>
         </View>
     );
@@ -67,10 +58,9 @@ const styles = StyleSheet.create({
         shadowRadius: 4.5,
     },
     headerSection: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
 });
 
-export default SectionCourses;
+export default SectionPaths;

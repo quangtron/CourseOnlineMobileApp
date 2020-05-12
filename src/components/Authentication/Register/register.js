@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
-import { Styles } from '../../Common'
+import Styles from '../../Common/Styles'
 
 const Register = _ => {
     return(
@@ -23,7 +23,7 @@ const Register = _ => {
                     <View>
                         <TextInput style={styles.inputLayout} placeholder='Confirm your password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
-                    <TouchableOpacity style={styles.btnLayout}>
+                    <TouchableOpacity style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-2%'}]}>
                         <Text style={Styles.text(20, '#000', 'normal')}>Register</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{bottom: '-7%'}}>
@@ -76,17 +76,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-    },
-    btnLayout: {
-        bottom: '-2%',
-        justifyContent: 'center',
-        alignItems: 'center',
-
-        width: 100,
-        height: 40,
-
-        backgroundColor: '#ffebee',
-        borderRadius: 20,
     },
     txtShadow: {
         textShadowOffset: {

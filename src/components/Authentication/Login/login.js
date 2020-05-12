@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
-import { Styles } from '../../Common'
+import Styles from '../../Common/Styles'
 
 const Login = _ => {
     return(
@@ -20,7 +20,7 @@ const Login = _ => {
                     <TouchableOpacity>
                         <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnLayout}>
+                    <TouchableOpacity style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}>
                         <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>
                     <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>
@@ -74,17 +74,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomWidth: 2,
         borderBottomColor: '#fff',
-    },
-    btnLayout: {
-        bottom: '-10%',
-        justifyContent: 'center',
-        alignItems: 'center',
-
-        width: 100,
-        height: 40,
-
-        backgroundColor: '#ffebee',
-        borderRadius: 20,
     },
     txtShadow: {
         textShadowOffset: {
