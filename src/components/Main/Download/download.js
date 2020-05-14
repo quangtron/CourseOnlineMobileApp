@@ -3,8 +3,9 @@ import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native
 
 import Styles from '../../Common/Styles';
 import DownloadItem from './DownloadItem/downloadItem';
+import Separator from '../../Common/Separator';
 
-const Download = props => {
+const Download = _ => {
     const listDownloads = [
         {
             id: 1,
@@ -35,23 +36,10 @@ const Download = props => {
         },
     ];
 
-    const renderSeparator = _ => {
-        return(
-            <View
-                style={{
-                    height: 1,
-                    marginRight: 10,
-                    marginBottom: 20,
-                    backgroundColor: '#E0E0E0',
-                }}
-            />
-        );
-    }
-
     return(
         <View style={styles.download}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(18, '#000', 'bold')}>{props.title}</Text>
+                <Text style={Styles.text(18, '#000', 'bold')}>Downloads</Text>
                 <TouchableOpacity>
                     <Text style={Styles.text(14, '#00838F', 'normal')}>Remove all</Text>
                 </TouchableOpacity>
@@ -60,7 +48,7 @@ const Download = props => {
                 style = {{marginTop: 30}}
                 data = {listDownloads}
                 renderItem = {({item}) => <DownloadItem item={item} />}
-                ItemSeparatorComponent = {renderSeparator}
+                ItemSeparatorComponent = {Separator}
             />
         </View>
     );

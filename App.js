@@ -7,12 +7,13 @@ import Home from './src/components/Main/Home/home';
 import Browse from './src/components/Main/Browse/browse';
 import Download from './src/components/Main/Download/download';
 import Search from './src/components/Main/Search/search';
+import CoursesDetail from './src/components/CourseDetail/coursesDetail';
+import Setting from './src/components/AccountManagement/Setting/setting';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Download title='Downloads' /> */}
-      <Search />
+      <Setting />
     </View>
   );
 }

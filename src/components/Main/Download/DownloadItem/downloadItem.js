@@ -12,19 +12,22 @@ const DownloadItem = props => {
                 source={img}
                 style={styles.image}
             />
-            <View style={{marginLeft: 10, width: '68%'}}>
+            <View style={styles.text}>
                 <Text style={Styles.text(16, '#000', 'normal')}>{title}</Text>
                 {author ? 
                     <View>
                         <Text style={[Styles.text(14, '#9E9E9E', 'normal'), {marginTop: 10}]}>{author}</Text>
                         <Text style={Styles.text(14, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
                     </View>
-                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses} courses . ${duration}`}</Text>
+                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses} courses`}</Text>
                 }
             </View>
-            <TouchableOpacity>
-                <Text style={{fontWeight: 'bold'}}>...</Text>
-            </TouchableOpacity>
+            {author ? 
+                <TouchableOpacity>
+                    <Text style={{fontWeight: 'bold'}}>...</Text>
+                </TouchableOpacity>
+                : null
+            }
         </TouchableOpacity>
     );
 }
@@ -38,6 +41,10 @@ const styles = StyleSheet.create({
         width: 80,
         height: 60,
     },
+    text: {
+        marginLeft: 10,
+        width: '68%',
+    }
 })
 
 export default DownloadItem;

@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, SectionList, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 
-import DownloadItem from '../Download/DownloadItem/downloadItem';
 import Styles from '../../Common/Styles';
+import DownloadItem from '../Download/DownloadItem/downloadItem';
+import Separator from '../../Common/Separator';
+import AuthorsResult from './AuthorsResult/authorsResult';
 
 const Search = _ => {
     const results = [
@@ -46,95 +48,39 @@ const Search = _ => {
                     title: 'React',
                     img: require('../../../../assets/bgLogin.jpg'),
                     courses: 5,
-                    duration: '42 hours'
                 },
                 {
                     id: 2,
                     title: 'React Native 2',
                     img: require('../../../../assets/bgLogin.jpg'),
                     courses: 6,
-                    duration: '42 hours'
                 },
             ],
         },
         {
-            title: 'Channels',
+            title: 'Authors',
             data: [
                 {
                     id: 1,
-                    title: 'React Native 1',
                     img: require('../../../../assets/bgLogin.jpg'),
                     author: 'T1',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
+                    courses: 5,
                 },
                 {
                     id: 2,
-                    title: 'React Native 2',
                     img: require('../../../../assets/bgLogin.jpg'),
                     author: 'T2',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
+                    courses: 6,
                 },
                 {
                     id: 3,
-                    title: 'React Native 3',
                     img: require('../../../../assets/bgLogin.jpg'),
                     author: 'T3',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
-                },
-            ],
-        },
-        {
-            title: 'Bookmarks',
-            data: [
-                {
-                    id: 1,
-                    title: 'React Native 1',
-                    img: require('../../../../assets/bgLogin.jpg'),
-                    author: 'T1',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
-                },
-                {
-                    id: 2,
-                    title: 'React Native 2',
-                    img: require('../../../../assets/bgLogin.jpg'),
-                    author: 'T2',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
-                },
-                {
-                    id: 3,
-                    title: 'React Native 3',
-                    img: require('../../../../assets/bgLogin.jpg'),
-                    author: 'T3',
-                    level: 'Beginner',
-                    released: 'May 11, 2020',
-                    duration: '38h'
+                    courses: 7,
                 },
             ],
         },
     ];
-
-    const renderSeparator = _ => {
-        return(
-            <View
-                style={{
-                    height: 1,
-                    marginRight: 10,
-                    marginBottom: 20,
-                    backgroundColor: '#E0E0E0',
-                }}
-            />
-        );
-    }
 
     const renderSearchView = _ => {
         return(
@@ -152,6 +98,24 @@ const Search = _ => {
         );
     }
 
+    const renderSectionHeader = (title, data) => {
+        return(
+            <View style={styles.headerSection}>
+                <Text style={Styles.text(18, '#000', 'bold')}>{title}</Text>
+                <TouchableOpacity>
+                    <Text style={Styles.text(14, '#000', 'normal')}>{`${data.length} results`} ></Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    const renderItem = item => {
+        if(!item.title){
+            return <AuthorsResult item={item} />
+        }
+        return <DownloadItem item={item} />
+    }
+
     return(
         <View style={{margin: 20}}>
             <View>
@@ -159,16 +123,9 @@ const Search = _ => {
             </View>
             <SectionList
                 sections = {results}
-                renderItem = {({item}) => <DownloadItem item={item} />}
-                renderSectionHeader = {({section: {title, data}}) => 
-                    <View style={styles.headerSection}>
-                        <Text style={Styles.text(18, '#000', 'bold')}>{title}</Text>
-                        <TouchableOpacity>
-                            <Text style={Styles.text(14, '#000', 'normal')}>{`${data.length} results`} ></Text>
-                        </TouchableOpacity>
-                    </View>
-                }
-                ItemSeparatorComponent = {renderSeparator}
+                renderItem = {({item}) => renderItem(item)}
+                renderSectionHeader = {({section: {title, data}}) => renderSectionHeader(title, data)}
+                ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator={false}
                 // ListHeaderComponent = {_ => searchView()}
             />
@@ -178,7 +135,7 @@ const Search = _ => {
 
 const styles = StyleSheet.create({
     headerSection: {
-        // marginTop: 10,
+        marginTop: 40,
         marginBottom: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -186,7 +143,7 @@ const styles = StyleSheet.create({
     },
     search: {
         marginTop: 40,
-        paddingBottom: 30,
+        // paddingBottom: 20,
         flexDirection: 'row',
         alignItems: 'center',
     },

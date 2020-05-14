@@ -8,10 +8,12 @@ const SectionPathsItem = props => {
 
     return(
         <TouchableOpacity style={styles.item}>
-            <Image
-                source={img}
-                style={styles.image}
-            />
+            <View style={styles.bgView}>
+                <Image
+                    source={img}
+                    style={styles.image}
+                />
+            </View>
             <View style={{margin: 10}}>
                 <Text>{title}</Text>
                 <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 5}]}>{`${courses} courses`}</Text>
@@ -28,9 +30,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#EEEEEE',
     },
     image: {
-        width: 200,
-        height: 115,
+        width: 80,
+        height: 80,
+        borderRadius: 50,
     },
+    bgView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 110,
+        backgroundColor: '#fff',
+    }
 })
 
 export default SectionPathsItem;
