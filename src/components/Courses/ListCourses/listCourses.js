@@ -2,11 +2,11 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import Styles from '../../Common/Styles';
-import DownloadItem from './DownloadItem/downloadItem';
+import DownloadItem from '../../Main/Download/DownloadItem/downloadItem';
 import Separator from '../../Common/Separator';
 
-const Download = _ => {
-    const listDownloads = [
+const ListCourses = _ => {
+    const listCourses = [
         {
             id: 1,
             title: 'React Native 1',
@@ -39,14 +39,11 @@ const Download = _ => {
     return(
         <View style={styles.download}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(18, '#000', 'bold')}>Downloads</Text>
-                <TouchableOpacity>
-                    <Text style={Styles.text(14, '#00838F', 'normal')}>Remove all</Text>
-                </TouchableOpacity>
+                <Text style={Styles.text(22, '#000', 'bold')}>Software Development</Text>
             </View>
             <FlatList
                 style = {{marginTop: 30}}
-                data = {listDownloads}
+                data = {listCourses}
                 renderItem = {({item}) => <DownloadItem item={item} />}
                 ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator = {false}
@@ -66,4 +63,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Download;
+export default ListCourses;

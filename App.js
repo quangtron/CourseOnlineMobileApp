@@ -10,11 +10,12 @@ import Search from './src/components/Main/Search/search';
 import CoursesDetail from './src/components/CourseDetail/coursesDetail';
 import Setting from './src/components/AccountManagement/Setting/setting';
 import Courses from './src/components/Courses/courses';
+import ListCourses from './src/components/Courses/ListCourses/listCourses';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Courses />
+      <ListCourses />
     </View>
   );
 }
