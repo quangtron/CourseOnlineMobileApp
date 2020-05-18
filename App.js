@@ -9,11 +9,12 @@ import Download from './src/components/Main/Download/download';
 import Search from './src/components/Main/Search/search';
 import CoursesDetail from './src/components/CourseDetail/coursesDetail';
 import Setting from './src/components/AccountManagement/Setting/setting';
+import Courses from './src/components/Courses/courses';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Setting />
+      <Courses />
     </View>
   );
 }

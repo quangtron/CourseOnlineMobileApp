@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 
 const SectionAuthorsItem = props => {
     return(
-        <TouchableOpacity style={{marginRight: 10}}>
+        <TouchableOpacity style={{marginRight: 20}}>
             <Image source={props.item.img} style={styles.image} />
             <Text style={styles.textLayout}>{props.item.name}</Text>
         </TouchableOpacity>
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     textLayout: {
         marginTop: 10,
         textAlign: 'center',
+        width: 80,
     },
 })
 
