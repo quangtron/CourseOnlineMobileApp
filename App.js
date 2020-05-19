@@ -11,11 +11,13 @@ import CoursesDetail from './src/components/CourseDetail/coursesDetail';
 import Setting from './src/components/AccountManagement/Setting/setting';
 import Courses from './src/components/Courses/courses';
 import ListCourses from './src/components/Courses/ListCourses/listCourses';
+import ForgetPassword from './src/components/Authentication/ForgetPassword/forgetPassword';
+import Profile from './src/components/AccountManagement/Profile/profile';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ListCourses />
+      <Profile />
     </View>
   );
 }
