@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import Styles from '../../../Common/Styles';
 
@@ -24,7 +25,7 @@ const DownloadItem = props => {
             </View>
             {author ? 
                 <TouchableOpacity>
-                    <Text style={{fontWeight: 'bold'}}>...</Text>
+                    <Ionicons name="ios-more" size={20} color="black" />
                 </TouchableOpacity>
                 : null
             }

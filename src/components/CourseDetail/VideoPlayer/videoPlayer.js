@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         right: 0,
     },
     videoBox: {
-        marginTop: 50,
         height: 250,
         backgroundColor: 'gray',
     },

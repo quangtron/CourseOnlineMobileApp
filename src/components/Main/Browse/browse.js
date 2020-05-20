@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 
 import ImageButton from '../../Common/ImageButton';
 import SectionPopularSkills from './SectionPopularSkills/sectionPopularSkills';
@@ -8,13 +8,16 @@ import SectionPaths from './SectionPaths/sectionPaths';
 import SectionAuthors from './SectionAuthors/sectionAuthors';
 
 const Browse = _ => {
+    const srcImageTop = require('../../../../assets/bgLogin.jpg');
+    const srcImageDown = require('../../../../assets/bgLogin.jpg');
+
     return(
-        <ScrollView style={{marginTop: 50}}>
-            <View style={{margin: 15}}>
-                <ImageButton title='NEW RELEASES' img={require('../../../../assets/bgLogin.jpg')} />
+        <ScrollView style={styles.browse}>
+            <View style={styles.imgBtnTop}>
+                <ImageButton title='NEW RELEASES' img={srcImageTop} />
             </View>
-            <View style={{margin: 15, marginTop: 0}}>
-                <ImageButton title='RECOMMENDED FOR YOU' img={require('../../../../assets/bgLogin.jpg')} />
+            <View style={styles.imgBtnDown}>
+                <ImageButton title='RECOMMENDED FOR YOU' img={srcImageDown} />
             </View>
             <SectionPopularSkills title='Popular Skills' />
             <SectionSpecialized />
@@ -23,5 +26,18 @@ const Browse = _ => {
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    browse: {
+        marginTop: 10,
+    },
+    imgBtnTop: {
+        margin: 15,
+    },
+    imgBtnDown: {
+        margin: 15,
+        marginTop: 0,
+    },
+})
 
 export default Browse;

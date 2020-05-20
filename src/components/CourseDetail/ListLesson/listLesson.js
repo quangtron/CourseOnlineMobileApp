@@ -3,8 +3,8 @@ import React from 'react';
 import { View, StyleSheet, SectionList, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import ListLessonItem from '../ListLessonItem/listLessonItem';
 
+import ListLessonItem from '../ListLessonItem/listLessonItem';
 import Separator from '../../Common/Separator';
 import HeaderLesson from './HeaderLesson/headerLesson';
 
@@ -96,7 +96,7 @@ function ContentsScreen() {
 
 function TranscriptScreen() {
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={styles.transcriptScreen}>
             <TextInput
                 style={styles.inputSearch}
                 autoFocus={true}
@@ -111,12 +111,10 @@ const Tab = createMaterialTopTabNavigator();
 
 const ListLesson = _ => {
     return(
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen name="Contents" component={ContentsScreen} />
-                <Tab.Screen name="Transcript" component={TranscriptScreen} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name="Contents" component={ContentsScreen} />
+            <Tab.Screen name="Transcript" component={TranscriptScreen} />
+        </Tab.Navigator>
     );
 }
 
@@ -132,6 +130,10 @@ const styles = StyleSheet.create({
         height: 35,
         borderBottomWidth: 2,
         borderBottomColor: '#000',
+    },
+    transcriptScreen: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })
 

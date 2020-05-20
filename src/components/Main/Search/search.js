@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, SectionList, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import Styles from '../../Common/Styles';
-import DownloadItem from '../Download/DownloadItem/downloadItem';
-import Separator from '../../Common/Separator';
-import AuthorsResult from './AuthorsResult/authorsResult';
+import SearchAll from './SearchAll/searchAll';
+import SearchCourses from './SearchCourses/searchCourses';
+import SearchInput from './SearchInput/searchInput';
+import SearchTabResults from './SearchTabResults/searchTabResults';
 
 const Search = _ => {
     const results = [
@@ -82,77 +84,18 @@ const Search = _ => {
         },
     ];
 
-    const renderSearchView = _ => {
-        return(
-            <View style={styles.search}>
-                <TextInput
-                    style={styles.inputSearch}
-                    autoFocus={true}
-                    clearButtonMode='always'
-                    placeholder='Enter your keyword'
-                />
-                <TouchableOpacity>
-                    <Text style={[Styles.text(16, '#000', 'normal'), {paddingLeft: 10}]}>Cancle</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-
-    const renderSectionHeader = (title, data) => {
-        return(
-            <View style={styles.headerSection}>
-                <Text style={Styles.text(18, '#000', 'bold')}>{title}</Text>
-                <TouchableOpacity>
-                    <Text style={Styles.text(14, '#000', 'normal')}>{`${data.length} results`} ></Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
-
-    const renderItem = item => {
-        if(!item.title){
-            return <AuthorsResult item={item} />
-        }
-        return <DownloadItem item={item} />
-    }
-
     return(
-        <View style={{margin: 20}}>
-            <View>
-                {renderSearchView()}
-            </View>
-            <SectionList
-                sections = {results}
-                renderItem = {({item}) => renderItem(item)}
-                renderSectionHeader = {({section: {title, data}}) => renderSectionHeader(title, data)}
-                ItemSeparatorComponent = {Separator}
-                showsVerticalScrollIndicator={false}
-                // ListHeaderComponent = {_ => searchView()}
-            />
-        </View>
+        <ScrollView style={styles.searchView}>
+            <SearchInput />
+            <SearchTabResults results={results} />
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    headerSection: {
-        marginTop: 40,
-        marginBottom: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: '#fff',
+    searchView: {
+        margin: 20,
     },
-    search: {
-        marginTop: 40,
-        // paddingBottom: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    inputSearch: {
-        flex: 1,
-        backgroundColor: '#EEEEEE',
-        borderRadius: 6,
-        padding: 10,
-    }
 })
 
 export default Search;

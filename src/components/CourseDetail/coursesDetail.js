@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import VideoPlayer from './VideoPlayer/videoPlayer';
 import Information from './Information/information';

@@ -58,7 +58,6 @@ const Download = _ => {
 const styles = StyleSheet.create({
     download: {
         margin: 20,
-        marginTop: 60,
     },
     headerSection: {
         flexDirection: 'row',

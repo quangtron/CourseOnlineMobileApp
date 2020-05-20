@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 
 import SectionCourses from './SectionCourses/sectionCourses';
 
-const Home = _ => {
+function Home(props) {
     const dataSections = [
         {
             title: 'Courses',
@@ -129,10 +129,10 @@ const Home = _ => {
     return(
         <View style={styles.home}>
             <ScrollView>
-                <SectionCourses dataSection={dataSections[0]} />
-                <SectionCourses dataSection={dataSections[1]} />
-                <SectionCourses dataSection={dataSections[2]} />
-                <SectionCourses dataSection={dataSections[3]} />
+                <SectionCourses dataSection={dataSections[0]} navigation={props.navigation} />
+                <SectionCourses dataSection={dataSections[1]} navigation={props.navigation} />
+                <SectionCourses dataSection={dataSections[2]} navigation={props.navigation} />
+                <SectionCourses dataSection={dataSections[3]} navigation={props.navigation} />
             </ScrollView>
         </View>
     );
@@ -140,9 +140,8 @@ const Home = _ => {
 
 const styles = StyleSheet.create({
     home: {
-        marginTop: 40,
         marginLeft: 15,
-    }
+    },
 })
 
 export default Home;

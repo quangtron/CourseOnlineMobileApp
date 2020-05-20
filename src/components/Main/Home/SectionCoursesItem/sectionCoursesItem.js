@@ -2,17 +2,22 @@ import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../../Common/Styles';
+import ScreenKey from '../../../Common/ScreenKey';
 
 const SectionCoursesItem = props => {
     const { title, author, level, released, duration, img, courses } = props.item;
 
+    const onPressItem = item => {
+        props.navigation.navigate(ScreenKey.CourseDetail, {item: item});
+    }
+
     return(
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={onPressItem}>
             <Image
                 source={img}
                 style={styles.image}
             />
-            <View style={{margin: 10}}>
+            <View style={styles.course}>
                 <Text>{title}</Text>
                 {author ? 
                     <View>
@@ -37,6 +42,9 @@ const styles = StyleSheet.create({
         width: 200,
         height: 100,
     },
+    course: {
+        margin: 10,
+    }
 })
 
 export default SectionCoursesItem;
