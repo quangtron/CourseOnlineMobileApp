@@ -1,4 +1,4 @@
-export default {
+export const ScreenKey = {
     Home: 'Home',
     Browse: 'Browse',
     Download: 'Download',
@@ -8,4 +8,10 @@ export default {
     Login: 'Login',
     MainTab: 'MainTab',
     CourseDetail: 'CourseDetail',
+    Setting: 'Setting',
+    SkillDetail: 'SkillDetail',
+    All: 'All',
+    Courses: 'Courses',
+    Paths: 'Paths',
+    Authors: 'Authors',
 }

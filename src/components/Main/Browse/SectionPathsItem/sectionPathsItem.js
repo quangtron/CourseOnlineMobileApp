@@ -2,12 +2,17 @@ import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../../Common/Styles';
+import { ScreenKey } from '../../../../global/constants';
 
 const SectionPathsItem = props => {
     const { title, courses, img } = props.item;
 
+    const onPressPath = item => {
+        props.navigation.navigate(ScreenKey.ListCourses, {item: item})
+    }
+
     return(
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={_ => onPressPath(props.items)}>
             <View style={styles.bgView}>
                 <Image
                     source={img}

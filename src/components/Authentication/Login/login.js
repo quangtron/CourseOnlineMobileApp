@@ -2,8 +2,13 @@ import React from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../Common/Styles'
+import { ScreenKey } from '../../../global/constants';
 
-const Login = _ => {
+const Login = props => {
+    const onPressLogin = _ => {
+        props.navigation.navigate(ScreenKey.MainTab);
+    }
+
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
@@ -20,7 +25,10 @@ const Login = _ => {
                     <TouchableOpacity>
                         <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}>
+                    <TouchableOpacity
+                        style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}
+                        onPress={onPressLogin}
+                    >
                         <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>
                     <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>

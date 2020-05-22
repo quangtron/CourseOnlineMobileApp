@@ -5,7 +5,7 @@ import Styles from '../../Common/Styles';
 import DownloadItem from './DownloadItem/downloadItem';
 import Separator from '../../Common/Separator';
 
-const Download = _ => {
+const Download = props => {
     const listDownloads = [
         {
             id: 1,
@@ -47,7 +47,7 @@ const Download = _ => {
             <FlatList
                 style = {{marginTop: 30}}
                 data = {listDownloads}
-                renderItem = {({item}) => <DownloadItem item={item} />}
+                renderItem = {({item}) => <DownloadItem item={item} navigation={props.navigation} />}
                 ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator = {false}
             />

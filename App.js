@@ -5,16 +5,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import Login from './src/components/Authentication/Login/login';
-import ScreenKey from './src/components/Common/ScreenKey';
 import HomeScreen from './src/global/Screens/HomeScreen';
 import BrowseScreen from './src/global/Screens/BrowseScreen';
 import DownloadScreen from './src/global/Screens/DownloadScreen';
 import SearchScreen from './src/global/Screens/SearchScreen';
 import Splashscreen from './src/components/Others/Splashscreen/splashscreen';
+import { ScreenKey } from './src/global/constants';
 
 const Tab = createBottomTabNavigator();
 
-const mainTabScreen = _ => {
+const mainTabScreen = () => {
   return(
     <Tab.Navigator
         screenOptions = {({ route }) => ({
@@ -54,26 +54,26 @@ const mainTabScreen = _ => {
   );
 }
 
-// const MainStack = createStackNavigator();
+const MainStack = createStackNavigator();
 
-// const mainStackScreen = _ => {
-//   return(
-//     <MainStack.Navigator>
-//       <MainStack.Screen
-//         name={ScreenKey.Splashscreen} 
-//         component={Splashscreen} 
-//         options={{headerShown: false}}
-//         />
-//       <MainStack.Screen name={ScreenKey.Login} component={Login} />
-//       {/* <MainStack.Screen name={ScreenKey.MainTab} component={mainTabScreen} /> */}
-//     </MainStack.Navigator>
-//   )
-// }
+const mainStackScreen = _ => {
+  return(
+    <MainStack.Navigator>
+      {/* <MainStack.Screen
+        name={ScreenKey.Splashscreen} 
+        component={Splashscreen} 
+        options={{headerShown: false}}
+      /> */}
+      <MainStack.Screen name={ScreenKey.Login} component={Login} options={{headerShown: false}} />
+      <MainStack.Screen name={ScreenKey.MainTab} component={mainTabScreen} options={{headerShown: false}} />
+    </MainStack.Navigator>
+  )
+}
 
 export default function App() {
   return(
     <NavigationContainer>
-      {mainTabScreen()}
+      {mainStackScreen()}
     </NavigationContainer>
   );
 }

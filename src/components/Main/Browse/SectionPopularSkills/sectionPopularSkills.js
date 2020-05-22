@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 import Styles from '../../../Common/Styles';
+import { ScreenKey } from '../../../../global/constants';
 
 const SectionPopularSkills = props => {
     const items = [
@@ -47,12 +48,20 @@ const SectionPopularSkills = props => {
         },
     ];
 
+    const onPressSkill = _ => {
+        props.navigation.navigate(ScreenKey.SkillDetail);
+    }
+
     const showListItems = items => {
         let result = null;
 
         result = items.map((item, index) => {
             return(
-                <TouchableOpacity key={index} style={[Styles.btnLayout(null,30,'#E0E0E0'), styles.btnLayout]}>
+                <TouchableOpacity
+                    key={index}
+                    style={[Styles.btnLayout(null,30,'#E0E0E0'), styles.btnLayout]}
+                    onPress={onPressSkill}
+                >
                     {item.img ? <Image style={{marginLeft: 10}} source={item.img} /> : null}
                     <Text style={{paddingRight: 20, paddingLeft: 10}}>{item.name}</Text>
                 </TouchableOpacity>

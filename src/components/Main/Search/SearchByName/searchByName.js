@@ -5,9 +5,17 @@ import { Ionicons } from '@expo/vector-icons';
 import Styles from '../../../Common/Styles';
 import DownloadItem from '../../Download/DownloadItem/downloadItem';
 import Separator from '../../../Common/Separator';
+import AuthorsResult from '../AuthorsResult/authorsResult';
 
-const SearchCourses = props => {
+const SearchByName = props => {
     const { data } = props.courses;
+
+    const renderItem = item => {
+        if(!item.title){
+            return <AuthorsResult item={item} navigation={props.navigation} />
+        }
+        return <DownloadItem item={item} navigation={props.navigation} />
+    }
     
     return(
         <View style={styles.courses}>
@@ -19,7 +27,7 @@ const SearchCourses = props => {
             </View>
             <FlatList
                 data = {data}
-                renderItem = {({item}) => <DownloadItem item={item} />}
+                renderItem = {({item}) => renderItem(item)}
                 ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator = {false}
                 style={styles.listCourses}
@@ -30,6 +38,7 @@ const SearchCourses = props => {
 
 const styles = StyleSheet.create({
     courses: {
+        margin: 20,
         marginTop: 30,
         marginBottom: 15,
     },
@@ -39,8 +48,8 @@ const styles = StyleSheet.create({
     },
     listCourses: {
         marginTop: 30,
-        marginBottom: '14%',
+        height: 600,
     },
 })
 
-export default SearchCourses;
+export default SearchByName;

@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     headerSection: {
         flexDirection: 'row',
         marginBottom: 20,
-        marginTop: 30,
+        padding: 20,
+        backgroundColor: '#F5F5F5',
     },
     box: {
         justifyContent: 'center',

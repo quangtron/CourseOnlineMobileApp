@@ -9,7 +9,7 @@ import Styles from '../../Common/Styles'
 
 const Setting = _ => {
     return(
-        <ScrollView style={{margin: 20}}>
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <AccountSetting />
             <Separator />
             <RequireWifi />
@@ -28,6 +28,11 @@ const Setting = _ => {
 }
 
 const styles = StyleSheet.create({
+    scrollView: {
+        margin: 20,
+        marginTop: 0,
+        marginBottom: 0,
+    },
     appVersion: {
         margin: 10,
         flexDirection: 'row',

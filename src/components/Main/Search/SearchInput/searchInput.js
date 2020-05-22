@@ -13,7 +13,7 @@ const SearchInput = _ => {
                 placeholder='Enter your keyword'
             />
             <TouchableOpacity>
-                <Text style={[Styles.text(16, '#000', 'normal'), {paddingLeft: 10}]}>Cancle</Text>
+                <Text style={[Styles.text(18, '#000', 'normal'), {paddingLeft: 10}]}>Cancle</Text>
             </TouchableOpacity>
         </View>
     );
@@ -21,8 +21,9 @@ const SearchInput = _ => {
 
 const styles = StyleSheet.create({
     search: {
+        margin: 20,
         marginTop: 40,
-        // paddingBottom: 20,
+        marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E0E0E0',
         borderRadius: 6,
         padding: 10,
+        fontSize: 20,
     },
 })
 

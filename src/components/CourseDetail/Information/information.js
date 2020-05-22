@@ -7,7 +7,7 @@ import DescribeCourse from './DescribeCourse/describeCourse';
 import Separator from '../../Common/Separator';
 import OthersButton from './OthersButton/othersButton';
 
-const Information = _ => {
+const Information = props => {
     const buttons = [
         {
             name: 'Bookmark',
@@ -26,9 +26,10 @@ const Information = _ => {
     const showBtnInfor = buttons => {
         return buttons.map((item, index) => <ButtonInformation key={index} item={item} />)
     }
+    
     return(
         <View style={{margin: 20}}>
-            <HeaderInformation />
+            <HeaderInformation infor={props.infor} />
             <View style={styles.btn}>
                 {showBtnInfor(buttons)}
             </View>

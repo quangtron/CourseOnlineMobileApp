@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { View, StyleSheet, SectionList, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import ListLessonItem from '../ListLessonItem/listLessonItem';
@@ -84,11 +83,11 @@ function ContentsScreen() {
     return (
         <View style={styles.contentsBox}>
             <SectionList
-                    sections = {listLesson}
-                    renderItem = {({item}) => <ListLessonItem data={item} />}
-                    renderSectionHeader = {({section: {title}}) => renderSectionHeader(title)}
-                    ItemSeparatorComponent = {Separator}
-                    showsVerticalScrollIndicator={false}
+                sections = {listLesson}
+                renderItem = {({item}) => <ListLessonItem data={item} />}
+                renderSectionHeader = {({section: {title}}) => renderSectionHeader(title)}
+                ItemSeparatorComponent = {Separator}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     contentsBox: {
         margin: 20,
         top: -30,
-        height: '100%',
+        height: 1000,
     },
     inputSearch: {
         marginTop: 10,

@@ -4,7 +4,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 import SectionCoursesItem from '../SectionCoursesItem/sectionCoursesItem';
 
 import Styles from '../../../Common/Styles';
-import ScreenKey from '../../../Common/ScreenKey';
+import { ScreenKey } from '../../../../global/constants';
 
 const SectionCourses = props => {
     const showListCoursesItem = items => {

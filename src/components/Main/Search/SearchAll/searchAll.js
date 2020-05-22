@@ -7,11 +7,15 @@ import Separator from '../../../Common/Separator';
 import AuthorsResult from '../AuthorsResult/authorsResult';
 
 const SearchAll = props => {
+    const onPressShowAll = title => {
+        props.navigation.navigate(title);
+    }
+
     const renderSectionHeader = (title, data) => {
         return(
             <View style={styles.headerSection}>
                 <Text style={Styles.text(18, '#000', 'bold')}>{title}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={_ => onPressShowAll(title)}>
                     <Text style={Styles.text(14, '#000', 'normal')}>{`${data.length} results`} ></Text>
                 </TouchableOpacity>
             </View>
@@ -20,13 +24,13 @@ const SearchAll = props => {
 
     const renderItem = item => {
         if(!item.title){
-            return <AuthorsResult item={item} />
+            return <AuthorsResult item={item} navigation={props.navigation} />
         }
-        return <DownloadItem item={item} />
+        return <DownloadItem item={item} navigation={props.navigation} />
     }
 
     return(
-        <View>
+        <View style={styles.searchAll}>
             <SectionList
                 sections = {props.all}
                 renderItem = {({item}) => renderItem(item)}
@@ -40,15 +44,19 @@ const SearchAll = props => {
 }
 
 const styles = StyleSheet.create({
+    searchAll: {
+        margin: 20,
+        marginTop: 0,
+    },
     headerSection: {
-        marginTop: 40,
         marginBottom: 15,
+        paddingTop: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // backgroundColor: '#F5F5F5',
+        backgroundColor: '#F5F5F5',
     },
     sectionList: {
-        marginBottom: '11%',
+        height: 670,
     },
 })
 

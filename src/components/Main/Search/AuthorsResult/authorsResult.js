@@ -2,12 +2,17 @@ import React from 'react';
 import { TouchableOpacity, Image, Text, StyleSheet, View } from 'react-native';
 
 import Styles from '../../../Common/Styles'
+import { ScreenKey } from '../../../../global/constants';
 
 const AuthorsResult = props => {
-    let { img, author, courses } = props.item;
+    const { img, author, courses } = props.item;
+
+    const onPressAuthor = item => {
+        props.navigation.navigate(ScreenKey.ListCourses, {item: item})
+    }
 
     return(
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={_ => onPressAuthor(props.item)}>
             <Image style={styles.image} source={img} />
             <View style={styles.text}>
                 <Text style={{marginBottom: 5}}>{author}</Text>

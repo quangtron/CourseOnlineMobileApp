@@ -4,6 +4,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 import SectionPathsItem from '../SectionPathsItem/sectionPathsItem';
 
 import Styles from '../../../Common/Styles';
+import { ScreenKey } from '../../../../global/constants';
 
 const SectionPaths = props => {
     const paths = [
@@ -30,16 +31,20 @@ const SectionPaths = props => {
     const showListPathsItem = paths => {
         let result = null;
 
-        result = paths.map((item, index) => <SectionPathsItem key={index} item={item} />);
+        result = paths.map((item, index) => <SectionPathsItem key={index} item={item} items={props.items} navigation={props.navigation} />);
 
         return result;
+    }
+
+    const onPressAll = item => {
+        props.navigation.navigate(ScreenKey.ListCourses, {item: item})
     }
 
     return(
         <View style={{margin: 15, marginRight: 0}}>
             <View style={[styles.headerSection, styles.textLayout]}>
                 <Text style={Styles.text(16, '#000', 'bold')}>{props.title}</Text>
-                <TouchableOpacity style={Styles.btnLayout(70, 20, '#EEEEEE')}>
+                <TouchableOpacity style={Styles.btnLayout(70, 20, '#EEEEEE')} onPress={_ => onPressAll(props.items)}>
                     <Text style={{fontSize: 13}}>See all</Text>
                 </TouchableOpacity>
             </View>

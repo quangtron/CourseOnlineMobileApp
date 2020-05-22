@@ -18,7 +18,7 @@ const ListCourses = props => {
             <FlatList
                 style = {{marginTop: 30}}
                 data = {data}
-                renderItem = {({item}) => <DownloadItem item={item} />}
+                renderItem = {({item}) => <DownloadItem item={item} navigation={props.navigation} />}
                 ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator = {false}
             />

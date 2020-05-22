@@ -3,12 +3,21 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import Styles from '../../../Common/Styles';
+import { ScreenKey } from '../../../../global/constants';
 
 const DownloadItem = props => {
     const { title, author, level, released, duration, img, courses } = props.item;
 
+    const onPress = (item) => {
+        if(author){
+            props.navigation.navigate(ScreenKey.CourseDetail, {item: item});
+        } else {
+            props.navigation.navigate(ScreenKey.ListCourses, {item: item});
+        }
+    }
+
     return(
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => onPress(props.item)}>
             <Image
                 source={img}
                 style={styles.image}

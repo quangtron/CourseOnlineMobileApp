@@ -1,14 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { ScrollView } from 'react-native';
 
-import Styles from '../../Common/Styles';
-import SearchAll from './SearchAll/searchAll';
-import SearchCourses from './SearchCourses/searchCourses';
 import SearchInput from './SearchInput/searchInput';
 import SearchTabResults from './SearchTabResults/searchTabResults';
 
-const Search = _ => {
+const Search = props => {
     const results = [
         {
             title: 'Courses',
@@ -50,6 +46,35 @@ const Search = _ => {
                     title: 'React',
                     img: require('../../../../assets/bgLogin.jpg'),
                     courses: 5,
+                    data: [
+                        {
+                            id: 1,
+                            title: 'React Native 1',
+                            img: require('../../../../assets/bgLogin.jpg'),
+                            author: 'T1',
+                            level: 'Beginner',
+                            released: 'May 11, 2020',
+                            duration: '38h'
+                        },
+                        {
+                            id: 1,
+                            title: 'React Native 1',
+                            img: require('../../../../assets/bgLogin.jpg'),
+                            author: 'T1',
+                            level: 'Beginner',
+                            released: 'May 11, 2020',
+                            duration: '38h'
+                        },
+                        {
+                            id: 1,
+                            title: 'React Native 1',
+                            img: require('../../../../assets/bgLogin.jpg'),
+                            author: 'T1',
+                            level: 'Beginner',
+                            released: 'May 11, 2020',
+                            duration: '38h'
+                        },
+                    ]
                 },
                 {
                     id: 2,
@@ -67,6 +92,26 @@ const Search = _ => {
                     img: require('../../../../assets/bgLogin.jpg'),
                     author: 'T1',
                     courses: 5,
+                    data:[
+                        {
+                            id: 1,
+                            title: 'React Native 1',
+                            img: require('../../../../assets/bgLogin.jpg'),
+                            author: 'T1',
+                            level: 'Beginner',
+                            released: 'May 11, 2020',
+                            duration: '38h'
+                        },
+                        {
+                            id: 1,
+                            title: 'React Native 1',
+                            img: require('../../../../assets/bgLogin.jpg'),
+                            author: 'T1',
+                            level: 'Beginner',
+                            released: 'May 11, 2020',
+                            duration: '38h'
+                        },
+                    ]
                 },
                 {
                     id: 2,
@@ -85,17 +130,11 @@ const Search = _ => {
     ];
 
     return(
-        <ScrollView style={styles.searchView}>
+        <ScrollView scrollEnabled={false}>
             <SearchInput />
-            <SearchTabResults results={results} />
+            <SearchTabResults results={results} navigation={props.navigation} />
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    searchView: {
-        margin: 20,
-    },
-})
 
 export default Search;

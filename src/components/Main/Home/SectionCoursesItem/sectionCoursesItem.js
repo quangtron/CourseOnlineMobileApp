@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../../Common/Styles';
-import ScreenKey from '../../../Common/ScreenKey';
+import { ScreenKey } from '../../../../global/constants';
 
 const SectionCoursesItem = props => {
     const { title, author, level, released, duration, img, courses } = props.item;
@@ -12,7 +12,7 @@ const SectionCoursesItem = props => {
     }
 
     return(
-        <TouchableOpacity style={styles.item} onPress={onPressItem}>
+        <TouchableOpacity style={styles.item} onPress={() => onPressItem(props.item)}>
             <Image
                 source={img}
                 style={styles.image}

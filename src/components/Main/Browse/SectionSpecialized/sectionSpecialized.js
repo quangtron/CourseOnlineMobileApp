@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 
 import ImageButton from '../../../Common/ImageButton';
 
-const SectionSpecialized = _ => {
+const SectionSpecialized = props => {
     let list = [
         {
             id: 1,
@@ -48,6 +48,38 @@ const SectionSpecialized = _ => {
             extraTitle: 'professional',
         },
     ];
+    const dataSections = {
+        title: 'New Releases',
+        data: [
+            {
+                id: 1,
+                title: 'React Native 1',
+                img: require('../../../../../assets/bgLogin.jpg'),
+                author: 'T1',
+                level: 'Beginner',
+                released: 'May 11, 2020',
+                duration: '38h'
+            },
+            {
+                id: 2,
+                title: 'React Native 2',
+                img: require('../../../../../assets/bgLogin.jpg'),
+                author: 'T2',
+                level: 'Beginner',
+                released: 'May 11, 2020',
+                duration: '38h'
+            },
+            {
+                id: 3,
+                title: 'React Native 3',
+                img: require('../../../../../assets/bgLogin.jpg'),
+                author: 'T3',
+                level: 'Beginner',
+                released: 'May 11, 2020',
+                duration: '38h'
+            },
+        ],
+    };
 
     let arrays = [], size = 2;
     while (list.length > 0)
@@ -64,6 +96,8 @@ const SectionSpecialized = _ => {
                             height={70}
                             extraTitle={item[0].extraTitle}
                             img={item[0].img}
+                            navigation={props.navigation}
+                            items={dataSections}
                         />
                     </View>
                     {item.length > 1 ? 
@@ -74,6 +108,8 @@ const SectionSpecialized = _ => {
                                 height={70}
                                 extraTitle={item[1].extraTitle}
                                 img={item[1].img}
+                                navigation={props.navigation}
+                                items={dataSections}
                             />
                         </View> : null
                     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Video from 'react-native-video';
+import { Video } from 'expo-av';
 
 const VideoPlayer = _ => {
     return(
@@ -13,7 +13,16 @@ const VideoPlayer = _ => {
         //     // onError={this.videoError}
         //     style={styles.bgVideo}
         // />
-        <View style={styles.videoBox} />
+        <Video
+            source={{ uri: 'https://www.youtube.com/watch?v=aRvEge92YWQ&t=1740s' }}
+            rate={1.0}
+            volume={1.0}
+            isMuted={false}
+            resizeMode="cover"
+            shouldPlay
+            isLooping
+            style={styles.videoBox}
+        />
     );
 }
 
@@ -27,7 +36,6 @@ const styles = StyleSheet.create({
     },
     videoBox: {
         height: 250,
-        backgroundColor: 'gray',
     },
 })
 

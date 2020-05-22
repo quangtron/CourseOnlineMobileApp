@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
-const Splashscreen = _ => {
+const Splashscreen = props => {
     const [loading, setLoading] = useState(0);
     const srcImage = require('../../../../assets/logo.png');
 
     // useEffect(_ => {
-    //     setLoading(loading + 1);
-    //     // if(loading === 100){
-
-    //     // }
+    //     setInterval(() => {
+    //         setLoading(loading + 1);
+            
+    //         // return () => {
+    //         //     clearInterval();
+    //         //     props.navigation.navigate(ScreenKey.MainTab);
+    //         // }
+    //     }, 100);
+        
     // }, [loading])
 
     return(

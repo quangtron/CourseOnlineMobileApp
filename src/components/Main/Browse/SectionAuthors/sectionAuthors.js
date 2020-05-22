@@ -46,7 +46,7 @@ const SectionAuthors = props => {
     const showAuthorsItem = authors => {
         let result = null;
 
-        result = authors.map((item, index) => <SectionAuthorsItem key={index} item={item} />)
+        result = authors.map((item, index) => <SectionAuthorsItem key={index} item={item} items={props.items} navigation={props.navigation} />)
 
         return result;
     }
