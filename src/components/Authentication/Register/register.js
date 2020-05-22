@@ -2,8 +2,17 @@ import React from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../Common/Styles'
+import { ScreenKey } from '../../../global/constants';
 
-const Register = _ => {
+const Register = props => {
+    const onPressVerify = _ => {
+        props.navigation.navigate(ScreenKey.VerifyPassword);
+    }
+
+    const onPressBack = _ => {
+        props.navigation.navigate(ScreenKey.Login);
+    }
+
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
@@ -14,21 +23,17 @@ const Register = _ => {
                     <View>
                         <TextInput style={styles.inputLayout} placeholder='Enter your email' placeholderTextColor='#fff' />
                     </View>
-                    <View>
-                        <TextInput style={styles.inputLayout} placeholder='Enter your username' placeholderTextColor='#fff' />
+                    <View style={styles.buttons}>
+                        <TouchableOpacity
+                            style={[Styles.btnLayout(100, 40, '#ffebee'), {marginBottom: 30}]}
+                            onPress={onPressVerify}
+                        >
+                            <Text style={Styles.text(20, '#000', 'normal')}>Verify</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={Styles.text(14, '#FFF59D', 'normal')} onPress={onPressBack}>Back to Login!</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View>
-                        <TextInput style={styles.inputLayout} placeholder='Enter your password' placeholderTextColor='#fff' secureTextEntry={true} />
-                    </View>
-                    <View>
-                        <TextInput style={styles.inputLayout} placeholder='Confirm your password' placeholderTextColor='#fff' secureTextEntry={true} />
-                    </View>
-                    <TouchableOpacity style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-2%'}]}>
-                        <Text style={Styles.text(20, '#000', 'normal')}>Register</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{bottom: '-7%'}}>
-                        <Text style={Styles.text(14, '#FFF59D', 'normal')}>Back to Login!</Text>
-                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>
@@ -41,6 +46,10 @@ const styles = StyleSheet.create({
         margin: 0,
         width: '100%',
         height: '100%',
+    },
+    buttons: {
+        marginTop: 50,
+        alignItems: 'center',
     },
     bgImage: {
         width: '100%',

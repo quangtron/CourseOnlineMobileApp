@@ -14,4 +14,9 @@ export const ScreenKey = {
     Courses: 'Courses',
     Paths: 'Paths',
     Authors: 'Authors',
+    Profile: 'Profile',
+    Register: 'Register',
+    ForgetPassword: 'ForgetPassword',
+    VerifyPassword: 'VerifyPassword',
+    Subscription: 'Subscription',
 }

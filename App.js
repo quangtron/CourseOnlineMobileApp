@@ -11,6 +11,9 @@ import DownloadScreen from './src/global/Screens/DownloadScreen';
 import SearchScreen from './src/global/Screens/SearchScreen';
 import Splashscreen from './src/components/Others/Splashscreen/splashscreen';
 import { ScreenKey } from './src/global/constants';
+import Register from './src/components/Authentication/Register/register';
+import ForgetPassword from './src/components/Authentication/ForgetPassword/forgetPassword';
+import VerifyPassword from './src/components/Authentication/VerifyPassword/verifyPassword';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,6 +68,9 @@ const mainStackScreen = _ => {
         options={{headerShown: false}}
       /> */}
       <MainStack.Screen name={ScreenKey.Login} component={Login} options={{headerShown: false}} />
+      <MainStack.Screen name={ScreenKey.Register} component={Register} options={{headerShown: false}} />
+      <MainStack.Screen name={ScreenKey.VerifyPassword} component={VerifyPassword} options={{headerShown: false}} />
+      <MainStack.Screen name={ScreenKey.ForgetPassword} component={ForgetPassword} options={{headerShown: false}} />
       <MainStack.Screen name={ScreenKey.MainTab} component={mainTabScreen} options={{headerShown: false}} />
     </MainStack.Navigator>
   )

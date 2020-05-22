@@ -4,13 +4,13 @@ import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpa
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
 
-const ForgetPassword = props => {
-    const onPressBack = _ => {
-        props.navigation.navigate(ScreenKey.Login);
+const VerifyPassword = props => {
+    const onPressVerify = _ => {
+        props.navigation.navigate(ScreenKey.MainTab);
     }
 
-    const onPressCreate = _ => {
-        props.navigation.navigate(ScreenKey.MainTab);
+    const onPressBack = _ => {
+        props.navigation.navigate(ScreenKey.Login);
     }
 
     return(
@@ -19,25 +19,27 @@ const ForgetPassword = props => {
                 <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
-                    <Text style={[Styles.text(30, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Forget Password</Text>
+                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Register</Text>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Enter your email' placeholderTextColor='#fff' />
+                        <TextInput style={styles.inputLayout} placeholder='Enter your username' placeholderTextColor='#fff' />
                     </View>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Enter new password' placeholderTextColor='#fff' secureTextEntry={true} />
+                        <TextInput style={styles.inputLayout} placeholder='Enter your password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Confirm password' placeholderTextColor='#fff' secureTextEntry={true} />
+                        <TextInput style={styles.inputLayout} placeholder='Confirm your password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
-                    <TouchableOpacity
-                        style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-2%'}]}
-                        onPress={onPressCreate}
-                    >
-                        <Text style={Styles.text(20, '#000', 'normal')}>Create</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{bottom: '-7%'}} onPress={onPressBack}>
-                        <Text style={Styles.text(14, '#FFF59D', 'normal')}>Back to Login!</Text>
-                    </TouchableOpacity>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity
+                            style={[Styles.btnLayout(100, 40, '#ffebee'), {marginBottom: 30}]}
+                            onPress={onPressVerify}
+                        >
+                            <Text style={Styles.text(20, '#000', 'normal')}>Verify</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Text style={Styles.text(14, '#FFF59D', 'normal')} onPress={onPressBack}>Back to Login!</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ImageBackground>
         </View>
@@ -50,6 +52,10 @@ const styles = StyleSheet.create({
         margin: 0,
         width: '100%',
         height: '100%',
+    },
+    buttons: {
+        marginTop: 50,
+        alignItems: 'center',
     },
     bgImage: {
         width: '100%',
@@ -96,4 +102,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default ForgetPassword;
+export default VerifyPassword;

@@ -9,6 +9,14 @@ const Login = props => {
         props.navigation.navigate(ScreenKey.MainTab);
     }
 
+    const onPressRegister = _ => {
+        props.navigation.navigate(ScreenKey.Register);
+    }
+
+    const onPressForgetPassword = _ =>{
+        props.navigation.navigate(ScreenKey.ForgetPassword);
+    }
+
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
@@ -22,7 +30,7 @@ const Login = props => {
                     <View>
                         <TextInput style={styles.inputLayout} placeholder='Password' placeholderTextColor='#fff' secureTextEntry={true} />
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onPressForgetPassword}>
                         <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -32,7 +40,7 @@ const Login = props => {
                         <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>
                     <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>
-                    <TouchableOpacity style={{bottom: '-16%'}}>
+                    <TouchableOpacity style={{bottom: '-16%'}} onPress={onPressRegister}>
                         <Text style={Styles.text(13, '#FFF59D', 'normal')}>Create New Account!</Text>
                     </TouchableOpacity>
                 </View>

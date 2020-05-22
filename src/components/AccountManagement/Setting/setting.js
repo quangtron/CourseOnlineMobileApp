@@ -7,10 +7,10 @@ import RequireWifi from './RequireWifi/requireWifi';
 import OthersSetting from './OthersSetting/othersSetting';
 import Styles from '../../Common/Styles'
 
-const Setting = _ => {
+const Setting = props => {
     return(
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-            <AccountSetting />
+            <AccountSetting navigation={props.navigation} />
             <Separator />
             <RequireWifi />
             <Separator />

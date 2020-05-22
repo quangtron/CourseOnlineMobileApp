@@ -6,12 +6,21 @@ import { ScreenKey } from '../constants';
 import Setting from '../../components/AccountManagement/Setting/setting';
 import ButtonSetting from '../../components/Common/ButtonSetting';
 import CoursesDetail from '../../components/CourseDetail/coursesDetail';
+import Profile from '../../components/AccountManagement/Profile/profile';
+import Subscription from '../../components/Others/Subscription/subscription';
 
 const DownloadStack = createStackNavigator();
 
 function DownloadScreen(props) {
     return(
-        <DownloadStack.Navigator mode="modal">
+        <DownloadStack.Navigator
+            initialRouteName={ScreenKey.Download}
+            mode="modal"
+            screenOptions={{headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 22,
+            }}}
+        >
             <DownloadStack.Screen
                 name={ScreenKey.Download}
                 component={Download}
@@ -31,6 +40,16 @@ function DownloadScreen(props) {
                     title: 'Courses Detail',
                     headerShown: false,
                 }}
+            />
+            <DownloadStack.Screen
+                name={ScreenKey.Profile} 
+                component={Profile} 
+                options={{title: 'Setting Account'}} 
+            />
+            <DownloadStack.Screen
+                name={ScreenKey.Subscription} 
+                component={Subscription} 
+                options={{title: 'Subscription'}} 
             />
         </DownloadStack.Navigator>
     );

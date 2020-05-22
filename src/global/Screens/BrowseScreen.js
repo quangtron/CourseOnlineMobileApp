@@ -8,12 +8,21 @@ import CoursesDetail from '../../components/CourseDetail/coursesDetail';
 import SkillDetail from '../../components/Main/Browse/SectionPopularSkills/SkillDetail/skillDetail';
 import ButtonSetting from '../../components/Common/ButtonSetting';
 import Setting from '../../components/AccountManagement/Setting/setting';
+import Profile from '../../components/AccountManagement/Profile/profile';
+import Subscription from '../../components/Others/Subscription/subscription';
 
 const BrowseStack = createStackNavigator();
 
 function BrowseScreen(props) {
     return(
-        <BrowseStack.Navigator initialRouteName={ScreenKey.Browse} mode="modal">
+        <BrowseStack.Navigator
+            initialRouteName={ScreenKey.Browse}
+            mode="modal"
+            screenOptions={{headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 22,
+            }}}
+        >
             <BrowseStack.Screen 
                 name={ScreenKey.Browse} 
                 component={Browse}
@@ -35,6 +44,16 @@ function BrowseScreen(props) {
                 name={ScreenKey.Setting} 
                 component={Setting} 
                 options={{title: 'Setting', headerShown: false}} 
+            />
+            <BrowseStack.Screen
+                name={ScreenKey.Profile} 
+                component={Profile} 
+                options={{title: 'Setting Account'}} 
+            />
+            <BrowseStack.Screen
+                name={ScreenKey.Subscription} 
+                component={Subscription} 
+                options={{title: 'Subscription'}} 
             />
         </BrowseStack.Navigator>
     );

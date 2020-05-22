@@ -10,7 +10,7 @@ const SearchStack = createStackNavigator();
 
 function SearchScreen() {
     return(
-        <SearchStack.Navigator mode="modal">
+        <SearchStack.Navigator mode="modal" initialRouteName={ScreenKey.Search}>
             <SearchStack.Screen
                 name={ScreenKey.Search}
                 component={Search}

@@ -1,8 +1,17 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Styles from '../../../Common/Styles';
+import { ScreenKey } from '../../../../global/constants';
 
-const AccountSetting = _ => {
+const AccountSetting = props => {
+    const onPressAccount = _ => {
+        props.navigation.navigate(ScreenKey.Profile);
+    }
+
+    const onPressSub = _ => {
+        props.navigation.navigate(ScreenKey.Subscription);
+    }
+
     return(
         <View style={styles.accountSetting}>
             <TouchableOpacity style={styles.account}>
@@ -12,10 +21,10 @@ const AccountSetting = _ => {
                     <Text style={Styles.text(16, '#9E9E9E', 'normal')}>Ton</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={onPressAccount}>
                 <Text style={Styles.text(18, '#000', 'normal')}>Account</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={onPressSub}>
                 <Text style={Styles.text(18, '#000', 'normal')}>Subscription</Text>
                 <Text style={Styles.text(14, '#9E9E9E', 'normal')}>Individual (Expires: may 31, 2020)</Text>
             </TouchableOpacity>

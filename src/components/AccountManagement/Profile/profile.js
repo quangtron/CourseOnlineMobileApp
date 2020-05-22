@@ -25,7 +25,6 @@ const Profile = _ => {
 
 const styles = StyleSheet.create({
     userInfor: {
-        marginTop: 50,
         marginBottom: 20,
         flexDirection: 'row',
         alignItems: 'center',

@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
 
+import ShareScreen from '../../../Others/Share/share';
+
 const ButtonInformation = props => {
     return(
         <View>
-            <TouchableOpacity style={styles.itemCenter}>
+            <TouchableOpacity style={styles.itemCenter} onPress={_ => ShareScreen()}>
                 <View style={styles.circleBtn}>
                     <Image source={props.item.img} style={styles.image} />
                 </View>
@@ -17,7 +19,7 @@ const ButtonInformation = props => {
 const styles = StyleSheet.create({
     itemCenter: {
         marginRight: '15%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     image: {
         alignSelf: 'center',

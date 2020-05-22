@@ -7,12 +7,21 @@ import CoursesDetail from '../../components/CourseDetail/coursesDetail';
 import { ScreenKey } from '../constants';
 import Setting from '../../components/AccountManagement/Setting/setting';
 import ButtonSetting from '../../components/Common/ButtonSetting';
+import Profile from '../../components/AccountManagement/Profile/profile';
+import Subscription from '../../components/Others/Subscription/subscription';
 
 const HomeStack = createStackNavigator();
 
 function HomeScreen(props) {
     return(
-        <HomeStack.Navigator initialRouteName={ScreenKey.Home} mode="modal">
+        <HomeStack.Navigator
+            initialRouteName={ScreenKey.Home}
+            mode="modal"
+            screenOptions={{headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 22,
+            }}}
+        >
             <HomeStack.Screen
                 name={ScreenKey.Home} 
                 component={Home} 
@@ -37,6 +46,16 @@ function HomeScreen(props) {
                 name={ScreenKey.Setting} 
                 component={Setting} 
                 options={{title: 'Setting', headerShown: false}} 
+            />
+            <HomeStack.Screen
+                name={ScreenKey.Profile} 
+                component={Profile} 
+                options={{title: 'Setting Account'}} 
+            />
+            <HomeStack.Screen
+                name={ScreenKey.Subscription} 
+                component={Subscription} 
+                options={{title: 'Subscription'}} 
             />
         </HomeStack.Navigator>
     );
