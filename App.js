@@ -17,7 +17,7 @@ import VerifyPassword from './src/components/Authentication/VerifyPassword/verif
 
 const Tab = createBottomTabNavigator();
 
-const mainTabScreen = () => {
+const mainTabScreen = _ => {
   return(
     <Tab.Navigator
         screenOptions = {({ route }) => ({
@@ -62,11 +62,11 @@ const MainStack = createStackNavigator();
 const mainStackScreen = _ => {
   return(
     <MainStack.Navigator>
-      {/* <MainStack.Screen
+      <MainStack.Screen
         name={ScreenKey.Splashscreen} 
         component={Splashscreen} 
         options={{headerShown: false}}
-      /> */}
+      />
       <MainStack.Screen name={ScreenKey.Login} component={Login} options={{headerShown: false}} />
       <MainStack.Screen name={ScreenKey.Register} component={Register} options={{headerShown: false}} />
       <MainStack.Screen name={ScreenKey.VerifyPassword} component={VerifyPassword} options={{headerShown: false}} />

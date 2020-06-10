@@ -128,7 +128,7 @@ function Home(props) {
 
     return(
         <View style={styles.home}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <SectionCourses dataSection={dataSections[0]} navigation={props.navigation} />
                 <SectionCourses dataSection={dataSections[1]} navigation={props.navigation} />
                 <SectionCourses dataSection={dataSections[2]} navigation={props.navigation} />

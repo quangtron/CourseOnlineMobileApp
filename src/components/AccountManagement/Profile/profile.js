@@ -4,7 +4,8 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import Styles from '../../Common/Styles';
 import Separator from '../../Common/Separator';
 
-const Profile = _ => {
+const Profile = props => {
+    console.log(props)
     return(
         <View style={{margin: 20}}>
             <View style={styles.userInfor}>

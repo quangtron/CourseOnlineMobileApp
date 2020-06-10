@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 
+import { ScreenKey } from '../../../global/constants';
+
 const Splashscreen = props => {
     const [loading, setLoading] = useState(0);
     const srcImage = require('../../../../assets/logo.png');
 
-    // useEffect(_ => {
-    //     setInterval(() => {
-    //         setLoading(loading + 1);
-            
-    //         // return () => {
-    //         //     clearInterval();
-    //         //     props.navigation.navigate(ScreenKey.MainTab);
-    //         // }
-    //     }, 100);
+    useEffect(_ => {
+        this.timer = setInterval(() => {
+            setLoading(loading + 1)
+        });
+
+        if(loading >= 100){
+            clearInterval(this.timer);
+            props.navigation.navigate(ScreenKey.Login);
+        }
         
-    // }, [loading])
+        return () => {
+            clearInterval(this.timer);
+        }
+        
+    }, [loading])
 
     return(
         <View style={styles.splashscreen}>

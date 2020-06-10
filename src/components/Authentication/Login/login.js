@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
+import { login } from '../../../core/services/authentication-services';
 
 const Login = props => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [status, setStatus] = useState(null);
+
+    useEffect(() => {
+        if(status && status.status === 200){
+            props.navigation.navigate(ScreenKey.MainTab);
+        }
+    })
+
+    const renderResultLogin = status => {
+        if(!status){
+            return <View />
+        } else if (status.status === 200){
+            return <Text>Login successed!</Text>
+        } else {
+            return <Text>{status.errorString}</Text>
+        }
+    }
+
     const onPressLogin = _ => {
-        props.navigation.navigate(ScreenKey.MainTab);
+        setStatus(login(username, password));
     }
 
     const onPressRegister = _ => {
@@ -25,11 +46,23 @@ const Login = props => {
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
                     <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Login</Text>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Username' placeholderTextColor='#fff' />
+                        <TextInput
+                            style={styles.inputLayout}
+                            placeholder='Username'
+                            placeholderTextColor='#fff'
+                            onChangeText={(text) => {setUsername(text)}}
+                        />
                     </View>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Password' placeholderTextColor='#fff' secureTextEntry={true} />
+                        <TextInput
+                            style={styles.inputLayout}
+                            placeholder='Password'
+                            placeholderTextColor='#fff'
+                            secureTextEntry={true}
+                            onChangeText={(text) => {setPassword(text)}}
+                        />
                     </View>
+                    {renderResultLogin(status)}
                     <TouchableOpacity onPress={onPressForgetPassword}>
                         <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>

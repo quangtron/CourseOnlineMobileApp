@@ -6,8 +6,13 @@ import Separator from '../../Common/Separator';
 import RequireWifi from './RequireWifi/requireWifi';
 import OthersSetting from './OthersSetting/othersSetting';
 import Styles from '../../Common/Styles'
+import { ScreenKey } from '../../../global/constants';
 
 const Setting = props => {
+    const onSignOut = _ => {
+        props.navigation.navigate(ScreenKey.Login);
+    }
+
     return(
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <AccountSetting navigation={props.navigation} />
@@ -20,7 +25,7 @@ const Setting = props => {
                 <Text style={Styles.text(18, '#000', 'normal')}>App Version</Text>
                 <Text style={Styles.text(18, '#000', 'normal')}>2.77.2568</Text>
             </View>
-            <TouchableOpacity style={styles.btnLayout}>
+            <TouchableOpacity style={styles.btnLayout} onPress={onSignOut}>
                 <Text style={Styles.text(18, '#00B0FF', 'normal')}>Sign Out</Text>
             </TouchableOpacity>
         </ScrollView>
