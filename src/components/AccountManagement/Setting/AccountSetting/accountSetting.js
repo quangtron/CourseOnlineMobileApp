@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
+import { AuthenticationContext } from '../../../../provider/authentication-provider';
 
 const AccountSetting = props => {
+    const {authentication} = useContext(AuthenticationContext)
     const onPressAccount = _ => {
         props.navigation.navigate(ScreenKey.Profile);
     }
@@ -14,11 +17,11 @@ const AccountSetting = props => {
 
     return(
         <View style={styles.accountSetting}>
-            <TouchableOpacity style={styles.account}>
+            <TouchableOpacity style={styles.account} onPress={onPressAccount}>
                 <Image style={styles.image} source={require('../../../../../assets/user.png')} />
                 <View style={{marginLeft: 10}}>
-                    <Text style={Styles.text(18, '#000', 'normal')}>Ha Quang Trong</Text>
-                    <Text style={Styles.text(16, '#9E9E9E', 'normal')}>Ton</Text>
+                    <Text style={Styles.text(18, '#000', 'normal')}>{authentication.user.fullname}</Text>
+                    <Text style={Styles.text(16, '#9E9E9E', 'normal')}>{authentication.user.username}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={onPressAccount}>

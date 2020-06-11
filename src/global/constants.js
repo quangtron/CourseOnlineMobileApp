@@ -20,3 +20,8 @@ export const ScreenKey = {
     VerifyPassword: 'VerifyPassword',
     Subscription: 'Subscription',
 }
+
+export const Images = {
+    NewReleases: require('../../assets/bgLogin.jpg'),
+    Recommended: require('../../assets/bgLogin.jpg'),
+}

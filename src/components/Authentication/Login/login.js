@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
 import { login } from '../../../core/services/authentication-services';
+import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Login = props => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState(null);
+    const {setAuthentication} = useContext(AuthenticationContext);
 
     useEffect(() => {
         if(status && status.status === 200){
@@ -26,8 +28,9 @@ const Login = props => {
         }
     }
 
-    const onPressLogin = _ => {
+    const onPressLogin = setAuthentication => {
         setStatus(login(username, password));
+        setAuthentication(login(username, password));
     }
 
     const onPressRegister = _ => {
@@ -68,7 +71,7 @@ const Login = props => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}
-                        onPress={onPressLogin}
+                        onPress={() => onPressLogin(setAuthentication)}
                     >
                         <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>

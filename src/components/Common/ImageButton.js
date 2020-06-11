@@ -5,12 +5,26 @@ import Styles from '../Common/Styles'
 import { ScreenKey } from '../../global/constants';
 
 const ImageButton = props => {
-    const onPressImg = item => {
+    const onPressImg = items => {
         if(props.width){
             props.navigation.navigate(ScreenKey.SkillDetail);
         } else {
-            props.navigation.navigate(ScreenKey.ListCourses, {item: item});
+            if(props.title === 'NEW RELEASES'){
+                filterCourses(items, 1);
+            } else if (props.title === 'RECOMMENDED FOR YOU'){
+                filterCourses(items, 2);
+            }else {
+                props.navigation.navigate(ScreenKey.ListCourses, {item: items});
+            }
         }
+    }
+
+    const filterCourses = (items, status) => {
+        let temp = items.data;
+        temp = temp.filter((item) => {
+            return item.status === status;
+        })
+        props.navigation.navigate(ScreenKey.ListCourses, {item: {...temp, data: temp}});
     }
 
     return(
