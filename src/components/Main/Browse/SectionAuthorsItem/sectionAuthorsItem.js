@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { ScreenKey } from '../../../../global/constants';
+import { MainContext } from '../../../../provider/main-provider';
 
 const SectionAuthorsItem = props => {
+    const {main} = useContext(MainContext);
+
     const onPressAuthor = item => {
         props.navigation.navigate(ScreenKey.ListCourses, {item: item});
     }
 
     return(
-        <TouchableOpacity style={styles.author} onPress={_ => onPressAuthor(props.items)} >
+        <TouchableOpacity style={styles.author} onPress={_ => onPressAuthor(main.Courses)} >
             <Image source={props.item.img} style={styles.image} />
             <Text style={styles.textLayout}>{props.item.name}</Text>
         </TouchableOpacity>

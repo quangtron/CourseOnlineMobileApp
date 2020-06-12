@@ -24,7 +24,7 @@ const ImageButton = props => {
         temp = temp.filter((item) => {
             return item.status === status;
         })
-        props.navigation.navigate(ScreenKey.ListCourses, {item: {...temp, data: temp}});
+        props.navigation.navigate(ScreenKey.ListCourses, {item: {...items, data: temp}});
     }
 
     return(

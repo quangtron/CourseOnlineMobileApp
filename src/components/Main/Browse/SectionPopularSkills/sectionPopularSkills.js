@@ -1,52 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
+import { PopularSkillsContext } from '../../../../provider/popular-skills-provider';
 
 const SectionPopularSkills = props => {
-    const items = [
-        {
-            id: 1,
-            name: 'Angular',
-            img: null
-        },
-        {
-            id: 2,
-            name: 'JavaScript',
-            img: require('../../../../../assets/iconCheck.png')
-        },
-        {
-            id: 3,
-            name: 'C#',
-            img: require('../../../../../assets/iconCheck.png')
-        },
-        {
-            id: 4,
-            name: 'Java',
-            img: null
-        },
-        {
-            id: 5,
-            name: 'Python',
-            img: null
-        },
-        {
-            id: 6,
-            name: 'Swift',
-            img: null
-        },
-        {
-            id: 7,
-            name: 'C++',
-            img: null
-        },
-        {
-            id: 8,
-            name: 'Data Analysts',
-            img: null
-        },
-    ];
+    const {popularSkills} = useContext(PopularSkillsContext);
 
     const onPressSkill = _ => {
         props.navigation.navigate(ScreenKey.SkillDetail);
@@ -75,7 +35,7 @@ const SectionPopularSkills = props => {
         <View style={{margin: 15, marginRight: 0}}>
             <Text style={[Styles.text(16, '#000', 'bold'), {marginBottom: 15}]}>{props.title}</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                {showListItems(items)}
+                {showListItems(popularSkills)}
             </ScrollView>
         </View>
     );

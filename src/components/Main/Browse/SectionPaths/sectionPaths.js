@@ -1,32 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import SectionPathsItem from '../SectionPathsItem/sectionPathsItem';
 
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
+import { MainContext } from '../../../../provider/main-provider';
 
 const SectionPaths = props => {
-    const paths = [
-        {
-            id: 1,
-            title: 'Cisco SCOR (350 - 701) for CCNP Security',
-            img: require('../../../../../assets/bgLogin.jpg'),
-            courses: 5
-        },
-        {
-            id: 2,
-            title: 'React Native 2',
-            img: require('../../../../../assets/bgLogin.jpg'),
-            courses: 6
-        },
-        {
-            id: 3,
-            title: 'React Native 3',
-            img: require('../../../../../assets/bgLogin.jpg'),
-            courses: 7
-        },
-    ];
+    const {main} = useContext(MainContext);
 
     const showListPathsItem = paths => {
         let result = null;
@@ -49,7 +31,7 @@ const SectionPaths = props => {
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>
-                {showListPathsItem(paths)}
+                {showListPathsItem(main.Paths.data)}
             </ScrollView>
         </View>
     );

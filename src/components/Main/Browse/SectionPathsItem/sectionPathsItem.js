@@ -21,7 +21,7 @@ const SectionPathsItem = props => {
             </View>
             <View style={{margin: 10}}>
                 <Text>{title}</Text>
-                <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 5}]}>{`${courses} courses`}</Text>
+                <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 5}]}>{`${courses.length} courses`}</Text>
             </View>
         </TouchableOpacity>
     );

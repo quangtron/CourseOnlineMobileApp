@@ -29,7 +29,7 @@ const DownloadItem = props => {
                         <Text style={[Styles.text(14, '#9E9E9E', 'normal'), {marginTop: 10}]}>{author}</Text>
                         <Text style={Styles.text(14, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
                     </View>
-                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses} courses`}</Text>
+                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses.length} courses`}</Text>
                 }
             </View>
             {author ? 

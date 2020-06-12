@@ -24,7 +24,7 @@ const SectionCourses = props => {
     return(
         <View style={styles.sectonCourses}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(16, '#000', 'bold')}>{title}</Text>
+                <Text style={Styles.text(16, '#000', 'bold')}>{props.title ? props.title : title}</Text>
                 <TouchableOpacity
                     style={Styles.btnLayout(70, 20, '#EEEEEE')}
                     onPress={_ => onPress(props.dataSection)}

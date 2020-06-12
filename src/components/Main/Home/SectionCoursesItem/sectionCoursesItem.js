@@ -8,7 +8,11 @@ const SectionCoursesItem = props => {
     const { title, author, level, released, duration, img, courses } = props.item;
 
     const onPressItem = item => {
-        props.navigation.navigate(ScreenKey.CourseDetail, {item: item});
+        if(author){
+            props.navigation.navigate(ScreenKey.CourseDetail, {item});
+        } else {
+            props.navigation.navigate(ScreenKey.ListCourses, {item: {title: 'Paths', data: courses}});
+        }
     }
 
     return(
@@ -24,7 +28,7 @@ const SectionCoursesItem = props => {
                         <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 10}]}>{author}</Text>
                         <Text style={Styles.text(13, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
                     </View>
-                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses} courses`}</Text>
+                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses.length} courses`}</Text>
                 }
             </View>
         </TouchableOpacity>
