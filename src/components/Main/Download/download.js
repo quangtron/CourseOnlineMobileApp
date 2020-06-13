@@ -1,40 +1,13 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 
 import Styles from '../../Common/Styles';
 import DownloadItem from './DownloadItem/downloadItem';
 import Separator from '../../Common/Separator';
+import { DownloadsContext } from '../../../provider/downloads-provider';
 
 const Download = props => {
-    const listDownloads = [
-        {
-            id: 1,
-            title: 'React Native 1',
-            img: require('../../../../assets/bgLogin.jpg'),
-            author: 'T1',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
-        },
-        {
-            id: 2,
-            title: 'React Native 2',
-            img: require('../../../../assets/bgLogin.jpg'),
-            author: 'T2',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
-        },
-        {
-            id: 3,
-            title: 'React Native 3',
-            img: require('../../../../assets/bgLogin.jpg'),
-            author: 'T3',
-            level: 'Beginner',
-            released: 'May 11, 2020',
-            duration: '38h'
-        },
-    ];
+    const {downloads} = useContext(DownloadsContext);
 
     return(
         <View style={styles.download}>
@@ -46,7 +19,7 @@ const Download = props => {
             </View>
             <FlatList
                 style = {{marginTop: 30}}
-                data = {listDownloads}
+                data = {downloads}
                 renderItem = {({item}) => <DownloadItem item={item} navigation={props.navigation} />}
                 ItemSeparatorComponent = {Separator}
                 showsVerticalScrollIndicator = {false}

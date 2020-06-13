@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
 
 import ShareScreen from '../../../Others/Share/share';
+import { DownloadsContext } from '../../../../provider/downloads-provider';
 
 const ButtonInformation = props => {
+    const { downloads, setDownloads } = useContext(DownloadsContext);
+
+    const onHandlePress = name => {
+        if(name === 'Download'){
+            const listDownloads = downloads;
+
+            listDownloads.push(props.data);
+            setDownloads(listDownloads);
+        }
+    }
+
+    const {img, name} = props.item;
+
     return(
         <View>
-            <TouchableOpacity style={styles.itemCenter} onPress={_ => ShareScreen()}>
+            <TouchableOpacity style={styles.itemCenter} onPress={_ => onHandlePress(name)}>
                 <View style={styles.circleBtn}>
-                    <Image source={props.item.img} style={styles.image} />
+                    <Image source={img} style={styles.image} />
                 </View>
-                <Text style={styles.textLayout}>{props.item.name}</Text>
+                <Text style={styles.textLayout}>{name}</Text>
             </TouchableOpacity>
         </View>
     );

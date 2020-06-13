@@ -22,16 +22,14 @@ const Information = props => {
             img: require('../../../../assets/iconDownload.png'),
         },
     ];
-
-    const showBtnInfor = buttons => {
-        return buttons.map((item, index) => <ButtonInformation key={index} item={item} />)
-    }
     
     return(
         <View style={{margin: 20}}>
             <HeaderInformation infor={props.infor} />
             <View style={styles.btn}>
-                {showBtnInfor(buttons)}
+                <ButtonInformation item={buttons[0]} />
+                <ButtonInformation item={buttons[1]} />
+                <ButtonInformation item={buttons[2]} data={props.infor} />
             </View>
             <Separator />
             <DescribeCourse />

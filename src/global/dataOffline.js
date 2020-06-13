@@ -286,3 +286,28 @@ export const AuthorsData = [
         name: 'Trong 7',
     },
 ];
+
+export const DownloadsData = [
+    {
+        id: 1,
+        title: 'React Native 1',
+        category: 'Javascript',
+        img: require('../../assets/bgLogin.jpg'),
+        author: 'T1',
+        level: 'Beginner',
+        released: 'May 11, 2020',
+        duration: '38h',
+        status: 1,
+    },
+    {
+        id: 2,
+        title: 'React Native 2',
+        category: 'Javascript',
+        img: require('../../assets/bgLogin.jpg'),
+        author: 'T2',
+        level: 'Beginner',
+        released: 'May 11, 2020',
+        duration: '38h',
+        status: 1,
+    },
+]
