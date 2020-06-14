@@ -12,7 +12,7 @@ const DownloadItem = props => {
         if(author){
             props.navigation.navigate(ScreenKey.CourseDetail, {item: item});
         } else {
-            props.navigation.navigate(ScreenKey.ListCourses, {item: item});
+            props.navigation.push(ScreenKey.ListCourses, {item: {title: item.title, data: item.courses}});
         }
     }
 

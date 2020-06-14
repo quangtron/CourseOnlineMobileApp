@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import VideoPlayer from './VideoPlayer/videoPlayer';
 import Information from './Information/information';
 import ListLesson from './ListLesson/listLesson';
+import { BookmarksContext } from '../../provider/bookmarks-provider';
 
 const CoursesDetail = props => {
     const { item } = props.route.params;
+    const {bookmarks} = useContext(BookmarksContext);
     
     const onPressLeft = () => {
         props.navigation.goBack();

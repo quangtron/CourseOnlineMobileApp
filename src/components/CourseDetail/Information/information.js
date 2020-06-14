@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import HeaderInformation from './HeaderInformation/headerInformation';
@@ -6,30 +6,58 @@ import ButtonInformation from './ButtonInformation/buttonInformation';
 import DescribeCourse from './DescribeCourse/describeCourse';
 import Separator from '../../Common/Separator';
 import OthersButton from './OthersButton/othersButton';
+import { BookmarksContext } from '../../../provider/bookmarks-provider';
 
 const Information = props => {
     const buttons = [
         {
             name: 'Bookmark',
             img: require('../../../../assets/iconBookmark.png'),
+            img2: require('../../../../assets/iconBookmarked.png'),
+            checked: false,
         },
         {
             name: 'Add to channel',
             img: require('../../../../assets/iconPlus.png'),
+            img2: require('../../../../assets/iconPlused.png'),
+            checked: false,
         },
         {
             name: 'Download',
             img: require('../../../../assets/iconDownload.png'),
+            img2: require('../../../../assets/iconDownloaded.png'),
+            checked: false,
         },
     ];
+
+    const [dataBtn, setDataBtn] = useState(buttons);
+    const {bookmarks} = useContext(BookmarksContext);
+
+    useEffect(() => {
+        for(let item of bookmarks){
+            if(item.title === props.infor.title){
+                let arrData = [...dataBtn];
+
+                arrData[0].checked = true;
+                setDataBtn(arrData);
+            }
+        }
+    }, [])
+
+    const onToggleChange = checked => {
+        let arrData = [...dataBtn];
+
+        arrData[0].checked = checked;
+        setDataBtn(arrData)
+    }
     
     return(
         <View style={{margin: 20}}>
             <HeaderInformation infor={props.infor} />
             <View style={styles.btn}>
-                <ButtonInformation item={buttons[0]} />
-                <ButtonInformation item={buttons[1]} />
-                <ButtonInformation item={buttons[2]} data={props.infor} />
+                <ButtonInformation item={dataBtn[0]} data={props.infor} onToggleChange={onToggleChange} />
+                <ButtonInformation item={dataBtn[1]} />
+                <ButtonInformation item={dataBtn[2]} data={props.infor} />
             </View>
             <Separator />
             <DescribeCourse />

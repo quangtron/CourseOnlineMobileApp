@@ -3,9 +3,11 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 
 import SectionCourses from './SectionCourses/sectionCourses';
 import { MainContext } from '../../../provider/main-provider';
+import { BookmarksContext } from '../../../provider/bookmarks-provider';
 
 function Home(props) {
     const {main} = useContext(MainContext);
+    const {bookmarks} = useContext(BookmarksContext);
 
     return(
         <View style={styles.home}>
@@ -13,7 +15,7 @@ function Home(props) {
                 <SectionCourses dataSection={main.Courses} navigation={props.navigation} />
                 <SectionCourses dataSection={main.Paths} navigation={props.navigation} />
                 <SectionCourses dataSection={main.Channels} navigation={props.navigation} />
-                <SectionCourses dataSection={main.Bookmarks} navigation={props.navigation} />
+                <SectionCourses dataSection={{title: 'Bookmarks', data: bookmarks}} navigation={props.navigation} />
             </ScrollView>
         </View>
     );

@@ -10,10 +10,12 @@ const SectionAuthorsItem = props => {
         props.navigation.navigate(ScreenKey.ListCourses, {item: item});
     }
 
+    const { img, author } = props.item;
+
     return(
         <TouchableOpacity style={styles.author} onPress={_ => onPressAuthor(main.Courses)} >
-            <Image source={props.item.img} style={styles.image} />
-            <Text style={styles.textLayout}>{props.item.name}</Text>
+            <Image source={img} style={styles.image} />
+            <Text style={styles.textLayout}>{author}</Text>
         </TouchableOpacity>
     );
 }

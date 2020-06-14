@@ -11,7 +11,7 @@ const SectionCoursesItem = props => {
         if(author){
             props.navigation.navigate(ScreenKey.CourseDetail, {item});
         } else {
-            props.navigation.navigate(ScreenKey.ListCourses, {item: {title: 'Paths', data: courses}});
+            props.navigation.navigate(ScreenKey.ListCourses, {item: {title: 'Paths', data: item.courses}});
         }
     }
 

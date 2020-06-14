@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 
 import Styles from '../../../Common/Styles';
+import { SearchContext } from '../../../../provider/search-provider';
 
 const SearchInput = _ => {
+    const {search, setSearch} = useContext(SearchContext);
+
     return(
         <View style={styles.search}>
             <TextInput
@@ -11,9 +14,11 @@ const SearchInput = _ => {
                 autoFocus={true}
                 clearButtonMode='always'
                 placeholder='Enter your keyword'
+                value={search}
+                onChangeText={(search) => setSearch(search)}
             />
-            <TouchableOpacity>
-                <Text style={[Styles.text(18, '#000', 'normal'), {paddingLeft: 10}]}>Cancle</Text>
+            <TouchableOpacity onPress={() => setSearch('')}>
+                <Text style={[Styles.text(18, '#000', 'normal'), {paddingLeft: 10}]}>Cancel</Text>
             </TouchableOpacity>
         </View>
     );

@@ -9,25 +9,25 @@ import { ScreenKey } from '../../../../global/constants';
 const SearchTabResults = props => {
     const SearchAllScreen = () => {
         return(
-            <SearchAll all={props.results} navigation={props.navigation} />
+            <SearchAll navigation={props.navigation} />
         );
     }
 
     const SearchCoursesScreen = () => {
         return(
-            <SearchByName courses={props.results[0]} navigation={props.navigation} />
+            <SearchByName name={ScreenKey.Courses} navigation={props.navigation} />
         );
     }
 
     const SearchPathsScreen = () => {
         return(
-            <SearchByName courses={props.results[1]} navigation={props.navigation} />
+            <SearchByName name={ScreenKey.Paths} navigation={props.navigation} />
         );
     }
 
     const SearchAuthorsScreen = () => {
         return(
-            <SearchByName courses={props.results[2]} navigation={props.navigation} />
+            <SearchByName name={ScreenKey.Authors} navigation={props.navigation} />
         );
     }
 
