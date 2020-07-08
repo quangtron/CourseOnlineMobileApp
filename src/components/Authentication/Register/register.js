@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
+import { RegisterContext } from '../../../provider/register-provider';
+import { VerifyEmailContext } from '../../../provider/verify-email-provider';
 
 const Register = props => {
+    const [email, setEmail] = useState('');
+    // const registerContext = useContext(RegisterContext);
+    const verifyEmailContext = useContext(VerifyEmailContext);
+
+    useEffect(() => {
+        console.log('useeffect');
+        console.log(email);
+        if(verifyEmailContext.state.isVerifyed){
+            console.log('success');
+        } else {
+            console.log('fail');
+        }
+    }, [verifyEmailContext.state.isVerifyed])
+
     const onPressVerify = _ => {
-        props.navigation.navigate(ScreenKey.VerifyPassword);
+        // props.navigation.navigate(ScreenKey.Register);
+        // verifyEmailContext.verifyEmail(email)
     }
 
     const onPressBack = _ => {
@@ -19,9 +36,14 @@ const Register = props => {
                 <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
-                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Register</Text>
+                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 40,}]}>Verify Email</Text>
                     <View>
-                        <TextInput style={styles.inputLayout} placeholder='Enter your email' placeholderTextColor='#fff' />
+                        <TextInput
+                            style={styles.inputLayout}
+                            placeholder='Enter your email'
+                            placeholderTextColor='#fff'
+                            onChangeText={(text) => setEmail(text)}
+                        />
                     </View>
                     <View style={styles.buttons}>
                         <TouchableOpacity

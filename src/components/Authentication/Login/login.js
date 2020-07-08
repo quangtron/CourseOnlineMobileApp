@@ -34,7 +34,7 @@ const Login = props => {
     }
 
     const onPressRegister = _ => {
-        props.navigation.navigate(ScreenKey.Register);
+        props.navigation.navigate(ScreenKey.VerifyPassword);
     }
 
     const onPressForgetPassword = _ =>{
