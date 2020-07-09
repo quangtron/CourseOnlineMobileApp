@@ -7,6 +7,7 @@ const RegisterContext = React.createContext();
 const initialState = {
     isRegistering: false,
     isRegistered: false,
+    message: null,
 }
 
 const RegisterProvider = props => {

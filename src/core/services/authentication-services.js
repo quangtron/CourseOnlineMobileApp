@@ -1,11 +1,8 @@
-export const login = (username, password) => {
-    if(username.toLowerCase() === 'admin'){
-        if(password === '123456'){
-            return {status: 200, user: {username, token: 'abc123', fullname: 'Administrator'}}
-        } else {
-            return {status: 404, errorString: 'Username & Password are not match!'}
-        }
-    }
+import axios from "axios";
 
-    return {status: 404, errorString: 'User is not existed!'}
+export const apiLogin = (email, password) => {
+    return axios.post('https://api.itedu.me/user/login', {
+        email,
+        password
+    })
 }

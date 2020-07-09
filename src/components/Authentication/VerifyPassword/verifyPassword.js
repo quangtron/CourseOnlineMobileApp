@@ -43,16 +43,23 @@ const VerifyPassword = (props) => {
     }
   }, [verifyEmailContext.state.isVerifyed]);
 
-  const onPressRegister = (_) => {
+  const onPressRegister = () => {
     // props.navigation.navigate(ScreenKey.MainTab);
     if (password === confirmPassword) {
       registerContext.register(name, email, phoneNumber, password);
     }
   };
 
-  const onPressBack = (_) => {
+  const onPressBack = () => {
+    registerContext.state.message = null;
     props.navigation.navigate(ScreenKey.Login);
   };
+
+  const renderMessage = () => {
+    if(registerContext.state.message){
+      return <Text style={styles.message}>{registerContext.state.message}</Text>
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -77,11 +84,12 @@ const VerifyPassword = (props) => {
           <Text
             style={[
               Styles.text(35, "#ffebee", "bold"),
-              { marginTop: 60, marginBottom: 40 },
+              { marginTop: 60, marginBottom: 30 },
             ]}
           >
             Register
           </Text>
+          {renderMessage()}
           <View>
             <TextInput
               style={styles.inputLayout}
@@ -203,6 +211,10 @@ const styles = StyleSheet.create({
     textShadowColor: "#F06292",
     textShadowRadius: 5,
   },
+  message: {
+    marginBottom: 10,
+    color: '#d32f2f',
+  }
 });
 
 export default VerifyPassword;

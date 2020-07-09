@@ -6,19 +6,22 @@ import Separator from '../../Common/Separator';
 import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Profile = props => {
-    const {authentication} = useContext(AuthenticationContext);
+    const authenticationContext = useContext(AuthenticationContext);
+    const { avatar, name, email, phone } = authenticationContext.state.user;
 
     return(
         <View style={{margin: 20}}>
             <View style={styles.userInfor}>
-                <Image style={styles.image} source={require('../../../../assets/user.png')} />
+                <Image style={styles.image} source={{uri: avatar}} />
                 <View style={{marginLeft: 10}}>
-                    <Text style={Styles.text(18, '#000', 'normal')}>{authentication.user.fullname}</Text>
-                    <Text style={Styles.text(16, '#9E9E9E', 'normal')}>{authentication.user.username}</Text>
+                    <Text style={Styles.text(18, '#000', 'normal')}>{name}</Text>
+                    <Text style={Styles.text(16, '#9E9E9E', 'normal')}>{email}</Text>
                 </View>
             </View>
             <Separator />
-            <Text style={Styles.text(18, '#000', 'normal')}>Date: May 9, 2020</Text>
+            <Text style={[Styles.text(18, '#000', 'normal'), {marginBottom: 10}]}>Name: {name}</Text>
+            <Text style={[Styles.text(18, '#000', 'normal'), {marginBottom: 10}]}>Email: {email}</Text>
+            <Text style={[Styles.text(18, '#000', 'normal'), {marginBottom: 10}]}>Phone number: {phone}</Text>
             <TouchableOpacity style={styles.btnLayout}>
                 <Text style={Styles.text(18, '#00B0FF', 'normal')}>Change Password</Text>
             </TouchableOpacity>
@@ -35,6 +38,7 @@ const styles = StyleSheet.create({
     image: {
         width: 100,
         height: 100,
+        borderRadius: 50,
     },
     btnLayout: {
         marginTop: 50,

@@ -8,7 +8,7 @@ export const registerReducer = (preState, action) => {
         case REGISTER_SUCCESSD:
             return {...preState, isRegistered: true, isRegistering: false, }
         case REGISTER_FAILED:
-            return {...preState, isRegistered: false, isRegistering: false, }
+            return {...preState, isRegistered: false, isRegistering: false, message: action.message }
         default:
             throw new Error();
     }

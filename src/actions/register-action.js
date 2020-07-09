@@ -8,8 +8,9 @@ const registerSuccessed = () => ({
     type: REGISTER_SUCCESSD
 })
 
-const registerFailed = () => ({
-    type: REGISTER_FAILED
+const registerFailed = (message) => ({
+    type: REGISTER_FAILED,
+    message
 })
 
 export const register = (dispatch) => (username, email, phone, password) => {
@@ -25,7 +26,7 @@ export const register = (dispatch) => (username, email, phone, password) => {
             }
         })
         .catch((err) => {
-            console.log('error:', err);
-            dispatch(registerFailed());
+            console.log('error:', err.response);
+            dispatch(registerFailed(err.response.data.message));
         })
 }

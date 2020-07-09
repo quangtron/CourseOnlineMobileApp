@@ -7,30 +7,30 @@ import { login } from '../../../core/services/authentication-services';
 import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Login = props => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [status, setStatus] = useState(null);
-    const {setAuthentication} = useContext(AuthenticationContext);
+    const authenticationContext = useContext(AuthenticationContext);
 
     useEffect(() => {
-        if(status && status.status === 200){
+        if(authenticationContext.state.isLogined){
             props.navigation.navigate(ScreenKey.MainTab);
+        } else {
+            console.log('Login failed!', authenticationContext.state.message);
         }
-    })
+    }, [authenticationContext.state.isLogined])
 
     const renderResultLogin = status => {
-        if(!status){
+        if(!status.isLogined && !status.message){
             return <View />
-        } else if (status.status === 200){
-            return <Text>Login successed!</Text>
+        } else if(status.message){
+            return <Text>{status.message}</Text>
         } else {
-            return <Text>{status.errorString}</Text>
+            return <Text>Login successed!</Text>
         }
     }
 
-    const onPressLogin = setAuthentication => {
-        setStatus(login(username, password));
-        setAuthentication(login(username, password));
+    const onPressLogin = () => {
+        authenticationContext.login(email, password);
     }
 
     const onPressRegister = _ => {
@@ -51,9 +51,9 @@ const Login = props => {
                     <View>
                         <TextInput
                             style={styles.inputLayout}
-                            placeholder='Username'
+                            placeholder='Email'
                             placeholderTextColor='#fff'
-                            onChangeText={(text) => {setUsername(text)}}
+                            onChangeText={(text) => {setEmail(text)}}
                         />
                     </View>
                     <View>
@@ -65,13 +65,13 @@ const Login = props => {
                             onChangeText={(text) => {setPassword(text)}}
                         />
                     </View>
-                    {renderResultLogin(status)}
+                    {renderResultLogin(authenticationContext.state)}
                     <TouchableOpacity onPress={onPressForgetPassword}>
                         <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}
-                        onPress={() => onPressLogin(setAuthentication)}
+                        onPress={() => onPressLogin()}
                     >
                         <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
                     </TouchableOpacity>
