@@ -20,6 +20,7 @@ const VerifyPassword = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [isEmpty, setIsEmpty] = useState(false);
   const registerContext = useContext(RegisterContext);
   const verifyEmailContext = useContext(VerifyEmailContext);
 
@@ -37,15 +38,18 @@ const VerifyPassword = (props) => {
     console.log("useeffect2");
     if (verifyEmailContext.state.isVerifyed) {
       console.log("success2");
-      props.navigation.navigate(ScreenKey.Register);
+      props.navigation.navigate(ScreenKey.Register, { email });
     } else {
-      console.log("fail");
+      console.log("fail2");
     }
   }, [verifyEmailContext.state.isVerifyed]);
 
   const onPressRegister = () => {
-    // props.navigation.navigate(ScreenKey.MainTab);
-    if (password === confirmPassword) {
+    if(!name || !email || !password || !phoneNumber){
+      setIsEmpty(true);
+    } else if (password === confirmPassword) {
+      registerContext.state.isRegistered = false;
+      registerContext.state.message = null;
       registerContext.register(name, email, phoneNumber, password);
     }
   };
@@ -56,7 +60,9 @@ const VerifyPassword = (props) => {
   };
 
   const renderMessage = () => {
-    if(registerContext.state.message){
+    if(isEmpty){
+      return <Text style={styles.message}>Chưa điền đầy đủ thông tin</Text>
+    } else if(registerContext.state.message){
       return <Text style={styles.message}>{registerContext.state.message}</Text>
     }
   }
@@ -87,13 +93,13 @@ const VerifyPassword = (props) => {
               { marginTop: 60, marginBottom: 30 },
             ]}
           >
-            Register
+            Đăng ký
           </Text>
           {renderMessage()}
           <View>
             <TextInput
               style={styles.inputLayout}
-              placeholder="Enter your name"
+              placeholder="Nhập họ tên"
               placeholderTextColor="#fff"
               onChangeText={(text) => setName(text)}
             />
@@ -101,7 +107,7 @@ const VerifyPassword = (props) => {
           <View>
             <TextInput
               style={styles.inputLayout}
-              placeholder="Enter your email"
+              placeholder="Nhập email"
               placeholderTextColor="#fff"
               onChangeText={(text) => setEmail(text)}
             />
@@ -109,7 +115,7 @@ const VerifyPassword = (props) => {
           <View>
             <TextInput
               style={styles.inputLayout}
-              placeholder="Enter your password"
+              placeholder="Nhập mật khẩu"
               placeholderTextColor="#fff"
               secureTextEntry={true}
               onChangeText={(text) => setPassword(text)}
@@ -118,7 +124,7 @@ const VerifyPassword = (props) => {
           <View>
             <TextInput
               style={styles.inputLayout}
-              placeholder="Confirm your password"
+              placeholder="Xác nhận mật khẩu"
               placeholderTextColor="#fff"
               secureTextEntry={true}
               onChangeText={(text) => setConfirmPassword(text)}
@@ -127,7 +133,7 @@ const VerifyPassword = (props) => {
           <View>
             <TextInput
               style={styles.inputLayout}
-              placeholder="Enter your phone number"
+              placeholder="Nhập số điện thoại"
               placeholderTextColor="#fff"
               onChangeText={(text) => setPhoneNumber(text)}
             />
@@ -140,14 +146,14 @@ const VerifyPassword = (props) => {
               ]}
               onPress={onPressRegister}
             >
-              <Text style={Styles.text(20, "#000", "normal")}>Register</Text>
+              <Text style={Styles.text(20, "#000", "normal")}>Đăng ký</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text
                 style={Styles.text(14, "#FFF59D", "normal")}
                 onPress={onPressBack}
               >
-                Back to Login!
+                Quay trở lại đăng nhập!
               </Text>
             </TouchableOpacity>
           </View>
