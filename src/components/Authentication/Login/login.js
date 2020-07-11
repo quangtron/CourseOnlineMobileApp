@@ -47,7 +47,7 @@ const Login = props => {
 
     const onPressForgetPassword = _ =>{
         resetForm();
-        props.navigation.navigate(ScreenKey.ForgetPassword);
+        props.navigation.navigate(ScreenKey.Register, {email: ''});
     }
 
     return(

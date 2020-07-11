@@ -14,12 +14,11 @@ import { ScreenKey } from "../../../global/constants";
 import { VerifyEmailContext } from "../../../provider/verify-email-provider";
 
 const Register = (props) => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const verifyEmailContext = useContext(VerifyEmailContext);
 
   useEffect(() => {
     console.log("useeffect");
-    console.log(email);
     if (verifyEmailContext.state.isVerifyed) {
       console.log("success");
     } else {
@@ -28,7 +27,11 @@ const Register = (props) => {
   }, [verifyEmailContext.state.isVerifyed]);
 
   const onPressVerify = (_) => {
-    verifyEmailContext.verifyEmail(email);
+    if(props.route.params.email === '') {
+      verifyEmailContext.forgetPassword(email);
+    } else {
+      verifyEmailContext.verifyEmail(props.route.params.email);
+    }
   };
 
   const onPressBack = (_) => {
@@ -63,17 +66,15 @@ const Register = (props) => {
           >
             Xác nhận email
           </Text>
-          {/* <View>
-                        <TextInput
-                            style={styles.inputLayout}
-                            placeholderTextColor='#fff'
-                            value={props.route.params.email}
-                        />
-                    </View> */}
-          <Text style={styles.inputLayout}>
-            Email:
-            <Text style={{color: '#FFF59D'}}> {props.route.params.email}</Text>
-          </Text>
+          <View>
+            <TextInput
+                style={styles.inputLayout}
+                placeholderTextColor='#fff'
+                placeholder='Nhập email'
+                value={props.route.params.email === '' ? email : props.route.params.email}
+                onChangeText={(text) => setEmail(text)}
+            />
+          </View>
           <View style={styles.buttons}>
             <TouchableOpacity
               style={[
@@ -82,7 +83,7 @@ const Register = (props) => {
               ]}
               onPress={onPressVerify}
             >
-              <Text style={Styles.text(20, "#000", "normal")}>Gửi lại mã</Text>
+              <Text style={Styles.text(20, "#000", "normal")}>{props.route.params.email === '' ? 'Gửi mã' : 'Gửi lại mã'}</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text

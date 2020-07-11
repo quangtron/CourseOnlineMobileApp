@@ -1,4 +1,4 @@
-import { apiVerifyEmail, apiActiveEmail } from "../core/services/verify-email-services";
+import { apiVerifyEmail, apiActiveEmail, apiForgetPassword } from "../core/services/verify-email-services";
 
 export const VERIFY_EMAIL_REQUEST = 'VERIFY_EMAIL_REQUEST';
 export const VERIFY_EMAIL_SUCCESSED = 'VERIFY_EMAIL_SUCCESSED';
@@ -57,5 +57,23 @@ export const activateEmail = (dispatch) => (token) => {
         .catch((err) => {
             console.log('error:', err);
             dispatch(activateEmailFailed());
+        })
+}
+
+export const forgetPassword = (dispatch) => (email) => {
+    dispatch({type: VERIFY_EMAIL_REQUEST});
+
+    apiForgetPassword(email)
+        .then((res) => {
+            if(res.status === 200) {
+                console.log('email: ',res.data.message);
+                dispatch(verifyEmailSuccessed());
+            } else {
+                dispatch(verifyEmailFailed());
+            }
+        })
+        .catch((err) => {
+            console.log('error:', err);
+            dispatch(verifyEmailFailed());
         })
 }

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import { verifyEmail } from '../actions/verify-email-action';
+import { verifyEmail, forgetPassword } from '../actions/verify-email-action';
 import { verifyEmailReducer } from '../reducers/verify-email-reducer';
 
 const VerifyEmailContext = React.createContext();
@@ -16,7 +16,7 @@ const initialState = {
 const VerifyEmailProvider = props => {
     const [state, dispatch] = useReducer(verifyEmailReducer, initialState);
     return(
-        <VerifyEmailContext.Provider value={{state, verifyEmail: verifyEmail(dispatch)}}>
+        <VerifyEmailContext.Provider value={{state, verifyEmail: verifyEmail(dispatch), forgetPassword: forgetPassword(dispatch)}}>
             {props.children}
         </VerifyEmailContext.Provider>
     )
