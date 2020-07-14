@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
-const DescribeCourse = _ => {
+const DescribeCourse = (props) => {
     const [heightText, setHeightText] = useState(80);
     const [heightScroll, setHeightScroll] = useState(65);
-    const [imageScroll, setImageScroll] = useState(require('../../../../../assets/iconDown.png'));
+    const [imageScroll, setImageScroll] = useState(require('../../../../../assets/iconUp.png'));
     const data = 'DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse';
 
     const showAllText = _ => {
         if(heightText){
             setHeightText(null);
             setHeightScroll(null);
-            setImageScroll(require('../../../../../assets/iconUp.png'));
+            setImageScroll(require('../../../../../assets/iconDown.png'));
         } else {
             setHeightText(80);
             setHeightScroll(65);
-            setImageScroll(require('../../../../../assets/iconDown.png'));
+            setImageScroll(require('../../../../../assets/iconUp.png'));
         }
     }
 
     return(
         <View style={styles.box}>
             <Text style={[styles.textArea, {height: heightText}]}>
-                {data}
+                {props.des}
             </Text>
             <TouchableOpacity style={[styles.btnScroll, {height: heightScroll}]} onPress={() => showAllText()}>
                 <Image style={styles.image} source={imageScroll} />

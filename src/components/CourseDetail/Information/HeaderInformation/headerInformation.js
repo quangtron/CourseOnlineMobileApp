@@ -4,25 +4,25 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Styles from '../../../Common/Styles';
 
 const HeaderInformation = props => {
-    const { title, img, author, duration, released, level } = props.infor;
+    const { title } = props.infor;
 
     return(
         <View>
             <Text style={Styles.text(22, '#000', 'bold')}>{title}</Text>
-            <TouchableOpacity style={[Styles.btnLayout(120,30,'#EEEEEE'), styles.author]}>
+            <TouchableOpacity style={[Styles.btnLayout(130,30,'#EEEEEE'), styles.author]}>
                 <View style={styles.images}>
                     <Image
                         style={styles.image}
-                        source={img}
+                        // source={img}
                     />
                     <Image
                         style={styles.imageCheck}
                         source={require('../../../../../assets/iconCheck.png')}
                     />
                 </View>
-                <Text style={styles.text}>{author}</Text>
+                <Text style={styles.text}>{props.infor['instructor.user.name']}</Text>
             </TouchableOpacity>
-            <Text style={[Styles.text(14, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${level} . ${released} . ${duration}`}</Text>
+            {/* <Text style={[Styles.text(14, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${level} . ${released} . ${duration}`}</Text> */}
         </View>
     );
 }

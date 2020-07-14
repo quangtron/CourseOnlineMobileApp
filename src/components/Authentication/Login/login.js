@@ -6,8 +6,8 @@ import { ScreenKey } from '../../../global/constants';
 import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Login = props => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('1612745@student.hcmus.edu.vn');
+    const [password, setPassword] = useState('12345678');
     const authenticationContext = useContext(AuthenticationContext);
 
     useEffect(() => {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         height: 100,
     },
     inputLayout: {
-        width: 200,
+        width: 250,
         padding: 5,
         marginBottom: 20,
 

@@ -11,27 +11,30 @@ import { BookmarksProvider } from "./src/provider/bookmarks-provider";
 import { SearchProvider } from "./src/provider/search-provider";
 import { VerifyEmailProvider } from "./src/provider/verify-email-provider";
 import { RegisterProvider } from "./src/provider/register-provider";
+import { CoursesProvider } from "./src/provider/courses-provider";
 
 export default function App() {
   return (
     <RegisterProvider>
       <VerifyEmailProvider>
         <AuthenticationProvider>
-          <MainProvider>
-            <PopularSkillsProvider>
-              <AuthorsProvider>
-                <DownloadsProvider>
-                  <BookmarksProvider>
-                    <SearchProvider>
-                      <NavigationContainer>
-                        {mainStackScreen()}
-                      </NavigationContainer>
-                    </SearchProvider>
-                  </BookmarksProvider>
-                </DownloadsProvider>
-              </AuthorsProvider>
-            </PopularSkillsProvider>
-          </MainProvider>
+          <CoursesProvider>
+            <MainProvider>
+              <PopularSkillsProvider>
+                <AuthorsProvider>
+                  <DownloadsProvider>
+                    <BookmarksProvider>
+                      <SearchProvider>
+                        <NavigationContainer>
+                          {mainStackScreen()}
+                        </NavigationContainer>
+                      </SearchProvider>
+                    </BookmarksProvider>
+                  </DownloadsProvider>
+                </AuthorsProvider>
+              </PopularSkillsProvider>
+            </MainProvider>
+          </CoursesProvider>
         </AuthenticationProvider>
       </VerifyEmailProvider>
     </RegisterProvider>

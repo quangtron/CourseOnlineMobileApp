@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Video } from 'expo-av';
 
-const VideoPlayer = _ => {
+const VideoPlayer = (props) => {
     return(
         <Video
-            source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+            source={{ uri: props.videoUrl }}
             rate={1.0}
             volume={1.0}
             isMuted={false}

@@ -14,13 +14,13 @@ const CoursesDetail = props => {
     const onPressLeft = () => {
         props.navigation.goBack();
     }
-
+    console.log('item: ',item);
     return(
         <View>
             <TouchableOpacity style={styles.back} onPress={onPressLeft}>
                 <Ionicons name="ios-arrow-back" size={24} color="tomato" />
             </TouchableOpacity>
-            <VideoPlayer />
+            <VideoPlayer videoUrl={item.promoVidUrl} />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Information infor={item} />
                 <ListLesson />

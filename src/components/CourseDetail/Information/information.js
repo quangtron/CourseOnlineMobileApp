@@ -60,7 +60,7 @@ const Information = props => {
                 <ButtonInformation item={dataBtn[2]} data={props.infor} />
             </View>
             <Separator />
-            <DescribeCourse />
+            <DescribeCourse des={props.infor.description} />
             <OthersButton />
         </View>
     );
