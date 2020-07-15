@@ -5,7 +5,6 @@ const DescribeCourse = (props) => {
     const [heightText, setHeightText] = useState(80);
     const [heightScroll, setHeightScroll] = useState(65);
     const [imageScroll, setImageScroll] = useState(require('../../../../../assets/iconUp.png'));
-    const data = 'DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse-DescribeCourse';
 
     const showAllText = _ => {
         if(heightText){

@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
-import { AuthorsData } from '../global/dataOffline';
+import React, { useReducer } from "react";
+
+import { authorsReducer } from "../reducers/authors-reducer";
+import { getAllAuthors, getDetailAuthor } from "../actions/authors-action";
 
 const AuthorsContext = React.createContext();
 
-const AuthorsProvider = props => {
-    const [authors, setAuthors] = useState(AuthorsData);
+const initialState = {
+  isGettingAllAuthors: false,
+  isGettedAllAuthors: false,
+  isGettingDetailAuthor: false,
+  isGettedDetailAuthor: false,
+  authors: null,
+  author: null,
+};
 
-    return(
-        <AuthorsContext.Provider value={{authors, setAuthors}}>
-            {props.children}
-        </AuthorsContext.Provider>
-    )
-}
+const AuthorsProvider = (props) => {
+  const [state, dispatch] = useReducer(authorsReducer, initialState);
 
-export {AuthorsContext, AuthorsProvider}
+  return (
+    <AuthorsContext.Provider
+      value={{
+        state,
+        getAllAuthors: getAllAuthors(dispatch),
+        getDetailAuthor: getDetailAuthor(dispatch),
+      }}
+    >
+      {props.children}
+    </AuthorsContext.Provider>
+  );
+};
+
+export { AuthorsContext, AuthorsProvider };

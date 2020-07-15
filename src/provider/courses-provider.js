@@ -5,6 +5,7 @@ import {
   getNewCourses,
   getTopSell,
   getTopRate,
+  getCourseInfo,
 } from "../actions/courses-action";
 
 const CoursesContext = React.createContext();
@@ -16,9 +17,12 @@ const initialState = {
   isGettedTopSell: false,
   isGettingTopRate: false,
   isGettedTopRate: false,
+  isGettingCourseInfo: false,
+  isGettedCourseInfo: false,
   newCourses: null,
   topSell: null,
   topRate: null,
+  courseInfo: null,
 };
 
 const CoursesProvider = (props) => {
@@ -31,6 +35,7 @@ const CoursesProvider = (props) => {
         getNewCourses: getNewCourses(dispatch),
         getTopSell: getTopSell(dispatch),
         getTopRate: getTopRate(dispatch),
+        getCourseInfo: getCourseInfo(dispatch),
       }}
     >
       {props.children}

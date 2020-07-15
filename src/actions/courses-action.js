@@ -1,4 +1,4 @@
-import { apiNewCourses, apiTopSell, apiTopRate } from "../core/services/courses-services";
+import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo } from "../core/services/courses-services";
 
 export const NEW_COURSES_REQUEST = 'NEW_COURSES_REQUEST';
 export const NEW_COURSES_SUCCESSED = 'NEW_COURSES_SUCCESSED';
@@ -11,6 +11,10 @@ export const TOP_SELL_FAILED = 'TOP_SELL_FAILED';
 export const TOP_RATE_REQUEST = 'TOP_RATE_REQUEST';
 export const TOP_RATE_SUCCESSED = 'TOP_RATE_SUCCESSED';
 export const TOP_RATE_FAILED = 'TOP_RATE_FAILED';
+
+export const GET_COURSE_INFO_REQUEST = 'GET_COURSE_INFO_REQUEST';
+export const GET_COURSE_INFO_SUCCESSED = 'GET_COURSE_INFO_SUCCESSED';
+export const GET_COURSE_INFO_FAILED = 'GET_COURSE_INFO_FAILED';
 
 const getNewCoursesSuccessed = (data) => ({
     type: NEW_COURSES_SUCCESSED,
@@ -37,6 +41,15 @@ const getTopRateSuccessed = (data) => ({
 
 const getTopRateFailed = () => ({
     type: TOP_RATE_FAILED
+})
+
+const getCourseInfoSuccessed = (data) => ({
+    type: GET_COURSE_INFO_SUCCESSED,
+    data
+})
+
+const getCourseInfoFailed = () => ({
+    type: GET_COURSE_INFO_FAILED,
 })
 
 export const getNewCourses = (dispatch) => (limit, page) => {
@@ -81,7 +94,7 @@ export const getTopRate = (dispatch) => (limit, page) => {
     apiTopRate(limit, page)
         .then((res) => {
             if(res.status === 200){
-                console.log('top rate', res.data);
+                // console.log('top rate', res.data);
                 dispatch(getTopRateSuccessed(res.data.payload));
             } else {
                 dispatch(getTopRateFailed());
@@ -90,5 +103,23 @@ export const getTopRate = (dispatch) => (limit, page) => {
         .catch((err) => {
             console.log('error: ', err);
             dispatch(getTopRateFailed());
+        })
+}
+
+export const getCourseInfo = (dispatch) => (id) => {
+    dispatch({type: GET_COURSE_INFO_REQUEST});
+
+    apiGetCourseInfo(id)
+        .then((res) => {
+            if(res.status === 200){
+                // console.log(res.data.payload);
+                dispatch(getCourseInfoSuccessed(res.data.payload));
+            } else {
+                dispatch(getCourseInfoFailed());
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(getCourseInfoFailed());
         })
 }

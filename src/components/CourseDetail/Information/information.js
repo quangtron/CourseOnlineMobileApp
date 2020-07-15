@@ -32,10 +32,11 @@ const Information = props => {
 
     const [dataBtn, setDataBtn] = useState(buttons);
     const {bookmarks} = useContext(BookmarksContext);
+    const { infor, authorInfo } = props;
 
     useEffect(() => {
         for(let item of bookmarks){
-            if(item.title === props.infor.title){
+            if(item.title === infor.title){
                 let arrData = [...dataBtn];
 
                 arrData[0].checked = true;
@@ -53,14 +54,14 @@ const Information = props => {
     
     return(
         <View style={{margin: 20}}>
-            <HeaderInformation infor={props.infor} />
+            <HeaderInformation authorInfo={authorInfo} info={infor} />
             <View style={styles.btn}>
-                <ButtonInformation item={dataBtn[0]} data={props.infor} onToggleChange={onToggleChange} />
+                <ButtonInformation item={dataBtn[0]} data={infor} onToggleChange={onToggleChange} />
                 <ButtonInformation item={dataBtn[1]} />
-                <ButtonInformation item={dataBtn[2]} data={props.infor} />
+                <ButtonInformation item={dataBtn[2]} data={infor} />
             </View>
             <Separator />
-            <DescribeCourse des={props.infor.description} />
+            <DescribeCourse des={infor.description} />
             <OthersButton />
         </View>
     );

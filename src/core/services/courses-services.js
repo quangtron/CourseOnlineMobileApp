@@ -20,3 +20,7 @@ export const apiTopRate = (limit, page) => {
         page
     })
 }
+
+export const apiGetCourseInfo = (id) => {
+    return axios.get('https://api.itedu.me/course/get-course-info', {params: {id}})
+}

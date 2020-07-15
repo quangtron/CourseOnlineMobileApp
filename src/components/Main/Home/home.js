@@ -5,16 +5,19 @@ import SectionCourses from "./SectionCourses/sectionCourses";
 import { MainContext } from "../../../provider/main-provider";
 import { BookmarksContext } from "../../../provider/bookmarks-provider";
 import { CoursesContext } from "../../../provider/courses-provider";
+import { AuthorsContext } from "../../../provider/authors-provider";
 
 function Home(props) {
   const { main } = useContext(MainContext);
   const { bookmarks } = useContext(BookmarksContext);
   const coursesContext = useContext(CoursesContext);
+  const authorsContext = useContext(AuthorsContext);
 
   useEffect(() => {
     coursesContext.getNewCourses(10, 1);
     coursesContext.getTopSell(10, 1);
     coursesContext.getTopRate(10, 1);
+    // authorsContext.getAllAuthors();
   }, []);
 
   return (
