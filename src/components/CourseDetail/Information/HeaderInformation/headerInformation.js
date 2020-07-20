@@ -8,7 +8,7 @@ import Styles from "../../../Common/Styles";
 const HeaderInformation = (props) => {
   const { name, avatar, intro, totalCourse, averagePoint } = props.authorInfo;
   const { title, subtitle, soldNumber, updatedAt } = props.info;
-  console.log(props.info, props.authorInfo);
+  // console.log(props.info, props.authorInfo);
 
   return (
     <View>
@@ -20,7 +20,7 @@ const HeaderInformation = (props) => {
         </Text>
       </View>
       <TouchableOpacity
-        style={[Styles.btnLayout(140, 40, "#FFFDE7"), styles.author]}
+        style={[Styles.btnLayout(160, 40, "#FFFDE7"), styles.author]}
       >
         <View style={styles.images}>
           <Image style={styles.image} source={{ uri: avatar }} />
@@ -32,7 +32,7 @@ const HeaderInformation = (props) => {
         <Text style={styles.text}>{name}</Text>
       </TouchableOpacity>
       <View style={styles.authorInfo}>
-        {intro ? <Text>{intro}</Text> : <Text style={styles.authorIntro}>(Chưa có bài tự giới thiệu.)</Text>}
+        {intro ? <Text style={styles.authorIntro}>{intro}</Text> : <Text style={styles.authorIntro}>(Chưa có bài tự giới thiệu.)</Text>}
         <View style={styles.authorDetail}>
           <Text>
             <Ionicons name="md-people" size={15} color="tomato" />{`  ${props.authorInfo.soldNumber} Học viên`}

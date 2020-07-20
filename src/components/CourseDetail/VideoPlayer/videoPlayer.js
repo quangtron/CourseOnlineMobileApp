@@ -3,7 +3,6 @@ import { StyleSheet, Image, View } from 'react-native';
 import { Video } from 'expo-av';
 
 const VideoPlayer = (props) => {
-    console.log('video', props);
     return(
         <View>
             {props.videoUrl ? 

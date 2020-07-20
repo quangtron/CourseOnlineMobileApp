@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, Image, Text, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import ShareScreen from '../../../Others/Share/share';
 import { DownloadsContext } from '../../../../provider/downloads-provider';
@@ -9,65 +11,69 @@ import { removeItemFromBookmarks } from '../../../../core/services/bookmarks-ser
 const ButtonInformation = props => {
     const { downloads, setDownloads } = useContext(DownloadsContext);
     const { bookmarks, setBookmarks } = useContext(BookmarksContext);
-    const {img, img2, name, checked} = props.item;
 
-    const onHandlePress = name => {
-        if(name === 'Download'){
-            const listDownloads = downloads;
+    const onHandlePress = () => {
+        // if(name === 'Download'){
+        //     const listDownloads = downloads;
 
-            listDownloads.push(data);
-            setDownloads(listDownloads);
-        } else if(name === 'Bookmark'){
-            let listBookmarks = bookmarks;
+        //     listDownloads.push(data);
+        //     setDownloads(listDownloads);
+        // } else if(name === 'Bookmark'){
+        //     let listBookmarks = bookmarks;
 
-            if(!checked){
-                listBookmarks.push(props.data);
-                setBookmarks(listBookmarks);
-                props.onToggleChange(!checked);
-                Alert.alert('Insert Successfully!');
-            } else {
-                listBookmarks = removeItemFromBookmarks(props.data.title, bookmarks);
-                setBookmarks(listBookmarks);
-                props.onToggleChange(!checked);
-                Alert.alert('Remove Successfully!');
-            }
-        }
+        //     if(!checked){
+        //         listBookmarks.push(props.data);
+        //         setBookmarks(listBookmarks);
+        //         props.onToggleChange(!checked);
+        //         Alert.alert('Insert Successfully!');
+        //     } else {
+        //         listBookmarks = removeItemFromBookmarks(props.data.title, bookmarks);
+        //         setBookmarks(listBookmarks);
+        //         props.onToggleChange(!checked);
+        //         Alert.alert('Remove Successfully!');
+        //     }
+        // }
     }
 
     return(
-        <View>
-            <TouchableOpacity style={styles.itemCenter} onPress={_ => onHandlePress(name)}>
-                <View style={styles.circleBtn}>
-                    <Image source={checked === true ? img2 : img} style={styles.image} />
-                </View>
-                <Text style={styles.textLayout}>{name}</Text>
+        <View style={styles.boxBtn}>
+            <TouchableOpacity style={styles.btnCustom(1)} onPress={() => onHandlePress()}>
+                <Text style={styles.textLayout(1)}>Yêu thích</Text>
+                <Ionicons name="ios-heart" size={24} color="tomato" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnCustom(2)} onPress={() => onHandlePress()}>
+                <Text style={styles.textLayout(2)}>Tham gia</Text>
+                <AntDesign name="pushpin" size={24} color="#2196F3" />
             </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    itemCenter: {
-        marginRight: '15%',
-        alignItems: 'center',
+    textLayout: (x) => {
+        return {
+            fontSize: 17,
+            color: x === 1 ? 'tomato' : '#2196F3',
+            marginRight: 10,
+        }
     },
-    image: {
-        alignSelf: 'center',
-        width: 30,
-        height: 30,
-        borderRadius: 50,
+    btnCustom: (x) => {
+        return {
+            width: 150,
+            height: 40,
+            borderWidth: 1,
+            borderColor: x === 1 ? 'tomato' : '#2196F3',
+            borderRadius: 25,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }
     },
-    textLayout: {
-        marginTop: 10,
-        textAlign: 'center',
-    },
-    circleBtn: {
-        width: 60,
-        height: 60,
-        backgroundColor: '#E0E0E0',
-        borderRadius: 50,
-        justifyContent: 'center',
-    },
+    boxBtn: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    }
 })
 
 export default ButtonInformation;

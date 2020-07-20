@@ -21,6 +21,6 @@ export const apiTopRate = (limit, page) => {
     })
 }
 
-export const apiGetCourseInfo = (id) => {
-    return axios.get('https://api.itedu.me/course/get-course-info', {params: {id}})
+export const apiGetCourseInfo = (id, userId) => {
+    return axios.get(`https://api.itedu.me/course/get-course-detail/${id}/${userId}`)
 }

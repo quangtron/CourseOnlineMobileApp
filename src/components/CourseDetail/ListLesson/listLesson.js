@@ -1,96 +1,30 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, StyleSheet, SectionList, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import ListLessonItem from '../ListLessonItem/listLessonItem';
-import Separator from '../../Common/Separator';
 import HeaderLesson from './HeaderLesson/headerLesson';
+import Separator from '../../Common/Separator';
 
-const listLesson = [
-    {
-        title: {
-            id: 1,
-            name: 'Course Overview',
-            duration: '1:27',
-        },
-        data: [
-            {
-                name: 'Introduction 1',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 2',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 3',
-                duration: '1:27',
-            },
-        ],
-    },
-    {
-        title: {
-            id: 2,
-            name: 'Understanding Leadership Fundamentals',
-            duration: '1:27',
-        },
-        data: [
-            {
-                name: 'Introduction 4',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 5',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 6',
-                duration: '1:27',
-            },
-        ],
-    },
-    {
-        title: {
-            id: 3,
-            name: 'Deploy Product',
-            duration: '1:27',
-        },
-        data: [
-            {
-                name: 'Introduction 7',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 8',
-                duration: '1:27',
-            },
-            {
-                name: 'Introduction 9',
-                duration: '1:27',
-            },
-        ],
-    },
-];
+const renderListLessons = (data) => {
+    return data.map((item, index) => <ListLessonItem data={item} key={index} />)
+}
 
-const renderSectionHeader = (title) => {
+const renderSectionHeader = (data, index) => {
     return(
-        <HeaderLesson title={title} />
+        <View key={index} style={{marginBottom: 30}}>
+            { index !== 0 ? <Separator /> : <View />}
+            <HeaderLesson data={data} index={index} />
+            {renderListLessons(data.lesson)}
+        </View>
     );
 }
 
-function ContentsScreen() {
-    return (
-        <View style={styles.contentsBox}>
-            <SectionList
-                sections = {listLesson}
-                renderItem = {({item}) => <ListLessonItem data={item} />}
-                renderSectionHeader = {({section: {title}}) => renderSectionHeader(title)}
-                ItemSeparatorComponent = {Separator}
-                showsVerticalScrollIndicator={false}
-            />
-        </View>
-    );
+const renderCourses = (data) => {
+    return data.map((item, index) => {
+        return renderSectionHeader(item, index);
+    })
 }
 
 function TranscriptScreen() {
@@ -108,10 +42,24 @@ function TranscriptScreen() {
 
 const Tab = createMaterialTopTabNavigator();
 
-const ListLesson = _ => {
+const ListLesson = props => {
+    const { data } = props;
+    
+    console.log('data: ', data.section)
+
+    const ContentsScreen = () => {
+        return (
+            <View style={styles.contentsBox}>
+                <ScrollView>
+                    {renderCourses(data.section)}
+                </ScrollView>
+            </View>
+        );
+    }
+    
     return(
         <Tab.Navigator>
-            <Tab.Screen name="Contents" component={ContentsScreen} />
+            <Tab.Screen name="Nội dung" component={ContentsScreen} />
             <Tab.Screen name="Transcript" component={TranscriptScreen} />
         </Tab.Navigator>
     );
@@ -120,8 +68,7 @@ const ListLesson = _ => {
 const styles = StyleSheet.create({
     contentsBox: {
         margin: 20,
-        top: -30,
-        height: 1000,
+        height: 900,
     },
     inputSearch: {
         marginTop: 10,

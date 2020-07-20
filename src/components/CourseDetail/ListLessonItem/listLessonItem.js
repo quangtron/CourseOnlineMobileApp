@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import Styles from '../../Common/Styles';
 
 const ListLessonItem = props => {
     const [check, setCheck] = useState(false);
@@ -9,7 +10,7 @@ const ListLessonItem = props => {
     }
 
     return(
-        <TouchableOpacity onPress={_ => onCheck()}>
+        <TouchableOpacity onPress={_ => onCheck()} style={styles.section}>
             <View style={styles.lessonBox}>
                 {check ? 
                     <Image source={require('../../../../assets/iconCheck.png')} style={styles.image} />
@@ -17,6 +18,7 @@ const ListLessonItem = props => {
                 }
                 <Text>{props.data.name}</Text>
             </View>
+            <Text style={Styles.text(15, '#9E9E9E', 'normal')}>{props.data.hours.toFixed(2)}</Text>
         </TouchableOpacity>
     );
 }
@@ -38,6 +40,10 @@ const styles = StyleSheet.create({
         height: 10,
         backgroundColor: 'gray',
         borderRadius: 50,
+    },
+    section: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 })
 

@@ -106,13 +106,13 @@ export const getTopRate = (dispatch) => (limit, page) => {
         })
 }
 
-export const getCourseInfo = (dispatch) => (id) => {
+export const getCourseInfo = (dispatch) => (id, userId) => {
     dispatch({type: GET_COURSE_INFO_REQUEST});
 
-    apiGetCourseInfo(id)
+    apiGetCourseInfo(id, userId)
         .then((res) => {
             if(res.status === 200){
-                // console.log(res.data.payload);
+                // console.log('data', res.data.payload);
                 dispatch(getCourseInfoSuccessed(res.data.payload));
             } else {
                 dispatch(getCourseInfoFailed());
