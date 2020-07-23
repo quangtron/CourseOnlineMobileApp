@@ -6,3 +6,9 @@ export const apiLogin = (email, password) => {
         password
     })
 }
+
+export const apiCheckOwnCourse = (id, token) => {
+    return axios.get(`https://api.itedu.me/user/check-own-course/${id}`, {
+        headers: { Authorization: `Bearer ${token}`}
+    })
+}

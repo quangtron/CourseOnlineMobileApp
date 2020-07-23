@@ -45,7 +45,7 @@ const Tab = createMaterialTopTabNavigator();
 const ListLesson = props => {
     const { data } = props;
     
-    console.log('data: ', data.section)
+    // console.log('data: ', data)
 
     const ContentsScreen = () => {
         return (

@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Text, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-import ShareScreen from '../../../Others/Share/share';
-import { DownloadsContext } from '../../../../provider/downloads-provider';
-import { BookmarksContext } from '../../../../provider/bookmarks-provider';
-import { removeItemFromBookmarks } from '../../../../core/services/bookmarks-services';
+import { AuthenticationContext } from '../../../../provider/authentication-provider';
+
 
 const ButtonInformation = props => {
-    const { downloads, setDownloads } = useContext(DownloadsContext);
-    const { bookmarks, setBookmarks } = useContext(BookmarksContext);
+    const authenticationContext = useContext(AuthenticationContext);
 
     const onHandlePress = () => {
         // if(name === 'Download'){
@@ -41,10 +38,16 @@ const ButtonInformation = props => {
                 <Text style={styles.textLayout(1)}>Yêu thích</Text>
                 <Ionicons name="ios-heart" size={24} color="tomato" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnCustom(2)} onPress={() => onHandlePress()}>
-                <Text style={styles.textLayout(2)}>Tham gia</Text>
-                <AntDesign name="pushpin" size={24} color="#2196F3" />
-            </TouchableOpacity>
+            {authenticationContext.state.checkOwnCourse.isUserOwnCourse
+                ? <TouchableOpacity style={styles.btnCustom(2)} onPress={() => onHandlePress()}>
+                    <Text style={styles.textLayout(2)}>Đã tham gia</Text>
+                    <AntDesign name="pushpin" size={24} color="#2196F3" />
+                </TouchableOpacity>
+                : <TouchableOpacity style={styles.btnCustom(2)} onPress={() => onHandlePress()}>
+                    <Text style={styles.textLayout(2)}>Tham gia</Text>
+                    <AntDesign name="pushpin" size={24} color="#2196F3" />
+                </TouchableOpacity>
+            }
         </View>
     );
 }

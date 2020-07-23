@@ -1,25 +1,14 @@
-import React, { useContext, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import moment from 'moment';
 
 import Styles from "../../../Common/Styles";
 import { ScreenKey } from "../../../../global/constants";
 
 const SectionCoursesItem = (props) => {
-  // const { title, author, level, released, duration, img, courses } = props.item;
-  const { title, imageUrl } = props.item;
+  const { title, imageUrl, price, courseImage, courseTitle, instructorName, latestLearnTime, total } = props.item;
 
   const onPressItem = (item) => {
-    // if(author){
-    //     props.navigation.navigate(ScreenKey.CourseDetail, {item});
-    // } else {
-    //     props.navigation.navigate(ScreenKey.ListCourses, {item: {title: 'Paths', data: item.courses}});
-    // }
     props.navigation.navigate(ScreenKey.CourseDetail, { item });
   };
 
@@ -28,46 +17,24 @@ const SectionCoursesItem = (props) => {
       style={styles.item}
       onPress={() => onPressItem(props.item)}
     >
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={{ uri: courseImage ? courseImage : imageUrl }} style={styles.image} />
       <View style={styles.course}>
-        <Text>{title}</Text>
-        <View>
-          <Text
-            style={[Styles.text(13, "#9E9E9E", "normal"), { marginTop: 10 }]}
-          >
-            {props.item["instructor.user.name"]}
+        <Text style={{marginBottom: 20}}>{courseTitle ? courseTitle : title}</Text>
+        <View >
+          <Text style={Styles.text(13, "#616161", "normal")}>
+            {instructorName ? instructorName : props.item["instructor.user.name"]}
           </Text>
-          {/* <Text
-              style={Styles.text(13, "#9E9E9E", "normal")}
-            >{`${level} . ${released} . ${duration}`}</Text> */}
+          {price >= 0 ? <Text style={Styles.text(13, "#616161", "normal")}>{price} đ</Text> : null}
+          {latestLearnTime ? 
+          <View>
+            <Text>Thời gian thanh toán:</Text>
+            <Text style={Styles.text(13, "#616161", "normal")}>{moment(latestLearnTime).format('DD/MM/YYYY, h:mm:ss')}</Text>
+            <Text>{total} bài học</Text>
+          </View> : null
+          }
         </View>
       </View>
     </TouchableOpacity>
-    // {/* <TouchableOpacity
-    //   style={styles.item}
-    //   onPress={() => onPressItem(props.item)}
-    // >
-    //   <Image source={img} style={styles.image} />
-    //   <View style={styles.course}>
-    //     <Text>{title}</Text>
-    //     {author ? (
-    //       <View>
-    //         <Text
-    //           style={[Styles.text(13, "#9E9E9E", "normal"), { marginTop: 10 }]}
-    //         >
-    //           {author}
-    //         </Text>
-    //         <Text
-    //           style={Styles.text(13, "#9E9E9E", "normal")}
-    //         >{`${level} . ${released} . ${duration}`}</Text>
-    //       </View>
-    //     ) : (
-    //       <Text
-    //         style={[Styles.text(13, "#9E9E9E", "normal"), { marginTop: 15 }]}
-    //       >{`${courses.length} courses`}</Text>
-    //     )}
-    //   </View>
-    // </TouchableOpacity> */}
   );
 };
 
@@ -75,7 +42,7 @@ const styles = StyleSheet.create({
   item: {
     margin: 5,
     width: 200,
-    height: 200,
+    height: null,
     backgroundColor: "#EEEEEE",
   },
   image: {
@@ -84,6 +51,9 @@ const styles = StyleSheet.create({
   },
   course: {
     margin: 10,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
 });
 

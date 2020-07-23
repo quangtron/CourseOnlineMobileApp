@@ -24,3 +24,9 @@ export const apiTopRate = (limit, page) => {
 export const apiGetCourseInfo = (id, userId) => {
     return axios.get(`https://api.itedu.me/course/get-course-detail/${id}/${userId}`)
 }
+
+export const apiGetMyCourses = (token) => {
+    return axios.get('https://api.itedu.me/user/get-process-courses', {
+        headers: { Authorization: `Bearer ${token}`}
+    })
+}

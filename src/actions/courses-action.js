@@ -1,4 +1,4 @@
-import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo } from "../core/services/courses-services";
+import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo, apiGetMyCourses } from "../core/services/courses-services";
 
 export const NEW_COURSES_REQUEST = 'NEW_COURSES_REQUEST';
 export const NEW_COURSES_SUCCESSED = 'NEW_COURSES_SUCCESSED';
@@ -15,6 +15,10 @@ export const TOP_RATE_FAILED = 'TOP_RATE_FAILED';
 export const GET_COURSE_INFO_REQUEST = 'GET_COURSE_INFO_REQUEST';
 export const GET_COURSE_INFO_SUCCESSED = 'GET_COURSE_INFO_SUCCESSED';
 export const GET_COURSE_INFO_FAILED = 'GET_COURSE_INFO_FAILED';
+
+export const GET_MY_COURSES_REQUEST = 'GET_MY_COURSES_REQUEST';
+export const GET_MY_COURSES_SUCCESSED = 'GET_MY_COURSES_SUCCESSED';
+export const GET_MY_COURSES_FAILED = 'GET_MY_COURSES_FAILED';
 
 const getNewCoursesSuccessed = (data) => ({
     type: NEW_COURSES_SUCCESSED,
@@ -50,6 +54,15 @@ const getCourseInfoSuccessed = (data) => ({
 
 const getCourseInfoFailed = () => ({
     type: GET_COURSE_INFO_FAILED,
+})
+
+const getMyCoursesSuccessed = (data) => ({
+    type: GET_MY_COURSES_SUCCESSED,
+    data
+})
+
+const getMyCoursesFailed = () => ({
+    type: GET_MY_COURSES_FAILED
 })
 
 export const getNewCourses = (dispatch) => (limit, page) => {
@@ -121,5 +134,23 @@ export const getCourseInfo = (dispatch) => (id, userId) => {
         .catch((err) => {
             console.log('error: ', err);
             dispatch(getCourseInfoFailed());
+        })
+}
+
+export const getMyCourses = (dispatch) => (token) => {
+    dispatch({type: GET_MY_COURSES_REQUEST});
+
+    apiGetMyCourses(token)
+        .then((res) => {
+            if(res.status === 200){
+                // console.log('data', res.data);
+                dispatch(getMyCoursesSuccessed(res.data.payload));
+            } else {
+                dispatch(getMyCoursesFailed());
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(getMyCoursesFailed());
         })
 }

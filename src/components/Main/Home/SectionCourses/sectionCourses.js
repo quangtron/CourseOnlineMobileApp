@@ -27,7 +27,7 @@ const SectionCourses = props => {
                     style={Styles.btnLayout(70, 20, '#EEEEEE')}
                     onPress={() => onPress(props.dataSection)}
                 >
-                    <Text style={{fontSize: 13}}>See all</Text>
+                    <Text style={{fontSize: 13}}>Xem tất cả</Text>
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>

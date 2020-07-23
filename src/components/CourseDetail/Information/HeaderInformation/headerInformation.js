@@ -1,14 +1,36 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import moment from "moment";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
 import Styles from "../../../Common/Styles";
 
 const HeaderInformation = (props) => {
   const { name, avatar, intro, totalCourse, averagePoint } = props.authorInfo;
-  const { title, subtitle, soldNumber, updatedAt } = props.info;
-  // console.log(props.info, props.authorInfo);
+  const {
+    title,
+    subtitle,
+    soldNumber,
+    updatedAt,
+    formalityPoint,
+    contentPoint,
+    presentationPoint,
+    ratedNumber,
+  } = props.info;
+  const sumPoint = ((formalityPoint + contentPoint + presentationPoint)/3).toFixed(1);
+  // console.log(props.info);
+
+  const renderStar = (point) => {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        { point - 1 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 2 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 3 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 4 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 5 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -16,32 +38,48 @@ const HeaderInformation = (props) => {
       <View style={styles.subInfo}>
         <Text>{subtitle}</Text>
         <Text style={{ marginTop: 15 }}>
-          {`${soldNumber} học viên - Cập nhật mới nhất: ${moment(updatedAt).format("DD/MM/YYYY")}`}
+          {`${soldNumber} học viên - Cập nhật mới nhất: ${moment(
+            updatedAt
+          ).format("DD/MM/YYYY")}`}
         </Text>
-      </View>
-      <TouchableOpacity
-        style={[Styles.btnLayout(160, 40, "#FFFDE7"), styles.author]}
-      >
-        <View style={styles.images}>
-          <Image style={styles.image} source={{ uri: avatar }} />
-          <Image
-            style={styles.imageCheck}
-            source={require("../../../../../assets/iconCheck.png")}
-          />
+        <View style={styles.vote}>
+          {renderStar(sumPoint)}
+          <Text> {sumPoint} ({ratedNumber} bình chọn)</Text>
         </View>
-        <Text style={styles.text}>{name}</Text>
-      </TouchableOpacity>
+      </View>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          style={[Styles.btnLayout(null, 40, "#FFFDE7"), styles.author]}
+        >
+          <View style={styles.images}>
+            <Image style={styles.image} source={{ uri: avatar }} />
+            <Image
+              style={styles.imageCheck}
+              source={require("../../../../../assets/iconCheck.png")}
+            />
+          </View>
+          <Text style={styles.text}>{name}</Text>
+        </TouchableOpacity>
+        <View />
+      </View>
       <View style={styles.authorInfo}>
-        {intro ? <Text style={styles.authorIntro}>{intro}</Text> : <Text style={styles.authorIntro}>(Chưa có bài tự giới thiệu.)</Text>}
+        {intro ? (
+          <Text style={styles.authorIntro}>{intro}</Text>
+        ) : (
+          <Text style={styles.authorIntro}>(Chưa có bài tự giới thiệu.)</Text>
+        )}
         <View style={styles.authorDetail}>
           <Text>
-            <Ionicons name="md-people" size={15} color="tomato" />{`  ${props.authorInfo.soldNumber} Học viên`}
+            <Ionicons name="md-people" size={15} color="tomato" />
+            {`  ${props.authorInfo.soldNumber} Học viên`}
           </Text>
           <Text>
-            <Ionicons name="ios-play-circle" size={15} color="tomato" />{`  ${totalCourse} Khoá học`}
+            <Ionicons name="ios-play-circle" size={15} color="tomato" />
+            {`  ${totalCourse} Khoá học`}
           </Text>
           <Text>
-            <Ionicons name="ios-star" size={15} color="tomato" />{`  ${averagePoint.toFixed(1)} Điểm`}
+            <Ionicons name="ios-star" size={15} color="tomato" />
+            {`  ${averagePoint.toFixed(1)} Điểm`}
           </Text>
         </View>
       </View>
@@ -55,7 +93,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     zIndex: 1000,
   },
   image: {
@@ -75,13 +113,13 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingRight: 15,
-    left: -10,
+    width: null,
   },
   subInfo: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: "#E0E0E0",
     borderRadius: 5,
     padding: 10,
-    marginTop: 10
+    marginTop: 10,
   },
   authorInfo: {
     borderRadius: 10,
@@ -89,19 +127,24 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     padding: 10,
     zIndex: -1,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: "#E0E0E0",
   },
   authorDetail: {
     marginLeft: 10,
     marginTop: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   authorIntro: {
-    fontStyle: 'italic',
-    color: '#424242',
+    fontStyle: "italic",
+    color: "#424242",
     marginTop: 15,
     marginBottom: 10,
+  },
+  vote: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
   }
 });
 

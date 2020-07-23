@@ -2,21 +2,20 @@ import React, { useContext, useEffect } from "react";
 import { View, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 
 import SectionCourses from "./SectionCourses/sectionCourses";
-import { MainContext } from "../../../provider/main-provider";
-import { BookmarksContext } from "../../../provider/bookmarks-provider";
 import { CoursesContext } from "../../../provider/courses-provider";
 import { AuthorsContext } from "../../../provider/authors-provider";
+import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 function Home(props) {
-  const { main } = useContext(MainContext);
-  const { bookmarks } = useContext(BookmarksContext);
   const coursesContext = useContext(CoursesContext);
   const authorsContext = useContext(AuthorsContext);
+  const authenticationContext = useContext(AuthenticationContext);
 
   useEffect(() => {
     coursesContext.getNewCourses(10, 1);
     coursesContext.getTopSell(10, 1);
     coursesContext.getTopRate(10, 1);
+    coursesContext.getMyCourses(authenticationContext.state.access_token);
     // authorsContext.getAllAuthors();
   }, []);
 
@@ -27,35 +26,38 @@ function Home(props) {
           <SectionCourses
             dataSection={coursesContext.state.newCourses}
             navigation={props.navigation}
-            title="NEW COURSES"
+            title="KHOÁ HỌC MỚI"
           />
         ) : (
           <ActivityIndicator />
         )}
-
         {coursesContext.state.topSell ? (
           <SectionCourses
             dataSection={coursesContext.state.topSell}
             navigation={props.navigation}
-            title="TOP SELL"
+            title="TOP BÁN CHẠY"
           />
         ) : (
           <ActivityIndicator />
         )}
-
         {coursesContext.state.topRate ? (
           <SectionCourses
             dataSection={coursesContext.state.topRate}
             navigation={props.navigation}
-            title="TOP RATE"
+            title="TOP BÌNH CHỌN"
           />
         ) : (
           <ActivityIndicator />
         )}
-
-        {/* <SectionCourses dataSection={main.Paths} navigation={props.navigation} />
-                <SectionCourses dataSection={main.Channels} navigation={props.navigation} />
-                <SectionCourses dataSection={{title: 'Bookmarks', data: bookmarks}} navigation={props.navigation} /> */}
+        {coursesContext.state.myCourses ? (
+          <SectionCourses
+            dataSection={coursesContext.state.myCourses}
+            navigation={props.navigation}
+            title="KHOÁ HỌC ĐÃ THAM GIA"
+          />
+        ) : (
+          <ActivityIndicator />
+        )}
       </ScrollView>
     </View>
   );
