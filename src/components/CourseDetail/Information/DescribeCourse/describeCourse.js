@@ -25,30 +25,22 @@ const DescribeCourse = (props) => {
   };
 
   const showLearnWhat = (data) => {
-    if(data){
-      return data.map((item, index) => <Text key={index}><Ionicons name="md-checkmark-circle-outline" size={14} color="tomato" />  {item}</Text>)
-    } else {
-      <Text style={styles.textItalic}>(Chưa có thông tin)</Text>
-    }
+      return data.map((item, index) => <Text key={index}><Ionicons name="md-checkmark-circle-outline" size={14} color="tomato" />  {item}</Text>);
   }
 
   const showRequirement = (data) => {
-    if(data.length > 0){
-      return data.map((item, index) => <Text key={index}><Ionicons name="ios-snow" size={14} color="tomato" />  {item}</Text>)
-    } else {
-      <Text style={styles.textItalic}>(Không có yêu cầu)</Text>
-    }
+      return data.map((item, index) => <Text key={index}><Ionicons name="ios-snow" size={14} color="tomato" />  {item}</Text>);
   }
 
   return (
     <View>
       <View style={styles.section}>
         <Text style={Styles.text(16, "#000", "bold")}>Bạn sẽ học được</Text>
-        <View style={{flexDirection: 'column'}}>{showLearnWhat(info.learnWhat)}</View>
+        <View style={{flexDirection: 'column'}}>{info.learnWhat.length > 0 ? showLearnWhat(info.learnWhat) : <Text style={styles.textItalic}>(Chưa có thông tin)</Text>}</View>
       </View>
       <View style={styles.section}>
         <Text style={Styles.text(16, "#000", "bold")}>Yêu cầu</Text>
-        <View style={{flexDirection: 'column'}}>{showRequirement(info.requirement)}</View>
+        <View style={{flexDirection: 'column'}}>{info.requirement.length > 0 ? showRequirement(info.requirement) : <Text style={styles.textItalic}>(Không có yêu cầu)</Text>}</View>
       </View>
       <View style={styles.section}>
         <Text style={Styles.text(16, "#000", "bold")}>Mô tả</Text>

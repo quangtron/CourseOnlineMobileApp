@@ -49,7 +49,7 @@ function Home(props) {
         ) : (
           <ActivityIndicator />
         )}
-        {coursesContext.state.myCourses ? (
+        {coursesContext.state.isGettedMyCourses ? (
           <SectionCourses
             dataSection={coursesContext.state.myCourses}
             navigation={props.navigation}

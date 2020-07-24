@@ -12,6 +12,7 @@ import { SearchProvider } from "./src/provider/search-provider";
 import { VerifyEmailProvider } from "./src/provider/verify-email-provider";
 import { RegisterProvider } from "./src/provider/register-provider";
 import { CoursesProvider } from "./src/provider/courses-provider";
+import { PaymentProvider } from "./src/provider/payment-provider";
 
 export default function App() {
   return (
@@ -19,21 +20,23 @@ export default function App() {
       <VerifyEmailProvider>
         <AuthenticationProvider>
           <CoursesProvider>
-            <MainProvider>
-              <PopularSkillsProvider>
-                <AuthorsProvider>
-                  <DownloadsProvider>
-                    <BookmarksProvider>
-                      <SearchProvider>
-                        <NavigationContainer>
-                          {mainStackScreen()}
-                        </NavigationContainer>
-                      </SearchProvider>
-                    </BookmarksProvider>
-                  </DownloadsProvider>
-                </AuthorsProvider>
-              </PopularSkillsProvider>
-            </MainProvider>
+            <PaymentProvider>
+              {/* <MainProvider> */}
+                <PopularSkillsProvider>
+                  <AuthorsProvider>
+                    <DownloadsProvider>
+                      <BookmarksProvider>
+                        <SearchProvider>
+                          <NavigationContainer>
+                            {mainStackScreen()}
+                          </NavigationContainer>
+                        </SearchProvider>
+                      </BookmarksProvider>
+                    </DownloadsProvider>
+                  </AuthorsProvider>
+                </PopularSkillsProvider>
+              {/* </MainProvider> */}
+            </PaymentProvider>
           </CoursesProvider>
         </AuthenticationProvider>
       </VerifyEmailProvider>

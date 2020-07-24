@@ -26,17 +26,16 @@ const CoursesDetail = (props) => {
     authenticationContext.checkOwnCourse(item.id, authenticationContext.state.access_token);
     coursesContext.getCourseInfo(item.id, authenticationContext.state.user.id);
   }, []);
-
-  const onPressLeft = () => {
-    props.navigation.goBack();
-  };
-
+  
   useEffect(() => {
     if (authenticationContext.state.isChecked) {
       console.log(authenticationContext.state.checkOwnCourse);
     }
   }, [authenticationContext.state.isChecked]);
-
+  
+  const onPressLeft = () => {
+    props.navigation.goBack();
+  };
   // console.log("item: ", item);
 
   return (
