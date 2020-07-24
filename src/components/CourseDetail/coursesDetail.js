@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  Text
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -14,6 +15,7 @@ import ListLesson from "./ListLesson/listLesson";
 import { AuthorsContext } from "../../provider/authors-provider";
 import { CoursesContext } from "../../provider/courses-provider";
 import { AuthenticationContext } from "../../provider/authentication-provider";
+import SectionCourses from "../Main/Home/SectionCourses/sectionCourses";
 
 const CoursesDetail = (props) => {
   const { item } = props.route.params;
@@ -25,7 +27,7 @@ const CoursesDetail = (props) => {
     // authorsContext.getDetailAuthor(item.instructorId);
     authenticationContext.checkOwnCourse(item.id, authenticationContext.state.access_token);
     coursesContext.getCourseInfo(item.id, authenticationContext.state.user.id);
-  }, []);
+  }, [item.id]);
   
   useEffect(() => {
     if (authenticationContext.state.isChecked) {
@@ -34,6 +36,7 @@ const CoursesDetail = (props) => {
   }, [authenticationContext.state.isChecked]);
   
   const onPressLeft = () => {
+    coursesContext.getMyCourses(authenticationContext.state.access_token);
     props.navigation.goBack();
   };
   // console.log("item: ", item);
@@ -52,12 +55,19 @@ const CoursesDetail = (props) => {
         imageUrl={item.imageUrl}
       />
       {coursesContext.state.isGettedCourseInfo ? (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom: 250}}>
           <Information
             infor={coursesContext.state.courseInfo}
             authorInfo={coursesContext.state.courseInfo.instructor}
           />
           <ListLesson data={coursesContext.state.courseInfo} />
+          <View style={{marginLeft: 20, marginBottom: 20}}>
+            <SectionCourses
+              dataSection={coursesContext.state.courseInfo.coursesLikeCategory}
+              navigation={props.navigation}
+              title="CÁC KHOÁ HỌC CÙNG CHỦ ĐỀ"
+            />
+          </View>
         </ScrollView>
       ) : (
         <ActivityIndicator />

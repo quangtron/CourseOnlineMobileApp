@@ -50,9 +50,7 @@ const ListLesson = props => {
     const ContentsScreen = () => {
         return (
             <View style={styles.contentsBox}>
-                <ScrollView>
-                    {renderCourses(data.section)}
-                </ScrollView>
+                {renderCourses(data.section)}
             </View>
         );
     }
@@ -67,8 +65,10 @@ const ListLesson = props => {
 
 const styles = StyleSheet.create({
     contentsBox: {
+        flex: 1,
         margin: 20,
-        height: 900,
+        marginBottom: 0,
+        // height: 400,
     },
     inputSearch: {
         marginTop: 10,

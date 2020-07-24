@@ -11,11 +11,11 @@ const ButtonInformation = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [checkOwnCourse, setCheckOwnCourse] = useState(false);
 
-  useEffect(() => {
-    if (authenticationContext.state.checkOwnCourse.isUserOwnCourse) {
-      setCheckOwnCourse(true);
-    }
-  }, [authenticationContext.state.checkOwnCourse.isUserOwnCourse]);
+  // useEffect(() => {
+  //   if (authenticationContext.state.checkOwnCourse.isUserOwnCourse) {
+  //     setCheckOwnCourse(true);
+  //   }
+  // }, [authenticationContext.state.checkOwnCourse.isUserOwnCourse]);
 
   const onHandleToggleModal = (bool) => {
     authenticationContext.checkOwnCourse(
@@ -63,13 +63,13 @@ const ButtonInformation = (props) => {
         <Ionicons name="ios-heart" size={24} color="tomato" />
       </TouchableOpacity>
       {authenticationContext.state.checkOwnCourse.isUserOwnCourse ? (
-        <TouchableOpacity
+        <View
           style={styles.btnCustom(2)}
           // onPress={() => onHandlePress()}
         >
           <Text style={styles.textLayout(2)}>Đã tham gia</Text>
           <AntDesign name="pushpin" size={24} color="#2196F3" />
-        </TouchableOpacity>
+        </View>
       ) : (
         <TouchableOpacity
           style={styles.btnCustom(2)}
