@@ -16,6 +16,7 @@ export const authorsReducer = (preState, action) => {
         ...preState,
         isGettingAllAuthors: false,
         isGettedAllAuthors: true,
+        authors: action.data
       };
     case GET_ALL_AUTHORS_FAILED:
       return {

@@ -3,15 +3,12 @@ import { View, Text, ScrollView } from 'react-native';
 
 import SectionAuthorsItem from '../SectionAuthorsItem/sectionAuthorsItem';
 import Styles from '../../../Common/Styles';
-import { AuthorsContext } from '../../../../provider/authors-provider';
 
 const SectionAuthors = props => {
-    const {authors} = useContext(AuthorsContext);
-
     const showAuthorsItem = authors => {
         let result = null;
 
-        result = authors.map((item, index) => <SectionAuthorsItem key={index} item={item} items={props.items} navigation={props.navigation} />)
+        result = authors.map((item, index) => <SectionAuthorsItem key={index} item={item} navigation={props.navigation} />)
 
         return result;
     }
@@ -25,7 +22,7 @@ const SectionAuthors = props => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
             >
-                {showAuthorsItem(authors)}
+                {showAuthorsItem(props.items)}
             </ScrollView>
         </View>
     );

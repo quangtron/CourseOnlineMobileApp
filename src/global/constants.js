@@ -19,6 +19,7 @@ export const ScreenKey = {
     ForgetPassword: 'ForgetPassword',
     VerifyPassword: 'VerifyPassword',
     Subscription: 'Subscription',
+    AuthorDetail: 'AuthorDetail',
 }
 
 export const Images = {

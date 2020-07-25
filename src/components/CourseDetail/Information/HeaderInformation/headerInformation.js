@@ -4,9 +4,10 @@ import moment from "moment";
 import { Ionicons } from "@expo/vector-icons";
 
 import Styles from "../../../Common/Styles";
+import { ScreenKey } from "../../../../global/constants";
 
 const HeaderInformation = (props) => {
-  const { name, avatar, intro, totalCourse, averagePoint } = props.authorInfo;
+  const { name, avatar, intro, totalCourse, averagePoint, id } = props.authorInfo;
   const {
     title,
     subtitle,
@@ -32,6 +33,10 @@ const HeaderInformation = (props) => {
     )
   }
 
+  const onPressAuthor = (id) => {
+    props.navigation.navigate(ScreenKey.AuthorDetail, {id: id});
+  }
+
   return (
     <View>
       <Text style={Styles.text(22, "#000", "bold")}>{title}</Text>
@@ -50,6 +55,7 @@ const HeaderInformation = (props) => {
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           style={[Styles.btnLayout(null, 40, "#FFFDE7"), styles.author]}
+          onPress={() => onPressAuthor(id)}
         >
           <View style={styles.images}>
             <Image style={styles.image} source={{ uri: avatar }} />

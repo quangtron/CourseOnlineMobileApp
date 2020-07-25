@@ -59,6 +59,7 @@ const CoursesDetail = (props) => {
           <Information
             infor={coursesContext.state.courseInfo}
             authorInfo={coursesContext.state.courseInfo.instructor}
+            navigation={props.navigation}
           />
           <ListLesson data={coursesContext.state.courseInfo} />
           <View style={{marginLeft: 20, marginBottom: 20}}>

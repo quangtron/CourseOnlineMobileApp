@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from "@expo/vector-icons";
 
 import Home from '../../components/Main/Home/home';
 import ListCourses from '../../components/Courses/ListCourses/listCourses';
@@ -9,6 +10,7 @@ import Setting from '../../components/AccountManagement/Setting/setting';
 import ButtonSetting from '../../components/Common/ButtonSetting';
 import Profile from '../../components/AccountManagement/Profile/profile';
 import Subscription from '../../components/Others/Subscription/subscription';
+import AuthorDetail from '../../components/Main/Browse/AuthorDetail/authorDetail';
 
 const HomeStack = createStackNavigator();
 
@@ -38,7 +40,7 @@ function HomeScreen(props) {
                 name={ScreenKey.CourseDetail} 
                 component={CoursesDetail} 
                 options={{
-                    title: 'Courses Detail',
+                    title: '',
                     headerShown: false,
                 }}
             />
@@ -56,6 +58,11 @@ function HomeScreen(props) {
                 name={ScreenKey.Subscription} 
                 component={Subscription} 
                 options={{title: 'Subscription'}} 
+            />
+            <HomeStack.Screen
+                name={ScreenKey.AuthorDetail}
+                component={AuthorDetail}
+                options={{title: 'Chi tiết'}}
             />
         </HomeStack.Navigator>
     );

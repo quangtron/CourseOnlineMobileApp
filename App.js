@@ -21,7 +21,7 @@ export default function App() {
         <AuthenticationProvider>
           <CoursesProvider>
             <PaymentProvider>
-              {/* <MainProvider> */}
+              <MainProvider>
                 <PopularSkillsProvider>
                   <AuthorsProvider>
                     <DownloadsProvider>
@@ -35,7 +35,7 @@ export default function App() {
                     </DownloadsProvider>
                   </AuthorsProvider>
                 </PopularSkillsProvider>
-              {/* </MainProvider> */}
+              </MainProvider>
             </PaymentProvider>
           </CoursesProvider>
         </AuthenticationProvider>

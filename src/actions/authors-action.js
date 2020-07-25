@@ -8,8 +8,9 @@ export const GET_DETAIL_AUTHOR_REQUEST = 'GET_DETAIL_AUTHOR_REQUEST';
 export const GET_DETAIL_AUTHOR_SUCCESSED = 'GET_DETAIL_AUTHOR_SUCCESSED';
 export const GET_DETAIL_AUTHOR_FAILED = 'GET_DETAIL_AUTHOR_FAILED';
 
-const getAllAuthorsSuccessed = () => ({
+const getAllAuthorsSuccessed = (data) => ({
     type: GET_ALL_AUTHORS_SUCCESSED,
+    data
 })
 
 const getAllAuthorsFailed = () => ({
@@ -31,8 +32,8 @@ export const getAllAuthors = (dispatch) => () => {
     apiGetAllAuthors()
         .then((res) => {
             if(res.status === 200){
-                console.log('authors: ', res.data);
-                dispatch(getAllAuthorsSuccessed())
+                // console.log('authors: ', res.data);
+                dispatch(getAllAuthorsSuccessed(res.data.payload))
             } else {
                 dispatch(getAllAuthorsFailed());
             }

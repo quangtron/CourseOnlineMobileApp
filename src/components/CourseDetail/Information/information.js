@@ -5,7 +5,6 @@ import HeaderInformation from './HeaderInformation/headerInformation';
 import ButtonInformation from './ButtonInformation/buttonInformation';
 import DescribeCourse from './DescribeCourse/describeCourse';
 import Separator from '../../Common/Separator';
-import OthersButton from './OthersButton/othersButton';
 import { BookmarksContext } from '../../../provider/bookmarks-provider';
 
 const Information = props => {
@@ -32,7 +31,7 @@ const Information = props => {
     
     return(
         <View style={{margin: 20}}>
-            <HeaderInformation authorInfo={authorInfo} info={infor} />
+            <HeaderInformation authorInfo={authorInfo} navigation={props.navigation} info={infor} />
             <View style={styles.btn}>
                 <ButtonInformation data={infor} onToggleChange={onToggleChange} />
             </View>

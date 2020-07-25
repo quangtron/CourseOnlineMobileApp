@@ -10,7 +10,7 @@ const initialState = {
   isGettedAllAuthors: false,
   isGettingDetailAuthor: false,
   isGettedDetailAuthor: false,
-  authors: null,
+  authors: [],
   author: null,
 };
 
