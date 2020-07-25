@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from "@expo/vector-icons";
 
 import Home from '../../components/Main/Home/home';
 import ListCourses from '../../components/Courses/ListCourses/listCourses';

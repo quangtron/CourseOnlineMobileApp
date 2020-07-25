@@ -12,7 +12,6 @@ import { Ionicons } from "@expo/vector-icons";
 import VideoPlayer from "./VideoPlayer/videoPlayer";
 import Information from "./Information/information";
 import ListLesson from "./ListLesson/listLesson";
-import { AuthorsContext } from "../../provider/authors-provider";
 import { CoursesContext } from "../../provider/courses-provider";
 import { AuthenticationContext } from "../../provider/authentication-provider";
 import SectionCourses from "../Main/Home/SectionCourses/sectionCourses";
@@ -20,12 +19,11 @@ import SectionCourses from "../Main/Home/SectionCourses/sectionCourses";
 const CoursesDetail = (props) => {
   const { item } = props.route.params;
   const authenticationContext = useContext(AuthenticationContext);
-  // const authorsContext = useContext(AuthorsContext);
   const coursesContext = useContext(CoursesContext);
 
   useEffect(() => {
-    // authorsContext.getDetailAuthor(item.instructorId);
     authenticationContext.checkOwnCourse(item.id, authenticationContext.state.access_token);
+    authenticationContext.checkLikeCourse(item.id, authenticationContext.state.access_token);
     coursesContext.getCourseInfo(item.id, authenticationContext.state.user.id);
   }, [item.id]);
   
@@ -52,7 +50,7 @@ const CoursesDetail = (props) => {
             ? coursesContext.state.courseInfo.promoVidUrl
             : item.promoVidUrl
         }
-        imageUrl={item.imageUrl}
+        imageUrl={item.imageUrl ? item.imageUrl : item.courseImage}
       />
       {coursesContext.state.isGettedCourseInfo ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom: 250}}>

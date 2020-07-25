@@ -8,32 +8,13 @@ import Separator from '../../Common/Separator';
 import { BookmarksContext } from '../../../provider/bookmarks-provider';
 
 const Information = props => {
-    const {bookmarks} = useContext(BookmarksContext);
     const { infor, authorInfo } = props;
-
-    useEffect(() => {
-        for(let item of bookmarks){
-            if(item.title === infor.title){
-                let arrData = [...dataBtn];
-
-                arrData[0].checked = true;
-                setDataBtn(arrData);
-            }
-        }
-    }, [])
-
-    const onToggleChange = checked => {
-        let arrData = [...dataBtn];
-
-        arrData[0].checked = checked;
-        setDataBtn(arrData)
-    }
     
     return(
         <View style={{margin: 20}}>
             <HeaderInformation authorInfo={authorInfo} navigation={props.navigation} info={infor} />
             <View style={styles.btn}>
-                <ButtonInformation data={infor} onToggleChange={onToggleChange} />
+                <ButtonInformation data={infor} />
             </View>
             <Separator />
             <DescribeCourse info={infor} />

@@ -3,12 +3,10 @@ import { View, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 
 import SectionCourses from "./SectionCourses/sectionCourses";
 import { CoursesContext } from "../../../provider/courses-provider";
-import { AuthorsContext } from "../../../provider/authors-provider";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
 
 function Home(props) {
   const coursesContext = useContext(CoursesContext);
-  const authorsContext = useContext(AuthorsContext);
   const authenticationContext = useContext(AuthenticationContext);
 
   useEffect(() => {
@@ -16,8 +14,11 @@ function Home(props) {
     coursesContext.getTopSell(10, 1);
     coursesContext.getTopRate(10, 1);
     coursesContext.getMyCourses(authenticationContext.state.access_token);
-    // authorsContext.getAllAuthors();
   }, []);
+
+  useEffect(() => {
+    authenticationContext.getCoursesLiked(authenticationContext.state.access_token);
+  }, [authenticationContext.state.likeStatus])
 
   return (
     <View style={styles.home}>
@@ -54,6 +55,15 @@ function Home(props) {
             dataSection={coursesContext.state.myCourses}
             navigation={props.navigation}
             title="KHOÁ HỌC ĐÃ THAM GIA"
+          />
+        ) : (
+          <ActivityIndicator />
+        )}
+        {authenticationContext.state.isGettedCoursesLiked ? (
+          <SectionCourses
+            dataSection={authenticationContext.state.coursesLiked}
+            navigation={props.navigation}
+            title="KHOÁ HỌC ĐÃ THÍCH"
           />
         ) : (
           <ActivityIndicator />

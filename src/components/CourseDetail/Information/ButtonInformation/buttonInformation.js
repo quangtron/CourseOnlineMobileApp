@@ -9,13 +9,6 @@ import ModalRegisterCourse from "../../../Common/ModalRegisterCourse";
 const ButtonInformation = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
   const [modalVisible, setModalVisible] = useState(false);
-  const [checkOwnCourse, setCheckOwnCourse] = useState(false);
-
-  // useEffect(() => {
-  //   if (authenticationContext.state.checkOwnCourse.isUserOwnCourse) {
-  //     setCheckOwnCourse(true);
-  //   }
-  // }, [authenticationContext.state.checkOwnCourse.isUserOwnCourse]);
 
   const onHandleToggleModal = (bool) => {
     authenticationContext.checkOwnCourse(
@@ -23,29 +16,15 @@ const ButtonInformation = (props) => {
       authenticationContext.state.access_token
     );
     setModalVisible(bool);
-    // if(name === 'Download'){
-    //     const listDownloads = downloads;
-    //     listDownloads.push(data);
-    //     setDownloads(listDownloads);
-    // } else if(name === 'Bookmark'){
-    //     let listBookmarks = bookmarks;
-    //     if(!checked){
-    //         listBookmarks.push(props.data);
-    //         setBookmarks(listBookmarks);
-    //         props.onToggleChange(!checked);
-    //         Alert.alert('Insert Successfully!');
-    //     } else {
-    //         listBookmarks = removeItemFromBookmarks(props.data.title, bookmarks);
-    //         setBookmarks(listBookmarks);
-    //         props.onToggleChange(!checked);
-    //         Alert.alert('Remove Successfully!');
-    //     }
-    // }
   };
 
   const onHandleCancel = () => {
     setModalVisible(false);
   };
+
+  const onHandleLike = () => {
+    authenticationContext.likeCourse(props.data.id, authenticationContext.state.access_token);
+  }
 
   return (
     <View style={styles.boxBtn}>
@@ -57,15 +36,14 @@ const ButtonInformation = (props) => {
       />
       <TouchableOpacity
         style={styles.btnCustom(1)}
-        // onPress={() => onHandlePress()}
+        onPress={() => onHandleLike()}
       >
-        <Text style={styles.textLayout(1)}>Yêu thích</Text>
+        <Text style={styles.textLayout(1)}>{authenticationContext.state.likeStatus ? 'Huỷ thích' : 'Yêu thích'}</Text>
         <Ionicons name="ios-heart" size={24} color="tomato" />
       </TouchableOpacity>
       {authenticationContext.state.checkOwnCourse.isUserOwnCourse ? (
         <View
           style={styles.btnCustom(2)}
-          // onPress={() => onHandlePress()}
         >
           <Text style={styles.textLayout(2)}>Đã tham gia</Text>
           <AntDesign name="pushpin" size={24} color="#2196F3" />
