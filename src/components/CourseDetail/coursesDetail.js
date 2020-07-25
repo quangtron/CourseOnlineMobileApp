@@ -50,7 +50,7 @@ const CoursesDetail = (props) => {
             ? coursesContext.state.courseInfo.promoVidUrl
             : item.promoVidUrl
         }
-        imageUrl={item.imageUrl ? item.imageUrl : item.courseImage}
+        imageUrl={item.imageUrl || item.courseImage}
       />
       {coursesContext.state.isGettedCourseInfo ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom: 250}}>

@@ -13,6 +13,9 @@ const SectionCoursesItem = (props) => {
     price,
     courseImage,
     courseTitle,
+    courseSoldNumber,
+    courseAveragePoint,
+    coursePrice,
     instructorName,
     latestLearnTime,
     total,
@@ -46,35 +49,34 @@ const SectionCoursesItem = (props) => {
       onPress={() => onPressItem(props.item)}
     >
       <Image
-        source={{ uri: courseImage ? courseImage : imageUrl }}
+        source={{ uri: courseImage || imageUrl }}
         style={styles.image}
       />
       <View style={styles.course}>
         <Text style={{ marginBottom: 20 }}>
-          {courseTitle ? courseTitle : title}
+          {courseTitle || title}
         </Text>
         <View>
-          <Text style={Styles.text(14, "#616161", "normal")}>
-            {instructorName
-              ? instructorName
-              : props.item["instructor.user.name"]}
+          <Text style={Styles.text(14, "#2196F3", "normal")}>
+            {instructorName || props.item["instructor.user.name"]}
           </Text>
+          {latestLearnTime ? null :
           <View style={styles.flexDirectionRow}>
-            {latestLearnTime ? null : renderStar(sumPoint)}
+            {renderStar(courseAveragePoint || sumPoint)}
             <Text style={Styles.text(14, "#616161", "normal")}>
-              <Text style={{color: 'tomato'}}>{soldNumber}</Text> học viên
+              <Text style={{color: 'tomato'}}>{soldNumber || courseSoldNumber}</Text> học viên
             </Text>
-          </View>
-          {price >= 0 ? (
-            price === 0 ? <Text>Miễn phí</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price} VND</Text>
+          </View>}
+          {price >= 0 || coursePrice >= 0 ? (
+            price === 0 || coursePrice === 0 ? <Text>Miễn phí</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
           ) : null}
           {latestLearnTime ? (
-            <View>
+            <View style={{marginTop: 10}}>
               <Text>Thời gian thanh toán:</Text>
               <Text style={Styles.text(14, "#616161", "normal")}>
                 {moment(latestLearnTime).format("DD/MM/YYYY, h:mm:ss")}
               </Text>
-              <Text>{total} bài học</Text>
+              <Text style={{marginTop: 10}}>{total} bài học</Text>
             </View>
           ) : null}
         </View>

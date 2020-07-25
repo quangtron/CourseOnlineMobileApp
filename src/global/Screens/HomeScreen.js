@@ -20,7 +20,7 @@ function HomeScreen(props) {
             mode="modal"
             screenOptions={{headerTitleStyle: {
                 fontWeight: 'bold',
-                fontSize: 22,
+                fontSize: 19,
             }}}
         >
             <HomeStack.Screen

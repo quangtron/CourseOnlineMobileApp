@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
   text: {
     paddingRight: 15,
     width: null,
+    color: '#1565C0',
+    fontWeight: 'bold',
   },
   subInfo: {
     backgroundColor: "#E0E0E0",

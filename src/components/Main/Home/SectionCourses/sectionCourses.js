@@ -15,8 +15,8 @@ const SectionCourses = props => {
         return result;
     }
     
-    const onPress = item => {
-        props.navigation.navigate(ScreenKey.ListCourses, {item: item});
+    const onPress = items => {
+        props.navigation.navigate(ScreenKey.ListCourses, {items: items, title: props.title});
     }
 
     return(
@@ -24,7 +24,7 @@ const SectionCourses = props => {
             <View style={styles.headerSection}>
                 <Text style={Styles.text(16, '#000', 'bold')}>{props.title ? props.title : 'title'}</Text>
                 <TouchableOpacity
-                    style={Styles.btnLayout(70, 20, '#EEEEEE')}
+                    style={Styles.btnLayout(90, 20, '#E0E0E0')}
                     onPress={() => onPress(props.dataSection)}
                 >
                     <Text style={{fontSize: 13}}>Xem tất cả</Text>
