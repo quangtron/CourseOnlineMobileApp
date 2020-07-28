@@ -1,11 +1,42 @@
-export const login = (username, password) => {
-    if(username.toLowerCase() === 'admin'){
-        if(password === '123456'){
-            return {status: 200, user: {username, token: 'abc123', fullname: 'Administrator'}}
-        } else {
-            return {status: 404, errorString: 'Username & Password are not match!'}
-        }
-    }
+import axios from "axios";
 
-    return {status: 404, errorString: 'User is not existed!'}
+export const apiLogin = (email, password) => {
+  return axios.post("https://api.itedu.me/user/login", {
+    email,
+    password,
+  });
+};
+
+export const apiCheckOwnCourse = (id, token) => {
+  return axios.get(`https://api.itedu.me/user/check-own-course/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const apiLikeCourse = (courseId, token) => {
+  return axios.post(
+    "https://api.itedu.me/user/like-course",
+    { courseId },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
+export const apiCheckLikeStatus = (courseId, token) => {
+  return axios.get(
+    `https://api.itedu.me/user/get-course-like-status/${courseId}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
+export const apiGetCoursesLiked = (token) => {
+  return axios.get(
+    'https://api.itedu.me/user/get-favorite-courses',
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
+export const apiChangeInfoUser = (name, avatar, phone, token) => {
+  return axios.put('https://api.itedu.me/user/update-profile', { name, avatar, phone }, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
 }

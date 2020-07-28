@@ -1,83 +1,96 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
-import { login } from '../../../core/services/authentication-services';
 import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Login = props => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [status, setStatus] = useState(null);
-    const {setAuthentication} = useContext(AuthenticationContext);
+    const authenticationContext = useContext(AuthenticationContext);
 
     useEffect(() => {
-        if(status && status.status === 200){
+        if(authenticationContext.state.isLogined){
+            resetForm();
             props.navigation.navigate(ScreenKey.MainTab);
+        } else {
+            console.log('Login failed!', authenticationContext.state.message);
         }
-    })
+    }, [authenticationContext.state.isLogined])
 
     const renderResultLogin = status => {
-        if(!status){
+        if(!status.message && !status.isLogining){
             return <View />
-        } else if (status.status === 200){
-            return <Text>Login successed!</Text>
+        } else if(status.isLogined) {
+            return <Text style={{color: '#d32f2f'}}>Đăng nhập thành công!</Text>
         } else {
-            return <Text>{status.errorString}</Text>
+            return <Text style={{color: '#d32f2f'}}>{status.message}</Text>
         }
     }
 
-    const onPressLogin = setAuthentication => {
-        setStatus(login(username, password));
-        setAuthentication(login(username, password));
+    const resetForm = () => {
+        setEmail('');
+        setPassword('');
+        authenticationContext.state.message = null;
+        authenticationContext.state.isLogining = false;
+    }
+
+    const onPressLogin = () => {
+        authenticationContext.login(email, password);
     }
 
     const onPressRegister = _ => {
-        props.navigation.navigate(ScreenKey.Register);
+        resetForm();
+        props.navigation.navigate(ScreenKey.VerifyPassword);
     }
 
     const onPressForgetPassword = _ =>{
-        props.navigation.navigate(ScreenKey.ForgetPassword);
+        resetForm();
+        props.navigation.navigate(ScreenKey.Register, {email: ''});
     }
+
+    const screenWidth = Math.round(Dimensions.get('window').width);
 
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
-                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
+                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
-                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Login</Text>
+                    <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Đăng nhập</Text>
                     <View>
                         <TextInput
-                            style={styles.inputLayout}
-                            placeholder='Username'
+                            style={styles.inputLayout(screenWidth)}
+                            placeholder='Nhập email'
                             placeholderTextColor='#fff'
-                            onChangeText={(text) => {setUsername(text)}}
+                            value={email}
+                            onChangeText={(text) => {setEmail(text)}}
                         />
                     </View>
                     <View>
                         <TextInput
-                            style={styles.inputLayout}
-                            placeholder='Password'
+                            style={styles.inputLayout(screenWidth)}
+                            placeholder='Nhập mật khẩu'
                             placeholderTextColor='#fff'
                             secureTextEntry={true}
+                            value={password}
                             onChangeText={(text) => {setPassword(text)}}
                         />
                     </View>
-                    {renderResultLogin(status)}
+                    {renderResultLogin(authenticationContext.state)}
                     <TouchableOpacity onPress={onPressForgetPassword}>
-                        <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Forgot password?</Text>
+                        <Text style={[Styles.text(13, '#FFF59D', 'normal')]}>Quên mật khẩu?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[Styles.btnLayout(100, 40, '#ffebee'), {bottom: '-10%'}]}
-                        onPress={() => onPressLogin(setAuthentication)}
+                        style={[Styles.btnLayout(120, 40, '#ffebee')]}
+                        onPress={() => onPressLogin()}
                     >
-                        <Text style={Styles.text(20, '#000', 'normal')}>Login</Text>
+                        <Text style={Styles.text(20, '#000', 'normal')}>Đăng nhập</Text>
                     </TouchableOpacity>
-                    <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Or</Text>
-                    <TouchableOpacity style={{bottom: '-16%'}} onPress={onPressRegister}>
-                        <Text style={Styles.text(13, '#FFF59D', 'normal')}>Create New Account!</Text>
+                    <Text style={[Styles.text(13, '#fff', 'normal')]}>Hoặc</Text>
+                    <TouchableOpacity style={{marginBottom: 20}} onPress={onPressRegister}>
+                        <Text style={Styles.text(13, '#FFF59D', 'normal')}>Tạo tài khoản mới!</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -93,39 +106,38 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     bgImage: {
-        width: '100%',
-        height: '100%',
-
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
     box: {
         alignItems: 'center',
-        width: '70%',
-        height: '50%',
+        width: '80%',
+        height: '60%',
 
-        borderColor: 'black',
         borderRadius: 10,
         backgroundColor: 'rgba(0,0,0,.3)',
+        justifyContent: 'space-around'
     },
     userImg: {
         position: 'absolute',
-        top: -50,
+        marginTop: -60,
 
         width: 100,
         height: 100,
     },
-    inputLayout: {
-        width: 200,
-        padding: 5,
-        marginBottom: 20,
-
-        fontSize: 16,
-        color: '#fff',
-        backgroundColor: 'transparent',
-        borderBottomWidth: 2,
-        borderBottomColor: '#fff',
+    inputLayout: (x) => {
+        return {
+            width: x*6.5/10,
+            padding: 5,
+            marginBottom: 20,
+    
+            fontSize: 16,
+            color: '#fff',
+            backgroundColor: 'transparent',
+            borderBottomWidth: 2,
+            borderBottomColor: '#fff',
+        }
     },
     txtShadow: {
         textShadowOffset: {
@@ -134,6 +146,7 @@ const styles = StyleSheet.create({
         },
         textShadowColor: '#F06292',
         textShadowRadius: 5,
+        marginBottom: '-20%',
     },
 })
 

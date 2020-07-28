@@ -8,7 +8,7 @@ const Separator = _ => {
                 height: 1,
                 marginRight: 10,
                 marginBottom: 20,
-                backgroundColor: '#E0E0E0',
+                backgroundColor: '#9E9E9E',
             }}
         />
     );

@@ -15,25 +15,23 @@ const SectionCourses = props => {
         return result;
     }
     
-    const onPress = item => {
-        props.navigation.navigate(ScreenKey.ListCourses, {item: item});
+    const onPress = items => {
+        props.navigation.navigate(ScreenKey.ListCourses, {items: items, title: props.title});
     }
-    
-    const { title, data } = props.dataSection;
 
     return(
         <View style={styles.sectonCourses}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(16, '#000', 'bold')}>{props.title ? props.title : title}</Text>
+                <Text style={Styles.text(16, '#000', 'bold')}>{props.title ? props.title : 'title'}</Text>
                 <TouchableOpacity
-                    style={Styles.btnLayout(70, 20, '#EEEEEE')}
-                    onPress={_ => onPress(props.dataSection)}
+                    style={Styles.btnLayout(90, 20, '#E0E0E0')}
+                    onPress={() => onPress(props.dataSection)}
                 >
-                    <Text style={{fontSize: 13}}>See all</Text>
+                    <Text style={{fontSize: 13}}>Xem tất cả</Text>
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>
-                {showListCoursesItem(data)}
+                {showListCoursesItem(props.dataSection)}
             </ScrollView>
         </View>
     );

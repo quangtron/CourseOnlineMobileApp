@@ -1,60 +1,102 @@
-import React from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import moment from 'moment';
 
-import Styles from '../../../Common/Styles';
-import { ScreenKey } from '../../../../global/constants';
+import Styles from "../../../Common/Styles";
+import { ScreenKey } from "../../../../global/constants";
 
-const DownloadItem = props => {
-    const { title, author, level, released, duration, img, courses } = props.item;
+const DownloadItem = (props) => {
+  const {
+    title,
+    imageUrl,
+    price,
+    soldNumber,
+    formalityPoint,
+    contentPoint,
+    presentationPoint,
+    instructorName,
+    courseTitle,
+    courseImage,
+    courseSoldNumber,
+    courseAveragePoint,
+    coursePrice,
+    latestLearnTime,
+  } = props.item;
 
-    const onPress = (item) => {
-        if(author){
-            props.navigation.navigate(ScreenKey.CourseDetail, {item: item});
-        } else {
-            props.navigation.push(ScreenKey.ListCourses, {item: {title: item.title, data: item.courses}});
-        }
-    }
+  const sumPoint = ((formalityPoint + contentPoint + presentationPoint) / 3).toFixed(1);
 
-    return(
-        <TouchableOpacity style={styles.item} onPress={() => onPress(props.item)}>
-            <Image
-                source={img}
-                style={styles.image}
-            />
-            <View style={styles.text}>
-                <Text style={Styles.text(16, '#000', 'normal')}>{title}</Text>
-                {author ? 
-                    <View>
-                        <Text style={[Styles.text(14, '#9E9E9E', 'normal'), {marginTop: 10}]}>{author}</Text>
-                        <Text style={Styles.text(14, '#9E9E9E', 'normal')}>{`${level} . ${released} . ${duration}`}</Text>
-                    </View>
-                    : <Text style={[Styles.text(13, '#9E9E9E', 'normal'), {marginTop: 15}]}>{`${courses.length} courses`}</Text>
-                }
+  const renderStar = (point) => {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        { point - 1 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 2 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 3 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 4 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+        { point - 5 >= 0 ? <Ionicons name="md-star" size={18} color="tomato" /> : <Ionicons name="ios-star-outline" size={18} color="tomato" />}
+      </View>
+    )
+  }
+
+  const onPress = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, { item: item });
+  };
+
+  return (
+    <TouchableOpacity style={styles.item} onPress={() => onPress(props.item)}>
+      <Image source={{ uri: imageUrl || courseImage }} style={styles.image} />
+      <View style={styles.text}>
+        <Text style={Styles.text(16, "#000", "normal")}>
+          {title || courseTitle}
+        </Text>
+        <Text style={[Styles.text(14, "#2196F3", "normal"), { marginTop: 10 }]}>
+          {props.item["instructor.user.name"] || instructorName}
+        </Text>
+        {latestLearnTime ? (
+          <View>
+            <Text>Thời gian thanh toán:</Text>
+            <Text style={Styles.text(14, "#9E9E9E", "normal")}>{moment(latestLearnTime).format("DD/MM/YYYY, h:mm:ss")}</Text>
+          </View>
+        ) : (
+          <View>
+            <View style={styles.subInfo}>
+              {renderStar(courseAveragePoint || sumPoint)}
+              <Text style={Styles.text(14, "#9E9E9E", "normal")}>
+                <Text style={Styles.text(14, "tomato", "normal")}>
+                  {soldNumber || courseSoldNumber}
+                </Text>{" "}
+                học viên
+              </Text>
             </View>
-            {author ? 
-                <TouchableOpacity>
-                    <Ionicons name="ios-more" size={20} color="black" />
-                </TouchableOpacity>
-                : null
-            }
-        </TouchableOpacity>
-    );
-}
+            {price >= 0 || coursePrice >= 0 ? (
+              price === 0 || coursePrice === 0 ? <Text>Miễn phí</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
+            ) : null}
+          </View>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-    item: {
-        marginBottom: 15,
-        flexDirection: 'row',
-    },
-    image: {
-        width: 80,
-        height: 60,
-    },
-    text: {
-        marginLeft: 10,
-        width: '68%',
-    }
-})
+  item: {
+    marginBottom: 15,
+    flexDirection: "row",
+  },
+  image: {
+    width: 150,
+    height: 100,
+  },
+  text: {
+    marginLeft: 10,
+    width: "55%",
+    justifyContent: "space-between",
+  },
+  subInfo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+});
 
 export default DownloadItem;

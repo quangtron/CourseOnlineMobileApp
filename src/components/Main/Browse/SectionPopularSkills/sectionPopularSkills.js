@@ -1,15 +1,25 @@
-import React, { useContext } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
-import { PopularSkillsContext } from '../../../../provider/popular-skills-provider';
+import { CoursesContext } from '../../../../provider/courses-provider';
 
 const SectionPopularSkills = props => {
-    const {popularSkills} = useContext(PopularSkillsContext);
+    const courseContext = useContext(CoursesContext);
+    const [title, setTitle] = useState('Danh sách khoá học');
+    const [isShow, setShow] = useState(false);
 
-    const onPressSkill = _ => {
-        props.navigation.navigate(ScreenKey.SkillDetail);
+    useEffect(() => {
+        if(courseContext.state.coursesCategory){
+            props.navigation.navigate(ScreenKey.ListCourses, {items: courseContext.state.coursesCategory , title: title });
+        }
+    }, [courseContext.state.coursesCategory])
+
+    const onPressSkill = (item) => {
+        courseContext.coursesCategory("", {category: [item.id]}, 0, 11);
+        setTitle(item.name);
+        // setShow(!isShow);
     }
 
     const showListItems = items => {
@@ -17,14 +27,15 @@ const SectionPopularSkills = props => {
 
         result = items.map((item, index) => {
             return(
-                <TouchableOpacity
-                    key={index}
-                    style={[Styles.btnLayout(null,30,'#E0E0E0'), styles.btnLayout]}
-                    onPress={onPressSkill}
-                >
-                    {item.img ? <Image style={{marginLeft: 10}} source={item.img} /> : null}
-                    <Text style={{paddingRight: 20, paddingLeft: 10}}>{item.name}</Text>
-                </TouchableOpacity>
+                <ImageBackground source={props.img} style={styles.imgBg}>
+                    <TouchableOpacity
+                        key={index}
+                        style={styles.btnLayout}
+                        onPress={() => onPressSkill(item)}
+                    >
+                        <Text style={styles.textStyle}>{item.name}</Text>
+                    </TouchableOpacity>
+                </ImageBackground>
             );
         });
 
@@ -35,7 +46,9 @@ const SectionPopularSkills = props => {
         <View style={{margin: 15, marginRight: 0}}>
             <Text style={[Styles.text(16, '#000', 'bold'), {marginBottom: 15}]}>{props.title}</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                {showListItems(popularSkills)}
+                <View style={styles.flewrap}>
+                    {showListItems(props.items)}
+                </View>
             </ScrollView>
         </View>
     );
@@ -43,9 +56,28 @@ const SectionPopularSkills = props => {
 
 const styles = StyleSheet.create({
     btnLayout: {
-        marginRight: 10,
-        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
+    textStyle: {
+        paddingRight: 15,
+        paddingLeft: 15,
+        color: '#fff',
+        fontSize: 23,
+        fontWeight: 'bold'
+    },
+    imgBg: {
+        width: 200,
+        height: 100,
+        marginRight: 20,
+        marginBottom: 20
+    },
+    flewrap: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        width: '50%'
+    }
 })
 
 export default SectionPopularSkills;

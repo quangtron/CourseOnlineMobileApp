@@ -1,73 +1,91 @@
-import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Text, Alert } from 'react-native';
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, TouchableOpacity, Text, Modal } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
-import ShareScreen from '../../../Others/Share/share';
-import { DownloadsContext } from '../../../../provider/downloads-provider';
-import { BookmarksContext } from '../../../../provider/bookmarks-provider';
-import { removeItemFromBookmarks } from '../../../../core/services/bookmarks-services';
+import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import ModalRegisterCourse from "../../../Common/ModalRegisterCourse";
 
-const ButtonInformation = props => {
-    const { downloads, setDownloads } = useContext(DownloadsContext);
-    const { bookmarks, setBookmarks } = useContext(BookmarksContext);
-    const {img, img2, name, checked} = props.item;
+const ButtonInformation = (props) => {
+  const authenticationContext = useContext(AuthenticationContext);
+  const [modalVisible, setModalVisible] = useState(false);
 
-    const onHandlePress = name => {
-        if(name === 'Download'){
-            const listDownloads = downloads;
-
-            listDownloads.push(data);
-            setDownloads(listDownloads);
-        } else if(name === 'Bookmark'){
-            let listBookmarks = bookmarks;
-
-            if(!checked){
-                listBookmarks.push(props.data);
-                setBookmarks(listBookmarks);
-                props.onToggleChange(!checked);
-                Alert.alert('Insert Successfully!');
-            } else {
-                listBookmarks = removeItemFromBookmarks(props.data.title, bookmarks);
-                setBookmarks(listBookmarks);
-                props.onToggleChange(!checked);
-                Alert.alert('Remove Successfully!');
-            }
-        }
-    }
-
-    return(
-        <View>
-            <TouchableOpacity style={styles.itemCenter} onPress={_ => onHandlePress(name)}>
-                <View style={styles.circleBtn}>
-                    <Image source={checked === true ? img2 : img} style={styles.image} />
-                </View>
-                <Text style={styles.textLayout}>{name}</Text>
-            </TouchableOpacity>
-        </View>
+  const onHandleToggleModal = (bool) => {
+    authenticationContext.checkOwnCourse(
+      props.data.id,
+      authenticationContext.state.access_token
     );
-}
+    setModalVisible(bool);
+  };
+
+  const onHandleCancel = () => {
+    setModalVisible(false);
+  };
+
+  const onHandleLike = () => {
+    authenticationContext.likeCourse(props.data.id, authenticationContext.state.access_token);
+  }
+
+  return (
+    <View style={styles.boxBtn}>
+      <ModalRegisterCourse
+        info={props.data}
+        visibleCheck={modalVisible}
+        onHandleCloseModal={onHandleToggleModal}
+        onHandleCancel={onHandleCancel}
+      />
+      <TouchableOpacity
+        style={styles.btnCustom(1)}
+        onPress={() => onHandleLike()}
+      >
+        <Text style={styles.textLayout(1)}>{authenticationContext.state.likeStatus ? 'Huỷ thích' : 'Yêu thích'}</Text>
+        <Ionicons name="ios-heart" size={24} color="tomato" />
+      </TouchableOpacity>
+      {authenticationContext.state.checkOwnCourse.isUserOwnCourse ? (
+        <View
+          style={styles.btnCustom(2)}
+        >
+          <Text style={styles.textLayout(2)}>Đã tham gia</Text>
+          <AntDesign name="pushpin" size={24} color="#2196F3" />
+        </View>
+      ) : (
+        <TouchableOpacity
+          style={styles.btnCustom(2)}
+          onPress={() => onHandleToggleModal(!modalVisible)}
+        >
+          <Text style={styles.textLayout(2)}>Tham gia</Text>
+          <AntDesign name="pushpin" size={24} color="#2196F3" />
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    itemCenter: {
-        marginRight: '15%',
-        alignItems: 'center',
-    },
-    image: {
-        alignSelf: 'center',
-        width: 30,
-        height: 30,
-        borderRadius: 50,
-    },
-    textLayout: {
-        marginTop: 10,
-        textAlign: 'center',
-    },
-    circleBtn: {
-        width: 60,
-        height: 60,
-        backgroundColor: '#E0E0E0',
-        borderRadius: 50,
-        justifyContent: 'center',
-    },
-})
+  textLayout: (x) => {
+    return {
+      fontSize: 17,
+      color: x === 1 ? "tomato" : "#2196F3",
+      marginRight: 10,
+    };
+  },
+  btnCustom: (x) => {
+    return {
+      width: 150,
+      height: 40,
+      borderWidth: 1,
+      borderColor: x === 1 ? "tomato" : "#2196F3",
+      borderRadius: 25,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    };
+  },
+  boxBtn: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
 
 export default ButtonInformation;
