@@ -1,18 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
 
 import Styles from "../../../Common/Styles";
 import DownloadItem from "../../Download/DownloadItem/downloadItem";
 import Separator from "../../../Common/Separator";
-import AuthorsResult from "../AuthorsResult/authorsResult";
-import { MainContext } from "../../../../provider/main-provider";
-import { SearchContext } from "../../../../provider/search-provider";
-import { AuthorsContext } from "../../../../provider/authors-provider";
-import { ScreenKey } from "../../../../global/constants";
-import {
-  searchCP,
-  searchAuthors,
-} from "../../../../core/services/search-services";
 import { CoursesContext } from "../../../../provider/courses-provider";
 
 const SearchAll = (props) => {
@@ -47,7 +38,7 @@ const SearchAll = (props) => {
           )}
           ItemSeparatorComponent={Separator}
           showsVerticalScrollIndicator={false}
-          style={{height: screenHeight*6/10}}
+          style={{height: (screenHeight - 210)*7.7/10}}
         />
       ) : (
         <View />
@@ -64,6 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
+    height: 20,
   },
 });
 

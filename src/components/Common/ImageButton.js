@@ -6,25 +6,7 @@ import { ScreenKey } from '../../global/constants';
 
 const ImageButton = props => {
     const onPressImg = items => {
-        if(props.width){
-            props.navigation.navigate(ScreenKey.SkillDetail);
-        } else {
-            if(props.title === 'NEW RELEASES'){
-                filterCourses(items, 1);
-            } else if (props.title === 'RECOMMENDED FOR YOU'){
-                filterCourses(items, 2);
-            }else {
-                props.navigation.navigate(ScreenKey.ListCourses, {item: items});
-            }
-        }
-    }
-
-    const filterCourses = (items, status) => {
-        let temp = items.data;
-        temp = temp.filter((item) => {
-            return item.status === status;
-        })
-        props.navigation.navigate(ScreenKey.ListCourses, {item: {...items, data: temp}});
+        props.navigation.navigate(ScreenKey.ListCourses, {items: items, title: props.title});
     }
 
     return(
@@ -34,7 +16,7 @@ const ImageButton = props => {
             ]}
             source={props.img}
         >
-            <TouchableOpacity style={styles.content} onPress={_ => onPressImg(props.items)}>
+            <TouchableOpacity style={styles.content} onPress={() => onPressImg(props.items)}>
                 <Text style={[Styles.text(20, '#fff', 'bold'), {textTransform: 'uppercase'}]}>{props.title}</Text>
                 {props.extraTitle ? <Text style={[Styles.text(11, '#fff', 'normal'), {textTransform: 'uppercase'}]}>{props.extraTitle}</Text> : null}
             </TouchableOpacity>

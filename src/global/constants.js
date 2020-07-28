@@ -23,8 +23,9 @@ export const ScreenKey = {
 }
 
 export const Images = {
-    NewReleases: require('../../assets/bgLogin.jpg'),
-    Recommended: require('../../assets/bgLogin.jpg'),
+    NewReleases: require('../../assets/newCourse.jpg'),
+    Recommended: require('../../assets/recommend.jpg'),
+    Code: require('../../assets/code.jpg'),
 }
 
 export const ArrayTimes = [

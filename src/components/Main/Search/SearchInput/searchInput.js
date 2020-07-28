@@ -17,9 +17,6 @@ const SearchInput = (props) => {
   const [search, setSearch] = useState("");
   const [opt, setOpt] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
-  const [nameCategory, setNameCategory] = useState([]);
-  const [nameTime, setNameTime] = useState([]);
-  const [namePrice, setNamePrice] = useState([]);
   const courseContext = useContext(CoursesContext);
 
   useEffect(() => {
@@ -42,9 +39,6 @@ const SearchInput = (props) => {
   const onHandleToggleModal = (bool, data) => {
     setModalVisible(bool);
     if(data){
-      setNameCategory(data.category);
-      setNameTime(data.time);
-      setNamePrice(data.price);
       setOpt({
         ...opt,
         category: data.category.map((item) => item.id),
@@ -57,43 +51,6 @@ const SearchInput = (props) => {
   const onHandleCancel = () => {
     setModalVisible(false);
   };
-
-  const onHandleDelete = (index, flag) => {
-    if(flag === 1) {
-      const newArr = [...nameCategory];
-      newArr.splice(index, 1);
-  
-      setNameCategory([...newArr]);
-      setOpt({
-        ...opt,
-        category: newArr.map((item) => item.id),
-      });
-    } else if (flag === 2) {
-      const newArr = [...nameTime];
-      newArr.splice(index, 1);
-  
-      setNameTime([...newArr]);
-      setOpt({
-        ...opt,
-        time: newArr.map((item) => item.condition),
-      });
-    } else {
-      const newArr = [...namePrice];
-      newArr.splice(index, 1);
-  
-      setNamePrice([...newArr]);
-      setOpt({
-        ...opt,
-        price: newArr.map((item) => item.condition),
-      });
-    }
-  }
-
-  const showCategoriesFiltered = (data, flag) => data.map((item, index) => 
-    <TouchableOpacity onPress={() => onHandleDelete(index, flag)} key={index}>
-      <Text>{item.name}</Text>
-    </TouchableOpacity>
-  )
 
   return (
     <View>
@@ -141,9 +98,6 @@ const SearchInput = (props) => {
           <Text style={{color: '#fff', marginLeft: 10}}>Lọc kết quả</Text>
         </TouchableOpacity>
       </View>
-      {showCategoriesFiltered(nameCategory, 1)}
-      {showCategoriesFiltered(nameTime, 2)}
-      {showCategoriesFiltered(namePrice, 3)}
     </View>
   );
 };
@@ -155,6 +109,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
     alignItems: "center",
+    height: 50,
   },
   inputSearch: {
     flex: 1,

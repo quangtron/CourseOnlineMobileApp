@@ -34,3 +34,9 @@ export const apiGetCoursesLiked = (token) => {
     { headers: { Authorization: `Bearer ${token}` } }
   );
 };
+
+export const apiChangeInfoUser = (name, avatar, phone, token) => {
+  return axios.put('https://api.itedu.me/user/update-profile', { name, avatar, phone }, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+}

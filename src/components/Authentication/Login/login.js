@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { View, ImageBackground, TextInput, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
 import { AuthenticationContext } from '../../../provider/authentication-provider';
 
 const Login = props => {
-    const [email, setEmail] = useState('1612745@student.hcmus.edu.vn');
-    const [password, setPassword] = useState('12345678');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const authenticationContext = useContext(AuthenticationContext);
 
     useEffect(() => {
@@ -50,16 +50,18 @@ const Login = props => {
         props.navigation.navigate(ScreenKey.Register, {email: ''});
     }
 
+    const screenWidth = Math.round(Dimensions.get('window').width);
+
     return(
         <View style={styles.container}>
             <ImageBackground source={require('../../../../assets/bgLogin.jpg')} style={styles.bgImage}>
-                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow, {top: '-13%'}]}>COURSE ONLINE</Text>
+                <Text style={[Styles.text(30, '#F06292', 'bold'), styles.txtShadow]}>COURSE ONLINE</Text>
                 <View style={styles.box}>
                     <Image source={require('../../../../assets/user.png')} style={styles.userImg} />
                     <Text style={[Styles.text(35, '#ffebee', 'bold'), {marginTop: 60, marginBottom: 60,}]}>Đăng nhập</Text>
                     <View>
                         <TextInput
-                            style={styles.inputLayout}
+                            style={styles.inputLayout(screenWidth)}
                             placeholder='Nhập email'
                             placeholderTextColor='#fff'
                             value={email}
@@ -68,7 +70,7 @@ const Login = props => {
                     </View>
                     <View>
                         <TextInput
-                            style={styles.inputLayout}
+                            style={styles.inputLayout(screenWidth)}
                             placeholder='Nhập mật khẩu'
                             placeholderTextColor='#fff'
                             secureTextEntry={true}
@@ -78,16 +80,16 @@ const Login = props => {
                     </View>
                     {renderResultLogin(authenticationContext.state)}
                     <TouchableOpacity onPress={onPressForgetPassword}>
-                        <Text style={[Styles.text(13, '#FFF59D', 'normal'), {right: '-15%'}]}>Quên mật khẩu?</Text>
+                        <Text style={[Styles.text(13, '#FFF59D', 'normal')]}>Quên mật khẩu?</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[Styles.btnLayout(120, 40, '#ffebee'), {bottom: '-10%'}]}
+                        style={[Styles.btnLayout(120, 40, '#ffebee')]}
                         onPress={() => onPressLogin()}
                     >
                         <Text style={Styles.text(20, '#000', 'normal')}>Đăng nhập</Text>
                     </TouchableOpacity>
-                    <Text style={[Styles.text(13, '#fff', 'normal'), {bottom: '-14%'}]}>Hoặc</Text>
-                    <TouchableOpacity style={{bottom: '-16%'}} onPress={onPressRegister}>
+                    <Text style={[Styles.text(13, '#fff', 'normal')]}>Hoặc</Text>
+                    <TouchableOpacity style={{marginBottom: 20}} onPress={onPressRegister}>
                         <Text style={Styles.text(13, '#FFF59D', 'normal')}>Tạo tài khoản mới!</Text>
                     </TouchableOpacity>
                 </View>
@@ -104,39 +106,38 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     bgImage: {
-        width: '100%',
-        height: '100%',
-
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
     },
     box: {
         alignItems: 'center',
-        width: '70%',
-        height: '50%',
+        width: '80%',
+        height: '60%',
 
-        borderColor: 'black',
         borderRadius: 10,
         backgroundColor: 'rgba(0,0,0,.3)',
+        justifyContent: 'space-around'
     },
     userImg: {
         position: 'absolute',
-        top: -50,
+        marginTop: -60,
 
         width: 100,
         height: 100,
     },
-    inputLayout: {
-        width: 250,
-        padding: 5,
-        marginBottom: 20,
-
-        fontSize: 16,
-        color: '#fff',
-        backgroundColor: 'transparent',
-        borderBottomWidth: 2,
-        borderBottomColor: '#fff',
+    inputLayout: (x) => {
+        return {
+            width: x*6.5/10,
+            padding: 5,
+            marginBottom: 20,
+    
+            fontSize: 16,
+            color: '#fff',
+            backgroundColor: 'transparent',
+            borderBottomWidth: 2,
+            borderBottomColor: '#fff',
+        }
     },
     txtShadow: {
         textShadowOffset: {
@@ -145,6 +146,7 @@ const styles = StyleSheet.create({
         },
         textShadowColor: '#F06292',
         textShadowRadius: 5,
+        marginBottom: '-20%',
     },
 })
 

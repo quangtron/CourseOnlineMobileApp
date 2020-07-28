@@ -14,6 +14,8 @@ import {
   GET_COURSES_LIKED_REQUEST,
   GET_COURSES_LIKED_SUCCESSED,
   GET_COURSES_LIKED_FAILED,
+  CHANGE_INFO_USER_REQUEST,
+  CHANGE_INFO_USER_SUCCESSED,
 } from "../actions/authen-action";
 
 export const authenReducer = (preState, action) => {
@@ -49,6 +51,12 @@ export const authenReducer = (preState, action) => {
       return {...preState, isGettingCoursesLiked: false, isGettedCoursesLiked: true, coursesLiked: action.data}
     case GET_COURSES_LIKED_FAILED:
       return {...preState, isGettingCoursesLiked: false, isGettedCoursesLiked: false}
+    case CHANGE_INFO_USER_REQUEST:
+      return {...preState, isChanging: true}
+    case CHANGE_INFO_USER_SUCCESSED:
+      return {...preState, isChanging: false, isChanged: true, user: action.data}
+    case CHANGE_INFO_USER_SUCCESSED:
+      return {...preState, isChanging: false, isChanged: false}
 
     default:
       // throw new Error();

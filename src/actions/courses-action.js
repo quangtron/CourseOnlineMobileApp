@@ -24,6 +24,9 @@ export const SEARCH_COURSE_REQUEST = 'SEARCH_COURSE_REQUEST';
 export const SEARCH_COURSE_SUCCESSED = 'SEARCH_COURSE_SUCCESSED';
 export const SEARCH_COURSE_FAILED = 'SEARCH_COURSE_FAILED';
 
+export const GET_COURSES_CATEGORY_REQUEST = 'GET_COURSES_CATEGORY_REQUEST';
+export const GET_COURSES_CATEGORY = 'GET_COURSES_CATEGORY';
+
 const getNewCoursesSuccessed = (data) => ({
     type: NEW_COURSES_SUCCESSED,
     data
@@ -70,6 +73,11 @@ const searchCourseSuccessed = (data) => ({
 })
 const searchCourseFailed = () => ({
     type: SEARCH_COURSE_FAILED,
+})
+
+const getCoursesCategorySuccessed = (data) => ({
+    type: GET_COURSES_CATEGORY,
+    data
 })
 
 export const getNewCourses = (dispatch) => (limit, page) => {
@@ -175,7 +183,25 @@ export const searchCourse = (dispatch) => (keyword, opt, offset, limit) => {
             }
         })
         .catch((err) => {
-            console.log('error: ', err);
+            console.log('error search: ', err);
             dispatch(searchCourseFailed());
+        })
+}
+
+export const getCoursesCategory = (dispatch) => (keyword, opt, offset, limit) => {
+    dispatch({type: GET_COURSES_CATEGORY_REQUEST});
+
+    apiSearchCourse(keyword, opt, offset, limit)
+        .then((res) => {
+            if(res.status === 200){
+                // console.log('data', res.data);
+                dispatch(getCoursesCategorySuccessed(res.data.payload));
+            } else {
+                dispatch(getCoursesCategorySuccessed(null));
+            }
+        })
+        .catch((err) => {
+            console.log('error search: ', err);
+            dispatch(getCoursesCategorySuccessed(null));
         })
 }

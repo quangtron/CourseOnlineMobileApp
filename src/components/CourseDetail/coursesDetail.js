@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
-  Text
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -20,24 +19,36 @@ const CoursesDetail = (props) => {
   const { item } = props.route.params;
   const authenticationContext = useContext(AuthenticationContext);
   const coursesContext = useContext(CoursesContext);
+  const [linkVideo, setLinkVideo] = useState("");
 
   useEffect(() => {
-    authenticationContext.checkOwnCourse(item.id, authenticationContext.state.access_token);
-    authenticationContext.checkLikeCourse(item.id, authenticationContext.state.access_token);
+    authenticationContext.checkOwnCourse(
+      item.id,
+      authenticationContext.state.access_token
+    );
+    authenticationContext.checkLikeCourse(
+      item.id,
+      authenticationContext.state.access_token
+    );
     coursesContext.getCourseInfo(item.id, authenticationContext.state.user.id);
+    setLinkVideo("");
   }, [item.id]);
-  
+
   useEffect(() => {
     if (authenticationContext.state.isChecked) {
       console.log(authenticationContext.state.checkOwnCourse);
     }
   }, [authenticationContext.state.isChecked]);
-  
+
   const onPressLeft = () => {
     coursesContext.getMyCourses(authenticationContext.state.access_token);
     props.navigation.goBack();
   };
-  // console.log("item: ", item);
+
+  const onHandleSwitchVideo = (video) => {
+    setLinkVideo(video);
+  };
+  // console.log("item: ", item.id);
 
   return (
     <View>
@@ -46,21 +57,30 @@ const CoursesDetail = (props) => {
       </TouchableOpacity>
       <VideoPlayer
         videoUrl={
-          authenticationContext.state.checkOwnCourse && coursesContext.state.isGettedCourseInfo
+          authenticationContext.state.checkOwnCourse &&
+          coursesContext.state.isGettedCourseInfo
             ? coursesContext.state.courseInfo.promoVidUrl
             : item.promoVidUrl
         }
+        videoLesson={linkVideo}
         imageUrl={item.imageUrl || item.courseImage}
       />
       {coursesContext.state.isGettedCourseInfo ? (
-        <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom: 250}}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ marginBottom: 250 }}
+        >
           <Information
             infor={coursesContext.state.courseInfo}
             authorInfo={coursesContext.state.courseInfo.instructor}
             navigation={props.navigation}
           />
-          <ListLesson data={coursesContext.state.courseInfo} />
-          <View style={{marginLeft: 20, marginBottom: 20}}>
+          <ListLesson
+            onHandleSwitchVideo={onHandleSwitchVideo}
+            videoLesson={linkVideo}
+            data={coursesContext.state.courseInfo}
+          />
+          <View style={{ marginLeft: 20, marginBottom: 20 }}>
             <SectionCourses
               dataSection={coursesContext.state.courseInfo.coursesLikeCategory}
               navigation={props.navigation}

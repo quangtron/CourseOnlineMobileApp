@@ -32,16 +32,6 @@ const RequireWifi = _ => {
                     value={isEnabledWifiDownload}
                 />
             </View>
-            <View style={[styles.button, {marginBottom: 20}]}>
-                <Text style={Styles.text(18, '#000', 'normal')}>Change theme</Text>
-                <Switch 
-                    trackColor={{ false: "#fff", true: "#40C4FF" }}
-                    thumbColor={ isEnabledWifiDownload ? "#f5dd4b" : "#fff"}
-                    ios_backgroundColor = "#F5F5F5"
-                    onValueChange={toggleSwitchWifiDownload}
-                    value={isEnabledWifiDownload}
-                />
-            </View>
         </View>
     );
 }

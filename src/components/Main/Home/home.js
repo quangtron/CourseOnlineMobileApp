@@ -10,7 +10,6 @@ function Home(props) {
   const authenticationContext = useContext(AuthenticationContext);
 
   useEffect(() => {
-    coursesContext.getNewCourses(10, 1);
     coursesContext.getTopSell(10, 1);
     coursesContext.getTopRate(10, 1);
     coursesContext.getMyCourses(authenticationContext.state.access_token);
@@ -23,15 +22,6 @@ function Home(props) {
   return (
     <View style={styles.home}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {coursesContext.state.isGetted ? (
-          <SectionCourses
-            dataSection={coursesContext.state.newCourses}
-            navigation={props.navigation}
-            title="KHOÁ HỌC MỚI"
-          />
-        ) : (
-          <ActivityIndicator />
-        )}
         {coursesContext.state.topSell ? (
           <SectionCourses
             dataSection={coursesContext.state.topSell}

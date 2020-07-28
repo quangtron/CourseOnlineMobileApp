@@ -1,86 +1,92 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import "react-native-gesture-handler";
+import React from "react";
+import { View, StyleSheet, TextInput } from "react-native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import ListLessonItem from '../ListLessonItem/listLessonItem';
-import HeaderLesson from './HeaderLesson/headerLesson';
-import Separator from '../../Common/Separator';
+import ListLessonItem from "../ListLessonItem/listLessonItem";
+import HeaderLesson from "./HeaderLesson/headerLesson";
+import Separator from "../../Common/Separator";
 
-const renderListLessons = (data) => {
-    return data.map((item, index) => <ListLessonItem data={item} key={index} />)
-}
+const ListLesson = (props) => {
+  const { data } = props;
+  const Tab = createMaterialTopTabNavigator();
 
-const renderSectionHeader = (data, index) => {
-    return(
-        <View key={index} style={{marginBottom: 30}}>
-            { index !== 0 ? <Separator /> : <View />}
-            <HeaderLesson data={data} index={index} />
-            {renderListLessons(data.lesson)}
-        </View>
-    );
-}
+  const renderListLessons = (data) => {
+    return data.map((item, index) => (
+      <ListLessonItem
+        onHandleSwitchVideo={onHandleSwitchVideo}
+        videoLesson={props.videoLesson}
+        data={item}
+        key={index}
+      />
+    ));
+  };
 
-const renderCourses = (data) => {
-    return data.map((item, index) => {
-        return renderSectionHeader(item, index);
-    })
-}
-
-function TranscriptScreen() {
+  const renderSectionHeader = (data, index) => {
     return (
-        <View style={styles.transcriptScreen}>
-            <TextInput
-                style={styles.inputSearch}
-                autoFocus={true}
-                clearButtonMode='always'
-                placeholder='Search Transcript'
-            />
-        </View>
+      <View key={index} style={{ marginBottom: 30 }}>
+        {index !== 0 ? <Separator /> : <View />}
+        <HeaderLesson data={data} index={index} />
+        {renderListLessons(data.lesson)}
+      </View>
     );
-}
+  };
 
-const Tab = createMaterialTopTabNavigator();
+  const renderCourses = (data) => {
+    return data.map((item, index) => {
+      return renderSectionHeader(item, index);
+    });
+  };
 
-const ListLesson = props => {
-    const { data } = props;
-    
-    // console.log('data: ', data)
-
-    const ContentsScreen = () => {
-        return (
-            <View style={styles.contentsBox}>
-                {renderCourses(data.section)}
-            </View>
-        );
-    }
-    
-    return(
-        <Tab.Navigator>
-            <Tab.Screen name="Nội dung" component={ContentsScreen} />
-            <Tab.Screen name="Transcript" component={TranscriptScreen} />
-        </Tab.Navigator>
+  function TranscriptScreen() {
+    return (
+      <View style={styles.transcriptScreen}>
+        <TextInput
+          style={styles.inputSearch}
+          autoFocus={true}
+          clearButtonMode="always"
+          placeholder="Search Transcript"
+        />
+      </View>
     );
-}
+  }
+
+  const onHandleSwitchVideo = (video) => {
+    props.onHandleSwitchVideo(video);
+  };
+
+  const ContentsScreen = () => {
+    return (
+      <View style={styles.contentsBox}>{renderCourses(data.section)}</View>
+    );
+  };
+
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Nội dung" component={ContentsScreen} />
+      <Tab.Screen name="Transcript" component={TranscriptScreen} />
+    </Tab.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
-    contentsBox: {
-        flex: 1,
-        margin: 20,
-        marginBottom: 0,
-        // height: 400,
-    },
-    inputSearch: {
-        marginTop: 10,
-        width: '90%',
-        height: 35,
-        borderBottomWidth: 2,
-        borderBottomColor: '#000',
-    },
-    transcriptScreen: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-})
+  contentsBox: {
+    flex: 1,
+    margin: 20,
+    marginBottom: 0,
+    // height: 400,
+  },
+  inputSearch: {
+    marginTop: 10,
+    width: "90%",
+    height: 35,
+    borderBottomWidth: 2,
+    borderBottomColor: "#000",
+  },
+  transcriptScreen: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default ListLesson;

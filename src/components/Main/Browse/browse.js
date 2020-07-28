@@ -3,58 +3,65 @@ import { View, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 
 import ImageButton from "../../Common/ImageButton";
 import SectionPopularSkills from "./SectionPopularSkills/sectionPopularSkills";
-import SectionSpecialized from "./SectionSpecialized/sectionSpecialized";
-import SectionPaths from "./SectionPaths/sectionPaths";
 import SectionAuthors from "./SectionAuthors/sectionAuthors";
-import { MainContext } from "../../../provider/main-provider";
 import { Images } from "../../../global/constants";
 import { AuthorsContext } from "../../../provider/authors-provider";
 import { CategoriesContext } from "../../../provider/categories-provider";
+import { CoursesContext } from "../../../provider/courses-provider";
 
 const Browse = (props) => {
-  const { main } = useContext(MainContext);
   const authorContext = useContext(AuthorsContext);
   const categoriesContext = useContext(CategoriesContext);
+  const coursesContext = useContext(CoursesContext);
 
   useEffect(() => {
     authorContext.getAllAuthors();
     categoriesContext.getAllCategories();
+    coursesContext.getNewCourses(10, 1);
   }, []);
 
   return (
     <ScrollView style={styles.browse} showsVerticalScrollIndicator={false}>
-      <View style={styles.imgBtnTop}>
-        <ImageButton
-          title="NEW RELEASES"
-          img={Images.NewReleases}
-          navigation={props.navigation}
-          items={main.Courses}
-        />
-      </View>
-      <View style={styles.imgBtnDown}>
-        <ImageButton
-          title="RECOMMENDED FOR YOU"
-          img={Images.Recommended}
-          items={main.Courses}
-          navigation={props.navigation}
-        />
-      </View>
-      <SectionPopularSkills
-        title="Popular Skills"
+      {coursesContext.state.isGetted
+        ? <View style={styles.imgBtnTop}>
+          <ImageButton
+            title="KHOÁ HỌC MỚI"
+            img={Images.NewReleases}
+            navigation={props.navigation}
+            items={coursesContext.state.newCourses}
+          />
+        </View>
+        : <ActivityIndicator />
+      }
+      {coursesContext.state.isGetted
+        ? <View style={styles.imgBtnDown}>
+            <ImageButton
+              title="Khoá học đề xuất cho bạn"
+              img={Images.Recommended}
+              items={coursesContext.state.newCourses}
+              navigation={props.navigation}
+            />
+          </View>
+        : <ActivityIndicator />
+      }
+
+      {categoriesContext.state.isGetted
+      ? <SectionPopularSkills
+        title="Chủ đề khoá học"
         navigation={props.navigation}
+        items={categoriesContext.state.categories}
+        img={Images.Code}
       />
-      <SectionSpecialized navigation={props.navigation} />
-      <SectionPaths
-        title="Paths"
-        navigation={props.navigation}
-        items={main.Courses}
-      />
+      : <ActivityIndicator />}
+      
       {authorContext.state.isGettedAllAuthors ? (
-        <SectionAuthors
-          title="DANH SÁCH TÁC GIẢ"
-          navigation={props.navigation}
-          items={authorContext.state.authors}
-        />
+        <View style={{marginLeft: 5}}>
+          <SectionAuthors
+            title="DANH SÁCH TÁC GIẢ"
+            navigation={props.navigation}
+            items={authorContext.state.authors}
+          />
+        </View>
       ) : (
         <ActivityIndicator />
       )}
@@ -67,10 +74,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   imgBtnTop: {
-    margin: 15,
+    margin: 20,
   },
   imgBtnDown: {
-    margin: 15,
+    margin: 20,
     marginTop: 0,
   },
 });

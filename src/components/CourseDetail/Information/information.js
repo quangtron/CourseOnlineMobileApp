@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import HeaderInformation from './HeaderInformation/headerInformation';
 import ButtonInformation from './ButtonInformation/buttonInformation';
 import DescribeCourse from './DescribeCourse/describeCourse';
 import Separator from '../../Common/Separator';
-import { BookmarksContext } from '../../../provider/bookmarks-provider';
 
 const Information = props => {
     const { infor, authorInfo } = props;
@@ -18,7 +17,6 @@ const Information = props => {
             </View>
             <Separator />
             <DescribeCourse info={infor} />
-            {/* <OthersButton /> */}
         </View>
     );
 }

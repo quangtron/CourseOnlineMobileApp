@@ -8,8 +8,6 @@ import { AuthenticationContext } from "../../../../provider/authentication-provi
 const AccountSetting = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
 
-  console.log(authenticationContext.state);
-
   const onPressAccount = (_) => {
     props.navigation.navigate(ScreenKey.Profile);
   };
@@ -35,7 +33,7 @@ const AccountSetting = (props) => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onPressAccount}>
-        <Text style={Styles.text(18, "#000", "normal")}>Account</Text>
+        <Text style={Styles.text(18, "#000", "normal")}>Quản lý tài khoản</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onPressSub}>
         <Text style={Styles.text(18, "#000", "normal")}>Subscription</Text>
@@ -60,6 +58,7 @@ const styles = StyleSheet.create({
   account: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 10,
   },
   image: {
     width: 80,

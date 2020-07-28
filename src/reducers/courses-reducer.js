@@ -1,4 +1,4 @@
-import { NEW_COURSES_REQUEST, NEW_COURSES_SUCCESSED, NEW_COURSES_FAILED, TOP_SELL_REQUEST, TOP_SELL_SUCCESSED, TOP_SELL_FAILED, TOP_RATE_REQUEST, TOP_RATE_SUCCESSED, TOP_RATE_FAILED, GET_COURSE_INFO_REQUEST, GET_COURSE_INFO_SUCCESSED, GET_COURSE_INFO_FAILED, GET_MY_COURSES_SUCCESSED, GET_MY_COURSES_REQUEST, GET_MY_COURSES_FAILED, SEARCH_COURSE_REQUEST, SEARCH_COURSE_SUCCESSED, SEARCH_COURSE_FAILED } from "../actions/courses-action";
+import { NEW_COURSES_REQUEST, NEW_COURSES_SUCCESSED, NEW_COURSES_FAILED, TOP_SELL_REQUEST, TOP_SELL_SUCCESSED, TOP_SELL_FAILED, TOP_RATE_REQUEST, TOP_RATE_SUCCESSED, TOP_RATE_FAILED, GET_COURSE_INFO_REQUEST, GET_COURSE_INFO_SUCCESSED, GET_COURSE_INFO_FAILED, GET_MY_COURSES_SUCCESSED, GET_MY_COURSES_REQUEST, GET_MY_COURSES_FAILED, SEARCH_COURSE_REQUEST, SEARCH_COURSE_SUCCESSED, SEARCH_COURSE_FAILED, GET_COURSES_CATEGORY_REQUEST, GET_COURSES_CATEGORY } from "../actions/courses-action";
 
 export const newCoursesReducer = (preState, action) => {
     switch (action.type) {
@@ -38,6 +38,11 @@ export const newCoursesReducer = (preState, action) => {
             return {...preState, isSearchingCourse: false, isSearchedCourse: true, resultSearch: action.data}
         case SEARCH_COURSE_FAILED:
             return {...preState, isSearchingCourse: false, isSearchedCourse: false}
+        case GET_COURSES_CATEGORY_REQUEST:
+            return {...preState}
+        case GET_COURSES_CATEGORY:
+            return {...preState, coursesCategory: action.data}
+        
         default:
             throw new Error();
     }

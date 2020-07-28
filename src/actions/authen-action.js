@@ -1,4 +1,4 @@
-import { apiLogin, apiCheckOwnCourse, apiLikeCourse, apiCheckLikeStatus, apiGetCoursesLiked } from "../core/services/authentication-services";
+import { apiLogin, apiCheckOwnCourse, apiLikeCourse, apiCheckLikeStatus, apiGetCoursesLiked, apiChangeInfoUser } from "../core/services/authentication-services";
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESSED = 'LOGIN_SUCCESSED';
@@ -19,6 +19,10 @@ export const CHECK_LIKE_STATUS_FAILED = 'CHECK_LIKE_STATUS_FAILED';
 export const GET_COURSES_LIKED_REQUEST = 'GET_COURSES_LIKED_REQUEST';
 export const GET_COURSES_LIKED_SUCCESSED = 'GET_COURSES_LIKED_SUCCESSED';
 export const GET_COURSES_LIKED_FAILED = 'GET_COURSES_LIKED_FAILED';
+
+export const CHANGE_INFO_USER_REQUEST = 'CHANGE_INFO_USER_REQUEST';
+export const CHANGE_INFO_USER_SUCCESSED = 'CHANGE_INFO_USER_SUCCESSED';
+export const CHANGE_INFO_USER_FAILED = 'CHANGE_INFO_USER_FAILED';
 
 const loginSuccessed = (data) => ({
     type: LOGIN_SUCCESSED,
@@ -59,6 +63,14 @@ const getCoursesLikedSuccessed = (data) => ({
 })
 const getCoursesLikedFailed = () => ({
     type: GET_COURSES_LIKED_FAILED,
+})
+
+const changeInfoUserSuccessed = (data) => ({
+    type: CHANGE_INFO_USER_SUCCESSED,
+    data
+})
+const changeInfoUserFailed = () => ({
+    type: CHANGE_INFO_USER_FAILED,
 })
 
 export const login = (dispatch) => (email, password) => {
@@ -147,5 +159,23 @@ export const getCoursesLiked = (dispatch) => (token) => {
         .catch((err) => {
             console.log('error: ', err);
             dispatch(getCoursesLikedFailed());
+        })
+}
+
+export const changeInfoUser = (dispatch) => (name, avatar, phone, token) => {
+    dispatch({type: CHANGE_INFO_USER_REQUEST});
+
+    apiChangeInfoUser(name, avatar, phone, token)
+        .then((res) => {
+            if(res.status === 200) {
+                // console.log('data', res.data);
+                dispatch(changeInfoUserSuccessed(res.data.payload));
+            } else {
+                dispatch(changeInfoUserFailed());
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err.response);
+            dispatch(changeInfoUserFailed());
         })
 }

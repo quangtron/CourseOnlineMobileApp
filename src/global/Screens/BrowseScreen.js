@@ -5,7 +5,6 @@ import Browse from '../../components/Main/Browse/browse';
 import { ScreenKey } from '../constants';
 import ListCourses from '../../components/Courses/ListCourses/listCourses';
 import CoursesDetail from '../../components/CourseDetail/coursesDetail';
-import SkillDetail from '../../components/Main/Browse/SectionPopularSkills/SkillDetail/skillDetail';
 import ButtonSetting from '../../components/Common/ButtonSetting';
 import Setting from '../../components/AccountManagement/Setting/setting';
 import Profile from '../../components/AccountManagement/Profile/profile';
@@ -40,7 +39,6 @@ function BrowseScreen(props) {
                     headerShown: false,
                 }}
             />
-            <BrowseStack.Screen name={ScreenKey.SkillDetail} component={SkillDetail} />
             <BrowseStack.Screen
                 name={ScreenKey.Setting} 
                 component={Setting} 
