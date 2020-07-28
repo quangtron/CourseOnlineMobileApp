@@ -1,4 +1,4 @@
-import { NEW_COURSES_REQUEST, NEW_COURSES_SUCCESSED, NEW_COURSES_FAILED, TOP_SELL_REQUEST, TOP_SELL_SUCCESSED, TOP_SELL_FAILED, TOP_RATE_REQUEST, TOP_RATE_SUCCESSED, TOP_RATE_FAILED, GET_COURSE_INFO_REQUEST, GET_COURSE_INFO_SUCCESSED, GET_COURSE_INFO_FAILED, GET_MY_COURSES_SUCCESSED, GET_MY_COURSES_REQUEST, GET_MY_COURSES_FAILED } from "../actions/courses-action";
+import { NEW_COURSES_REQUEST, NEW_COURSES_SUCCESSED, NEW_COURSES_FAILED, TOP_SELL_REQUEST, TOP_SELL_SUCCESSED, TOP_SELL_FAILED, TOP_RATE_REQUEST, TOP_RATE_SUCCESSED, TOP_RATE_FAILED, GET_COURSE_INFO_REQUEST, GET_COURSE_INFO_SUCCESSED, GET_COURSE_INFO_FAILED, GET_MY_COURSES_SUCCESSED, GET_MY_COURSES_REQUEST, GET_MY_COURSES_FAILED, SEARCH_COURSE_REQUEST, SEARCH_COURSE_SUCCESSED, SEARCH_COURSE_FAILED } from "../actions/courses-action";
 
 export const newCoursesReducer = (preState, action) => {
     switch (action.type) {
@@ -32,6 +32,12 @@ export const newCoursesReducer = (preState, action) => {
             return {...preState, isGettingMyCourses: false, isGettedMyCourses: true, myCourses: action.data}
         case GET_MY_COURSES_FAILED:
             return {...preState, isGettingMyCourses: false, isGettedMyCourses: false}
+        case SEARCH_COURSE_REQUEST:
+            return {...preState, isSearchingCourse: true}
+        case SEARCH_COURSE_SUCCESSED:
+            return {...preState, isSearchingCourse: false, isSearchedCourse: true, resultSearch: action.data}
+        case SEARCH_COURSE_FAILED:
+            return {...preState, isSearchingCourse: false, isSearchedCourse: false}
         default:
             throw new Error();
     }

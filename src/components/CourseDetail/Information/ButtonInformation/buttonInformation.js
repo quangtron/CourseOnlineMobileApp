@@ -51,7 +51,7 @@ const ButtonInformation = (props) => {
       ) : (
         <TouchableOpacity
           style={styles.btnCustom(2)}
-          onPress={() => onHandleToggleModal(true)}
+          onPress={() => onHandleToggleModal(!modalVisible)}
         >
           <Text style={styles.textLayout(2)}>Tham gia</Text>
           <AntDesign name="pushpin" size={24} color="#2196F3" />

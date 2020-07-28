@@ -9,13 +9,16 @@ import SectionAuthors from "./SectionAuthors/sectionAuthors";
 import { MainContext } from "../../../provider/main-provider";
 import { Images } from "../../../global/constants";
 import { AuthorsContext } from "../../../provider/authors-provider";
+import { CategoriesContext } from "../../../provider/categories-provider";
 
 const Browse = (props) => {
   const { main } = useContext(MainContext);
   const authorContext = useContext(AuthorsContext);
+  const categoriesContext = useContext(CategoriesContext);
 
   useEffect(() => {
     authorContext.getAllAuthors();
+    categoriesContext.getAllCategories();
   }, []);
 
   return (

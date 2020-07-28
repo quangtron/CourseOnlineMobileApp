@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 
-import Styles from '../../Common/Styles';
 import DownloadItem from '../../Main/Download/DownloadItem/downloadItem';
 import Separator from '../../Common/Separator';
 

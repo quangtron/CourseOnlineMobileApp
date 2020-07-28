@@ -13,6 +13,7 @@ import { VerifyEmailProvider } from "./src/provider/verify-email-provider";
 import { RegisterProvider } from "./src/provider/register-provider";
 import { CoursesProvider } from "./src/provider/courses-provider";
 import { PaymentProvider } from "./src/provider/payment-provider";
+import { CategoriesProvider } from "./src/provider/categories-provider";
 
 export default function App() {
   return (
@@ -20,23 +21,25 @@ export default function App() {
       <VerifyEmailProvider>
         <AuthenticationProvider>
           <CoursesProvider>
-            <PaymentProvider>
-              <MainProvider>
-                <PopularSkillsProvider>
-                  <AuthorsProvider>
-                    <DownloadsProvider>
-                      <BookmarksProvider>
-                        <SearchProvider>
-                          <NavigationContainer>
-                            {mainStackScreen()}
-                          </NavigationContainer>
-                        </SearchProvider>
-                      </BookmarksProvider>
-                    </DownloadsProvider>
-                  </AuthorsProvider>
-                </PopularSkillsProvider>
-              </MainProvider>
-            </PaymentProvider>
+            <CategoriesProvider>
+              <PaymentProvider>
+                <MainProvider>
+                  <PopularSkillsProvider>
+                    <AuthorsProvider>
+                      <DownloadsProvider>
+                        <BookmarksProvider>
+                          <SearchProvider>
+                            <NavigationContainer>
+                              {mainStackScreen()}
+                            </NavigationContainer>
+                          </SearchProvider>
+                        </BookmarksProvider>
+                      </DownloadsProvider>
+                    </AuthorsProvider>
+                  </PopularSkillsProvider>
+                </MainProvider>
+              </PaymentProvider>
+            </CategoriesProvider>
           </CoursesProvider>
         </AuthenticationProvider>
       </VerifyEmailProvider>

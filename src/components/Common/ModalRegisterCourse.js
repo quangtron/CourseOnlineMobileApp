@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   Text,
   Modal,
   Image,
+  ScrollView,
 } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';  
@@ -36,80 +37,78 @@ const ModalRegisterCourse = (props) => {
       animationType="slide"
       visible={props.visibleCheck}
       presentationStyle="formSheet"
-      onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
-      }}
     >
-      <View style={styles.modalStyle}>
-        <Text style={styles.textHead}>- Tham gia khoá học -</Text>
-        <View style={styles.box}>
-          <Text style={styles.textTitle}>Thông tin khoá học</Text>
-          <View style={styles.infoCourse}>
-            <Image source={{ uri: info.imageUrl }} style={styles.imgStyle} />
-            <View style={styles.textBox}>
-              <Text style={{ fontSize: 18 }}>{info.title}</Text>
-              <View>
-                <Text style={styles.textStyle}>Giảng viên:</Text>
-                <Text style={Styles.text(16, "#000", "normal")}>
-                  {info.instructor.name}
+    <ScrollView>
+        <View style={styles.modalStyle}>
+          <Text style={styles.textHead}>- Tham gia khoá học -</Text>
+          <View style={styles.box}>
+            <Text style={styles.textTitle}>Thông tin khoá học</Text>
+            <View style={styles.infoCourse}>
+              <Image source={{ uri: info.imageUrl }} style={styles.imgStyle} />
+              <View style={styles.textBox}>
+                <Text style={{ fontSize: 18 }}>{info.title}</Text>
+                <View>
+                  <Text style={styles.textStyle}>Giảng viên:</Text>
+                  <Text style={Styles.text(16, "#000", "normal")}>
+                    {info.instructor.name}
+                  </Text>
+                </View>
+                <Text style={Styles.text(16, "tomato", "normal")}>
+                  {info.price > 0 ? `${info.price} VND` : "Miễn phí"}
                 </Text>
               </View>
-              <Text style={Styles.text(16, "tomato", "normal")}>
-                {info.price > 0 ? `${info.price} VND` : "Miễn phí"}
-              </Text>
             </View>
           </View>
-        </View>
-        <View style={styles.box}>
-          <Text style={styles.textTitle}>Thông tin khách hàng</Text>
-          <View style={styles.infoItem}>
-            <FontAwesome name="user-o" size={16} color="tomato" />
-            <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.name}</Text>
+          <View style={styles.box}>
+            <Text style={styles.textTitle}>Thông tin khách hàng</Text>
+            <View style={styles.infoItem}>
+              <FontAwesome name="user-o" size={16} color="tomato" />
+              <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.name}</Text>
+            </View>
+            <View style={styles.infoItem}>
+              <MaterialCommunityIcons name="email-outline" size={16} color="tomato" />
+              <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.email}</Text>
+            </View>
+            <View style={styles.infoItem}>
+              <MaterialCommunityIcons name="cellphone-iphone" size={16} color="tomato" />
+              <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.phone}</Text>
+            </View>
           </View>
-          <View style={styles.infoItem}>
-            <MaterialCommunityIcons name="email-outline" size={16} color="tomato" />
-            <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.email}</Text>
-          </View>
-          <View style={styles.infoItem}>
-            <MaterialCommunityIcons name="cellphone-iphone" size={16} color="tomato" />
-            <Text style={Styles.text(16, "#000", "normal")}>  {authenticationContext.state.user.phone}</Text>
+          <Text style={[styles.textStyle, {color: '#03A9F4'}]}>*Khóa học sẽ được kích hoạt ngay khi bạn đăng ký thành công.</Text>
+          <View style={styles.btnBox}>
+            <TouchableOpacity
+              onPress={() => {
+                onHandleCloseModal();
+              }}
+              style={styles.btnStyle(2)}
+            >
+              <Text style={Styles.text(16, "#fff", "normal")}>Đăng ký</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                onHandleCancel();
+              }}
+              style={styles.btnStyle(1)}
+            >
+              <Text style={Styles.text(16, "#fff", "normal")}>Huỷ</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <Text style={[styles.textStyle, {color: '#03A9F4'}]}>*Khóa học sẽ được kích hoạt ngay khi bạn đăng ký thành công.</Text>
-        <View style={styles.btnBox}>
-          <TouchableOpacity
-            onPress={() => {
-              onHandleCloseModal();
-            }}
-            style={styles.btnStyle(2)}
-          >
-            <Text style={Styles.text(16, "#fff", "normal")}>Đăng ký</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              onHandleCancel();
-            }}
-            style={styles.btnStyle(1)}
-          >
-            <Text style={Styles.text(16, "#fff", "normal")}>Huỷ</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   modalStyle: {
-    padding: 10,
-    position: "relative",
     flex: 1,
-    // justifyContent: 'center',
+    padding: 20,
+    position: "relative",
     alignItems: "center",
     backgroundColor: "#fff",
   },
   textHead: {
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 50,
     fontSize: 20,
     fontWeight: "bold",
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   textBox: {
-    width: "50%",
+    width: "52%",
     marginTop: 10,
     marginLeft: 10,
     justifyContent: "space-around",

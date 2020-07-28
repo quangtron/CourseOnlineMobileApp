@@ -9,7 +9,7 @@ import { ScreenKey } from '../../../../global/constants';
 const SearchTabResults = props => {
     const SearchAllScreen = () => {
         return(
-            <SearchAll navigation={props.navigation} />
+            <SearchAll keyword={props.keyword} navigation={props.navigation} />
         );
     }
 
@@ -36,9 +36,9 @@ const SearchTabResults = props => {
     return(
         <Tab.Navigator>
             <Tab.Screen name={ScreenKey.All} component={SearchAllScreen} />
-            <Tab.Screen name={ScreenKey.Courses} component={SearchCoursesScreen} />
+            {/* <Tab.Screen name={ScreenKey.Courses} component={SearchCoursesScreen} />
             <Tab.Screen name={ScreenKey.Paths} component={SearchPathsScreen} />
-            <Tab.Screen name={ScreenKey.Authors} component={SearchAuthorsScreen} />
+            <Tab.Screen name={ScreenKey.Authors} component={SearchAuthorsScreen} /> */}
         </Tab.Navigator>
     );
 }
