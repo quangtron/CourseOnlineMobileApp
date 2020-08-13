@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Download from '../../components/Main/Download/download';
@@ -8,13 +8,16 @@ import ButtonSetting from '../../components/Common/ButtonSetting';
 import CoursesDetail from '../../components/CourseDetail/coursesDetail';
 import Profile from '../../components/AccountManagement/Profile/profile';
 import Subscription from '../../components/Others/Subscription/subscription';
+import { SettingCommonContext } from '../../provider/settingCommon-provider';
 
 const DownloadStack = createStackNavigator();
 
 function DownloadScreen(props) {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     return(
         <DownloadStack.Navigator
-            initialRouteName={ScreenKey.Download}
+            initialRouteName={language ? ScreenKey.Download : 'Tải xuống'}
             mode="modal"
             screenOptions={{headerTitleStyle: {
                 fontWeight: 'bold',
@@ -22,7 +25,7 @@ function DownloadScreen(props) {
             }}}
         >
             <DownloadStack.Screen
-                name={ScreenKey.Download}
+                name={language ? ScreenKey.Download : 'Tải xuống'}
                 component={Download}
                 options={{
                     headerRight: () => <ButtonSetting navigation={props.navigation} />

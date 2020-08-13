@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import moment from "moment";
 import { Ionicons } from "@expo/vector-icons";
 
 import Styles from "../../../Common/Styles";
 import { ScreenKey } from "../../../../global/constants";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const HeaderInformation = (props) => {
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const { name, avatar, intro, totalCourse, averagePoint, id } = props.authorInfo;
   const {
     title,
@@ -43,13 +45,13 @@ const HeaderInformation = (props) => {
       <View style={styles.subInfo}>
         <Text>{subtitle}</Text>
         <Text style={{ marginTop: 15 }}>
-          {`${soldNumber} học viên - Cập nhật mới nhất: ${moment(
+          {soldNumber} {language ? 'students - update:' : 'học viên - Cập nhật mới nhất:'} {moment(
             updatedAt
-          ).format("DD/MM/YYYY")}`}
+          ).format("DD/MM/YYYY")}
         </Text>
         <View style={styles.vote}>
           {renderStar(sumPoint)}
-          <Text> {sumPoint} ({ratedNumber} bình chọn)</Text>
+          <Text> {sumPoint} ({ratedNumber} {language ? 'rate' : 'bình chọn'})</Text>
         </View>
       </View>
       <View style={{ flexDirection: "row" }}>
@@ -72,20 +74,20 @@ const HeaderInformation = (props) => {
         {intro ? (
           <Text style={styles.authorIntro}>{intro}</Text>
         ) : (
-          <Text style={styles.authorIntro}>(Chưa có bài tự giới thiệu.)</Text>
+          <Text style={styles.authorIntro}>{language ? '(No self-introductions.)' : '(Chưa có bài tự giới thiệu.)'}</Text>
         )}
         <View style={styles.authorDetail}>
           <Text>
             <Ionicons name="md-people" size={15} color="tomato" />
-            {`  ${props.authorInfo.soldNumber} Học viên`}
+            {'  '}{props.authorInfo.soldNumber} {language ? 'Students' : 'Học viên'}
           </Text>
           <Text>
             <Ionicons name="ios-play-circle" size={15} color="tomato" />
-            {`  ${totalCourse} Khoá học`}
+            {'  '}{totalCourse} {language ? 'Courses' : 'Khoá học'}
           </Text>
           <Text>
             <Ionicons name="ios-star" size={15} color="tomato" />
-            {`  ${averagePoint.toFixed(1)} Điểm`}
+            {'  '}{averagePoint.toFixed(1)} {language ? 'Point' : 'Điểm'}
           </Text>
         </View>
       </View>

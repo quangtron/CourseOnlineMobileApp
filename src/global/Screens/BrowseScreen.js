@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Browse from '../../components/Main/Browse/browse';
@@ -10,13 +10,16 @@ import Setting from '../../components/AccountManagement/Setting/setting';
 import Profile from '../../components/AccountManagement/Profile/profile';
 import Subscription from '../../components/Others/Subscription/subscription';
 import AuthorDetail from '../../components/Main/Browse/AuthorDetail/authorDetail';
+import { SettingCommonContext } from '../../provider/settingCommon-provider';
 
 const BrowseStack = createStackNavigator();
 
 function BrowseScreen(props) {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     return(
         <BrowseStack.Navigator
-            initialRouteName={ScreenKey.Browse}
+            initialRouteName={language ? ScreenKey.Browse : 'Nổi bật'}
             mode="modal"
             screenOptions={{headerTitleStyle: {
                 fontWeight: 'bold',
@@ -24,7 +27,7 @@ function BrowseScreen(props) {
             }}}
         >
             <BrowseStack.Screen 
-                name={ScreenKey.Browse} 
+                name={language ? ScreenKey.Browse : 'Nổi bật'} 
                 component={Browse}
                 options={{
                     headerRight: () => <ButtonSetting navigation={props.navigation} />

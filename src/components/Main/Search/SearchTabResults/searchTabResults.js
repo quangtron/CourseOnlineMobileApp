@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import SearchAll from '../SearchAll/searchAll';
 import { ScreenKey } from '../../../../global/constants';
+import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 
 
 const SearchTabResults = props => {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     const SearchAllScreen = () => {
         return(
             <SearchAll keyword={props.keyword} navigation={props.navigation} />
@@ -16,7 +19,7 @@ const SearchTabResults = props => {
 
     return(
         <Tab.Navigator>
-            <Tab.Screen name={ScreenKey.All} component={SearchAllScreen} />
+            <Tab.Screen name={language ? 'Result' : ScreenKey.All} component={SearchAllScreen} />
         </Tab.Navigator>
     );
 }

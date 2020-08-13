@@ -14,9 +14,11 @@ import ListLesson from "./ListLesson/listLesson";
 import { CoursesContext } from "../../provider/courses-provider";
 import { AuthenticationContext } from "../../provider/authentication-provider";
 import SectionCourses from "../Main/Home/SectionCourses/sectionCourses";
+import { SettingCommonContext } from "../../provider/settingCommon-provider";
 
 const CoursesDetail = (props) => {
   const { item } = props.route.params;
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const authenticationContext = useContext(AuthenticationContext);
   const coursesContext = useContext(CoursesContext);
   const [linkVideo, setLinkVideo] = useState("");
@@ -84,7 +86,7 @@ const CoursesDetail = (props) => {
             <SectionCourses
               dataSection={coursesContext.state.courseInfo.coursesLikeCategory}
               navigation={props.navigation}
-              title="CÁC KHOÁ HỌC CÙNG CHỦ ĐỀ"
+              title={language ? "COURSES LIKE CATEGORY" : "CÁC KHOÁ HỌC CÙNG CHỦ ĐỀ"}
             />
           </View>
         </ScrollView>

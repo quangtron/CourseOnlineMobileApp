@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import SectionCoursesItem from '../SectionCoursesItem/sectionCoursesItem';
 
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
+import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 
 const SectionCourses = props => {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     const showListCoursesItem = items => {
         let result = null;
         
@@ -27,7 +30,7 @@ const SectionCourses = props => {
                     style={Styles.btnLayout(90, 20, '#E0E0E0')}
                     onPress={() => onPress(props.dataSection)}
                 >
-                    <Text style={{fontSize: 13}}>Xem tất cả</Text>
+                    <Text style={{fontSize: 13}}>{language ? "See all" : "Xem tất cả"}</Text>
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>

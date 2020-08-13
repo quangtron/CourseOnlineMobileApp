@@ -4,9 +4,11 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Styles from "../../../Common/Styles";
 import { ScreenKey } from "../../../../global/constants";
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const AccountSetting = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
+  const {language, setLanguage} = useContext(SettingCommonContext);
 
   const onPressAccount = (_) => {
     props.navigation.navigate(ScreenKey.Profile);
@@ -33,9 +35,9 @@ const AccountSetting = (props) => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onPressAccount}>
-        <Text style={Styles.text(18, "#000", "normal")}>Quản lý tài khoản</Text>
+        <Text style={Styles.text(18, "#000", "normal")}>{language ? 'Setting profile' : 'Quản lý tài khoản'}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={onPressSub}>
+      {/* <TouchableOpacity style={styles.button} onPress={onPressSub}>
         <Text style={Styles.text(18, "#000", "normal")}>Subscription</Text>
         <Text style={Styles.text(14, "#9E9E9E", "normal")}>
           Individual (Expires: may 31, 2020)
@@ -45,7 +47,7 @@ const AccountSetting = (props) => {
         <Text style={Styles.text(18, "#000", "normal")}>
           Communication Preferences
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

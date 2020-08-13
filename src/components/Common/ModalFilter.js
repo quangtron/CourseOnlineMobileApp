@@ -14,9 +14,11 @@ import { Ionicons } from "@expo/vector-icons";
 import Styles from "./Styles";
 import { CategoriesContext } from "../../provider/categories-provider";
 import { ArrayTimes, ArrayPrices } from "../../global/constants";
+import { SettingCommonContext } from "../../provider/settingCommon-provider";
 
 const ModalFilterCourse = (props) => {
   const categoriesContext = useContext(CategoriesContext);
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const [isShowDropdown, setShowDropdown] = useState(false);
   const [isShowDropdownTime, setShowDropdownTime] = useState(false);
   const [isShowDropdownPrice, setShowDropdownPrice] = useState(false);
@@ -109,13 +111,13 @@ const ModalFilterCourse = (props) => {
       <ScrollView>
         {categoriesContext.state.isGetted ? (
           <View style={styles.modalStyle}>
-            <Text style={styles.textHead}>- Lọc kết quả -</Text>
+            <Text style={styles.textHead}>- {language ? 'Filter' : 'Lọc kết quả'} -</Text>
             <View style={styles.box}>
               <TouchableOpacity
                 style={styles.sectionFilter}
                 onPress={() => setShowDropdown(!isShowDropdown)}
               >
-                <Text style={styles.textTitle}>Chủ đề</Text>
+                <Text style={styles.textTitle}>{language ? 'Categories' : 'Chủ đề'}</Text>
                 <Ionicons name={isShowDropdown ? "ios-arrow-dropup" : "ios-arrow-dropdown"} size={24} color="#2962FF" />
               </TouchableOpacity>
               {isShowDropdown ? (
@@ -129,7 +131,7 @@ const ModalFilterCourse = (props) => {
                 style={styles.sectionFilter}
                 onPress={() => setShowDropdownTime(!isShowDropdownTime)}
               >
-                <Text style={styles.textTitle}>Thời lượng</Text>
+                <Text style={styles.textTitle}>{language ? 'Times' : 'Thời lượng'}</Text>
                 <Ionicons name={isShowDropdownTime ? "ios-arrow-dropup" : "ios-arrow-dropdown"} size={24} color="#2962FF" />
               </TouchableOpacity>
               {isShowDropdownTime ? (
@@ -143,7 +145,7 @@ const ModalFilterCourse = (props) => {
                 style={styles.sectionFilter}
                 onPress={() => setShowDropdownPrice(!isShowDropdownPrice)}
               >
-                <Text style={styles.textTitle}>Học phí</Text>
+                <Text style={styles.textTitle}>{language ? 'Price' : 'Học phí'}</Text>
                 <Ionicons name={isShowDropdownPrice ? "ios-arrow-dropup" : "ios-arrow-dropdown"} size={24} color="#2962FF" />
               </TouchableOpacity>
               {isShowDropdownPrice ? (
@@ -157,20 +159,20 @@ const ModalFilterCourse = (props) => {
               style={styles.btnStyle(1)}
             >
               <Ionicons name="ios-trash" size={24} color="#fff" style={{marginRight: 5}} />
-              <Text style={Styles.text(16, "#fff", "normal")}>Xoá tất cả</Text>
+              <Text style={Styles.text(16, "#fff", "normal")}>{language ? 'Delete all' : 'Xoá tất cả'}</Text>
             </TouchableOpacity>
             <View style={styles.btnBox}>
               <TouchableOpacity
                 onPress={() => {onHandleCloseModal()}}
                 style={styles.btnStyle(2)}
               >
-                <Text style={Styles.text(16, "#fff", "normal")}>Lọc</Text>
+                <Text style={Styles.text(16, "#fff", "normal")}>{language ? 'Filter' : 'Lọc'}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {onHandleCancel()}}
                 style={styles.btnStyle(1)}
               >
-                <Text style={Styles.text(16, "#fff", "normal")}>Huỷ lọc</Text>
+                <Text style={Styles.text(16, "#fff", "normal")}>{language ? 'Cancel' : 'Huỷ lọc'}</Text>
               </TouchableOpacity>
             </View>
           </View>

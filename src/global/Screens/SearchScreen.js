@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Search from '../../components/Main/Search/search';
 import { ScreenKey } from '../constants';
 import CoursesDetail from '../../components/CourseDetail/coursesDetail';
 import ListCourses from '../../components/Courses/ListCourses/listCourses';
+import { SettingCommonContext } from '../../provider/settingCommon-provider';
 
 const SearchStack = createStackNavigator();
 
 function SearchScreen() {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     return(
-        <SearchStack.Navigator mode="modal" initialRouteName={ScreenKey.Search}>
+        <SearchStack.Navigator mode="modal" initialRouteName={language ? ScreenKey.Search : 'Tìm kiếm'}>
             <SearchStack.Screen
-                name={ScreenKey.Search}
+                name={language ? ScreenKey.Search : 'Tìm kiếm'}
                 component={Search}
                 options={{headerShown: false}}
             />

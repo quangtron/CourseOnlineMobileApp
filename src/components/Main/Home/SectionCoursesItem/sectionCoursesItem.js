@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import moment from "moment";
 import { Ionicons } from "@expo/vector-icons";
 
 import Styles from "../../../Common/Styles";
 import { ScreenKey } from "../../../../global/constants";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const SectionCoursesItem = (props) => {
   const {
@@ -24,6 +25,8 @@ const SectionCoursesItem = (props) => {
     presentationPoint,
     soldNumber,
   } = props.item;
+
+  const {language, setLanguage} = useContext(SettingCommonContext);
 
   const onPressItem = (item) => {
     props.navigation.navigate(ScreenKey.CourseDetail, { item });
@@ -64,19 +67,19 @@ const SectionCoursesItem = (props) => {
           <View style={styles.flexDirectionRow}>
             {renderStar(courseAveragePoint || sumPoint)}
             <Text style={Styles.text(14, "#616161", "normal")}>
-              <Text style={{color: 'tomato'}}>{soldNumber || courseSoldNumber}</Text> học viên
+              <Text style={{color: 'tomato'}}>{soldNumber || courseSoldNumber}</Text>{language ? " students" : " học viên"}
             </Text>
           </View>}
           {price >= 0 || coursePrice >= 0 ? (
-            price === 0 || coursePrice === 0 ? <Text>Miễn phí</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
+            price === 0 || coursePrice === 0 ? <Text>{language ? "Free" : "Miễn phí"}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
           ) : null}
           {latestLearnTime ? (
             <View style={{marginTop: 10}}>
-              <Text>Thời gian thanh toán:</Text>
+              <Text>{language ? "Time payment:" : "Thời gian thanh toán:"}</Text>
               <Text style={Styles.text(14, "#616161", "normal")}>
                 {moment(latestLearnTime).format("DD/MM/YYYY, h:mm:ss")}
               </Text>
-              <Text style={{marginTop: 10}}>{total} bài học</Text>
+              <Text style={{marginTop: 10}}>{total}{language ? " courses" : " bài học"}</Text>
             </View>
           ) : null}
         </View>

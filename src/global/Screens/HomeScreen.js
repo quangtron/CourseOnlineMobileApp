@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../../components/Main/Home/home';
@@ -10,13 +10,16 @@ import ButtonSetting from '../../components/Common/ButtonSetting';
 import Profile from '../../components/AccountManagement/Profile/profile';
 import Subscription from '../../components/Others/Subscription/subscription';
 import AuthorDetail from '../../components/Main/Browse/AuthorDetail/authorDetail';
+import { SettingCommonContext } from '../../provider/settingCommon-provider';
 
 const HomeStack = createStackNavigator();
 
 function HomeScreen(props) {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     return(
         <HomeStack.Navigator
-            initialRouteName={ScreenKey.Home}
+            initialRouteName={language ? ScreenKey.Home : 'Trang chủ'}
             mode="modal"
             screenOptions={{headerTitleStyle: {
                 fontWeight: 'bold',
@@ -24,7 +27,7 @@ function HomeScreen(props) {
             }}}
         >
             <HomeStack.Screen
-                name={ScreenKey.Home} 
+                name={language ? ScreenKey.Home : 'Trang chủ'} 
                 component={Home} 
                 options={{
                     headerRight: () => <ButtonSetting navigation={props.navigation} />

@@ -1,13 +1,15 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import ListLessonItem from "../ListLessonItem/listLessonItem";
 import HeaderLesson from "./HeaderLesson/headerLesson";
 import Separator from "../../Common/Separator";
+import { SettingCommonContext } from "../../../provider/settingCommon-provider";
 
 const ListLesson = (props) => {
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const { data } = props;
   const Tab = createMaterialTopTabNavigator();
 
@@ -63,7 +65,7 @@ const ListLesson = (props) => {
 
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Nội dung" component={ContentsScreen} />
+      <Tab.Screen name={language ? 'Content' : "Nội dung"} component={ContentsScreen} />
       <Tab.Screen name="Transcript" component={TranscriptScreen} />
     </Tab.Navigator>
   );

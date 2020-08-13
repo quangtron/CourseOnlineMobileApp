@@ -4,10 +4,12 @@ import { View, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import SectionCourses from "./SectionCourses/sectionCourses";
 import { CoursesContext } from "../../../provider/courses-provider";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { SettingCommonContext } from "../../../provider/settingCommon-provider";
 
 function Home(props) {
   const coursesContext = useContext(CoursesContext);
   const authenticationContext = useContext(AuthenticationContext);
+  const {language, setLanguage} = useContext(SettingCommonContext);
 
   useEffect(() => {
     coursesContext.getTopSell(10, 1);
@@ -26,7 +28,7 @@ function Home(props) {
           <SectionCourses
             dataSection={coursesContext.state.topSell}
             navigation={props.navigation}
-            title="TOP BÁN CHẠY"
+            title={language ? "TOP SELL" : "TOP BÁN CHẠY"}
           />
         ) : (
           <ActivityIndicator />
@@ -35,7 +37,7 @@ function Home(props) {
           <SectionCourses
             dataSection={coursesContext.state.topRate}
             navigation={props.navigation}
-            title="TOP BÌNH CHỌN"
+            title={language ? "TOP RATE" : "TOP BÌNH CHỌN"}
           />
         ) : (
           <ActivityIndicator />
@@ -44,7 +46,7 @@ function Home(props) {
           <SectionCourses
             dataSection={coursesContext.state.myCourses}
             navigation={props.navigation}
-            title="KHOÁ HỌC ĐÃ THAM GIA"
+            title={language ? "MY COURSES" : "KHOÁ HỌC ĐÃ THAM GIA"}
           />
         ) : (
           <ActivityIndicator />
@@ -54,6 +56,7 @@ function Home(props) {
             dataSection={authenticationContext.state.coursesLiked}
             navigation={props.navigation}
             title="KHOÁ HỌC ĐÃ THÍCH"
+            title={language ? "MY FAVORITE COURSES" : "KHOÁ HỌC ĐÃ THÍCH"}
           />
         ) : (
           <ActivityIndicator />

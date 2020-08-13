@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Styles from "../../../Common/Styles";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const DescribeCourse = (props) => {
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const [heightText, setHeightText] = useState(80);
   const [heightScroll, setHeightScroll] = useState(65);
   const [imageScroll, setImageScroll] = useState(
@@ -44,27 +46,27 @@ const DescribeCourse = (props) => {
   return (
     <View>
       <View style={styles.section}>
-        <Text style={Styles.text(16, "#000", "bold")}>Bạn sẽ học được</Text>
+        <Text style={Styles.text(16, "#000", "bold")}>{language ? 'You will learn' : 'Bạn sẽ học được'}</Text>
         <View style={{ flexDirection: "column" }}>
           {info.learnWhat.length > 0 ? (
             showLearnWhat(info.learnWhat)
           ) : (
-            <Text style={styles.textItalic}>(Chưa có thông tin)</Text>
+            <Text style={styles.textItalic}>{language ? '(No information)' : '(Chưa có thông tin)'}</Text>
           )}
         </View>
       </View>
       <View style={styles.section}>
-        <Text style={Styles.text(16, "#000", "bold")}>Yêu cầu</Text>
+        <Text style={Styles.text(16, "#000", "bold")}>{language ? 'Requirements' : 'Yêu cầu'}</Text>
         <View style={{ flexDirection: "column" }}>
           {info.requirement.length > 0 ? (
             showRequirement(info.requirement)
           ) : (
-            <Text style={styles.textItalic}>(Không có yêu cầu)</Text>
+            <Text style={styles.textItalic}>{language ? '(No require)' : '(Không có yêu cầu)'}</Text>
           )}
         </View>
       </View>
       <View style={styles.section}>
-        <Text style={Styles.text(16, "#000", "bold")}>Mô tả</Text>
+        <Text style={Styles.text(16, "#000", "bold")}>{language ? 'Describe' : 'Mô tả'}</Text>
         <View style={styles.box}>
           <Text style={[styles.textArea, { height: heightText }]}>
             {info.description}

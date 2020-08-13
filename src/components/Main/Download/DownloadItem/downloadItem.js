@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import moment from 'moment';
 
 import Styles from "../../../Common/Styles";
 import { ScreenKey } from "../../../../global/constants";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const DownloadItem = (props) => {
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const {
     title,
     imageUrl,
@@ -54,7 +56,7 @@ const DownloadItem = (props) => {
         </Text>
         {latestLearnTime ? (
           <View>
-            <Text>Thời gian thanh toán:</Text>
+            <Text>{language ? 'Time payment:' : 'Thời gian thanh toán:'}</Text>
             <Text style={Styles.text(14, "#9E9E9E", "normal")}>{moment(latestLearnTime).format("DD/MM/YYYY, h:mm:ss")}</Text>
           </View>
         ) : (
@@ -65,11 +67,11 @@ const DownloadItem = (props) => {
                 <Text style={Styles.text(14, "tomato", "normal")}>
                   {soldNumber || courseSoldNumber}
                 </Text>{" "}
-                học viên
+                {language ? 'students' : 'học viên'}
               </Text>
             </View>
             {price >= 0 || coursePrice >= 0 ? (
-              price === 0 || coursePrice === 0 ? <Text>Miễn phí</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
+              price === 0 || coursePrice === 0 ? <Text>{language ? 'Free' : 'Miễn phí'}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
             ) : null}
           </View>
         )}

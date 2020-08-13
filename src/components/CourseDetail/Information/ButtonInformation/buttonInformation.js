@@ -5,9 +5,11 @@ import { AntDesign } from "@expo/vector-icons";
 
 import { AuthenticationContext } from "../../../../provider/authentication-provider";
 import ModalRegisterCourse from "../../../Common/ModalRegisterCourse";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const ButtonInformation = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const [modalVisible, setModalVisible] = useState(false);
 
   const onHandleToggleModal = (bool) => {
@@ -38,14 +40,14 @@ const ButtonInformation = (props) => {
         style={styles.btnCustom(1)}
         onPress={() => onHandleLike()}
       >
-        <Text style={styles.textLayout(1)}>{authenticationContext.state.likeStatus ? 'Huỷ thích' : 'Yêu thích'}</Text>
+        <Text style={styles.textLayout(1)}>{authenticationContext.state.likeStatus ? (language ? 'Unlike' : 'Huỷ thích') : (language ? 'Like' : 'Yêu thích')}</Text>
         <Ionicons name="ios-heart" size={24} color="tomato" />
       </TouchableOpacity>
       {authenticationContext.state.checkOwnCourse.isUserOwnCourse ? (
         <View
           style={styles.btnCustom(2)}
         >
-          <Text style={styles.textLayout(2)}>Đã tham gia</Text>
+          <Text style={styles.textLayout(2)}>{language ? 'Enjoyed' : 'Đã tham gia'}</Text>
           <AntDesign name="pushpin" size={24} color="#2196F3" />
         </View>
       ) : (
@@ -53,7 +55,7 @@ const ButtonInformation = (props) => {
           style={styles.btnCustom(2)}
           onPress={() => onHandleToggleModal(!modalVisible)}
         >
-          <Text style={styles.textLayout(2)}>Tham gia</Text>
+          <Text style={styles.textLayout(2)}>{language ? 'Enjoy' : 'Tham gia'}</Text>
           <AntDesign name="pushpin" size={24} color="#2196F3" />
         </TouchableOpacity>
       )}

@@ -12,8 +12,10 @@ import RNPickerSelect from "react-native-picker-select";
 import { CoursesContext } from "../../../../provider/courses-provider";
 import ModalFilterCourse from "../../../Common/ModalFilter";
 import { ArraySelect } from "../../../../global/constants";
+import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const SearchInput = (props) => {
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const [search, setSearch] = useState("");
   const [opt, setOpt] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
@@ -64,7 +66,7 @@ const SearchInput = (props) => {
           style={styles.inputSearch}
           autoFocus={true}
           clearButtonMode="always"
-          placeholder="Nhập từ khoá ..."
+          placeholder={language ? "Enter keyword ..." : "Nhập từ khoá ..."}
           value={search}
           onChangeText={(search) => setSearch(search)}
         />
@@ -75,9 +77,9 @@ const SearchInput = (props) => {
       <View style={styles.sortFilterBox}>
         <RNPickerSelect
           onValueChange={(value) => onSort(value)}
-          items={ArraySelect}
+          items={ArraySelect(language)}
           placeholder={{
-            label: "Chọn kiểu sắp xếp",
+            label: language ? "Sort" : "Chọn kiểu sắp xếp",
             value: null,
           }}
           style={{
@@ -95,7 +97,7 @@ const SearchInput = (props) => {
         />
         <TouchableOpacity style={styles.filterStyle} onPress={() => onHandleToggleModal(!modalVisible)}>
           <Ionicons name="ios-color-filter" size={22} color="#fff" />
-          <Text style={{color: '#fff', marginLeft: 10}}>Lọc kết quả</Text>
+          <Text style={{color: '#fff', marginLeft: 10}}>{language ? 'Filter' : 'Lọc kết quả'}</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -3,13 +3,15 @@ import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native
 
 import Styles from '../../Common/Styles';
 import Separator from '../../Common/Separator';
+import { SettingCommonContext } from '../../../provider/settingCommon-provider';
 
 const Download = props => {
+    const {language, setLanguage} = useContext(SettingCommonContext);
 
     return(
         <View style={styles.download}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(18, '#000', 'bold')}>Chưa có khoá học nào</Text>
+                <Text style={Styles.text(18, '#000', 'bold')}>{language ? 'Not course available' : 'Chưa có khoá học nào'}</Text>
                 {/* <TouchableOpacity>
                     <Text style={Styles.text(14, '#00838F', 'normal')}>Remove all</Text>
                 </TouchableOpacity> */}

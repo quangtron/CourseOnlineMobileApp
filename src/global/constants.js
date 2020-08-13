@@ -103,9 +103,9 @@ export const ArrayPrices = [
     },
 ]
 
-export const ArraySelect = [
-    { label: "Giá tăng dần", value: {name: "price", rule: "ASC"} },
-    { label: "Giá giảm dần", value: {name: "price", rule: "DESC"} },
-    { label: "Mới nhất", value: {name: "updatedAt", rule: "DESC"} },
-    { label: "Bán chạy nhất", value: {name: "soldNumber", rule: "DESC"} },
+export const ArraySelect = (bool) => [
+    { label: bool ? "Price: High to low" : "Giá tăng dần", value: {name: "price", rule: "ASC"} },
+    { label: bool ? "Price: Low to high" : "Giá giảm dần", value: {name: "price", rule: "DESC"} },
+    { label: bool ? "Latest" : "Mới nhất", value: {name: "updatedAt", rule: "DESC"} },
+    { label: bool ? "Best sell" : "Bán chạy nhất", value: {name: "soldNumber", rule: "DESC"} },
   ]

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 import AccountSetting from './AccountSetting/accountSetting';
@@ -7,8 +7,11 @@ import RequireWifi from './RequireWifi/requireWifi';
 import OthersSetting from './OthersSetting/othersSetting';
 import Styles from '../../Common/Styles'
 import { ScreenKey } from '../../../global/constants';
+import { SettingCommonContext } from '../../../provider/settingCommon-provider';
 
 const Setting = props => {
+    const {language, setLanguage} = useContext(SettingCommonContext);
+
     const onSignOut = _ => {
         props.navigation.navigate(ScreenKey.Login);
     }
@@ -19,14 +22,14 @@ const Setting = props => {
             <Separator />
             <RequireWifi />
             <Separator />
-            <OthersSetting />
-            <Separator />
+            {/* <OthersSetting /> */}
+            {/* <Separator /> */}
             <View style={styles.appVersion}>
-                <Text style={Styles.text(18, '#000', 'normal')}>App Version</Text>
-                <Text style={Styles.text(18, '#000', 'normal')}>2.77.2568</Text>
+                <Text style={Styles.text(18, '#000', 'normal')}>{language ? 'App Version' : 'Phiên bản'}</Text>
+                <Text style={Styles.text(18, '#000', 'normal')}>2.9.5</Text>
             </View>
             <TouchableOpacity style={styles.btnLayout} onPress={onSignOut}>
-                <Text style={Styles.text(18, '#00B0FF', 'normal')}>Sign Out</Text>
+                <Text style={Styles.text(18, '#00B0FF', 'normal')}>{language ? 'Sign Out' : 'Đăng xuất'}</Text>
             </TouchableOpacity>
         </ScrollView>
     );
