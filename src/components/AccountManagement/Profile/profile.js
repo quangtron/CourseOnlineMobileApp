@@ -12,9 +12,11 @@ import {
 import Styles from "../../Common/Styles";
 import Separator from "../../Common/Separator";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { SettingCommonContext } from "../../../provider/settingCommon-provider";
 
 const Profile = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
+  const {language, setLanguage} = useContext(SettingCommonContext);
   const { avatar, name, email, phone } = authenticationContext.state.user;
   const [nameEdit, setNameEdit] = useState('');
   const [phoneEdit, setPhoneEdit] = useState('');
@@ -58,14 +60,14 @@ const Profile = (props) => {
         onChangeText={(text) => setNameEdit(text)}
       >{email}</TextInput>
 
-      <Text style={styles.textSection}>Name:</Text>
+      <Text style={styles.textSection}>{language ? 'Name:' : 'Họ & tên:'}</Text>
       <TextInput
         style={styles.sectionInfo(isEdit)}
         editable={isEdit}
         onChangeText={(text) => setNameEdit(text)}
       >{nameEdit}</TextInput>
       
-      <Text style={styles.textSection}>Phone number:</Text>
+      <Text style={styles.textSection}>{language ? 'Phone number:' : 'SĐT:'}</Text>
       <TextInput
         style={styles.sectionInfo(isEdit)}
         editable={isEdit}
@@ -75,14 +77,14 @@ const Profile = (props) => {
       {isEdit
         ? <TouchableOpacity style={styles.btnLayout(1)} onPress={() => onChangeInfo()}>
           <Text style={Styles.text(18, "#00B0FF", "normal")}>
-            Lưu thay đổi
+            {language ? 'Save' : 'Lưu thay đổi'}
           </Text>
         </TouchableOpacity>
         : <View />
       }
       <TouchableOpacity style={styles.btnLayout(2)} onPress={() => onCancelChange()}>
         <Text style={Styles.text(18, "tomato", "normal")}>
-          {isEdit ? 'Huỷ thay đổi' : 'Thay đổi thông tin'}
+          {isEdit ? (language ? 'Cancel' : 'Huỷ thay đổi') : (language ? 'Change information' : 'Thay đổi thông tin')}
         </Text>
       </TouchableOpacity>
     </ScrollView>

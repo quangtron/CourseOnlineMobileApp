@@ -3,8 +3,11 @@ import { View, Text, ScrollView } from 'react-native';
 
 import SectionAuthorsItem from '../SectionAuthorsItem/sectionAuthorsItem';
 import Styles from '../../../Common/Styles';
+import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 
 const SectionAuthors = props => {
+    const {theme} = useContext(SettingCommonContext);
+
     const showAuthorsItem = authors => {
         let result = null;
 
@@ -16,7 +19,7 @@ const SectionAuthors = props => {
     return(
         <View style={{margin: 15, marginRight: 0}}>
             <View>
-                <Text style={[Styles.text(16, '#000', 'bold'), {marginBottom: 10}]}>{props.title}</Text>
+                <Text style={[Styles.text(16, theme ? '#fff' : '#000', 'bold'), {marginBottom: 10}]}>{props.title}</Text>
             </View>
             <ScrollView
                 horizontal={true}

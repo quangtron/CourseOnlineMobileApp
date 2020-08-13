@@ -13,16 +13,22 @@ import { SettingCommonContext } from '../../provider/settingCommon-provider';
 const DownloadStack = createStackNavigator();
 
 function DownloadScreen(props) {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     return(
         <DownloadStack.Navigator
             initialRouteName={language ? ScreenKey.Download : 'Tải xuống'}
             mode="modal"
-            screenOptions={{headerTitleStyle: {
-                fontWeight: 'bold',
-                fontSize: 22,
-            }}}
+            screenOptions={{
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 19,
+                    color: theme ? '#fff' : '#000'
+                },
+                headerStyle: {
+                    backgroundColor: theme ? '#000' : '#fff',
+                }
+            }}
         >
             <DownloadStack.Screen
                 name={language ? ScreenKey.Download : 'Tải xuống'}
@@ -34,7 +40,7 @@ function DownloadScreen(props) {
             <DownloadStack.Screen
                 name={ScreenKey.Setting} 
                 component={Setting} 
-                options={{title: 'Setting', headerShown: false}} 
+                options={{title: language ? 'Setting' : 'Cài đặt', headerShown: false}} 
             />
             <DownloadStack.Screen
                 name={ScreenKey.CourseDetail} 
@@ -47,7 +53,7 @@ function DownloadScreen(props) {
             <DownloadStack.Screen
                 name={ScreenKey.Profile} 
                 component={Profile} 
-                options={{title: 'Setting Account'}} 
+                options={{title: language ? 'Profile' : 'Thông tin tài khoản'}} 
             />
             <DownloadStack.Screen
                 name={ScreenKey.Subscription} 

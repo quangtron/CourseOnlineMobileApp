@@ -7,7 +7,7 @@ import { SettingCommonContext } from '../../../../provider/settingCommon-provide
 
 
 const SearchTabResults = props => {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     const SearchAllScreen = () => {
         return(
@@ -18,7 +18,19 @@ const SearchTabResults = props => {
     const Tab = createMaterialTopTabNavigator();
 
     return(
-        <Tab.Navigator>
+        <Tab.Navigator
+            tabBarOptions = {{
+                activeTintColor: '#fff',
+                inactiveTintColor: theme ? '#fff' : 'gray',
+                labelStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                },
+                style: {
+                    backgroundColor: theme ? '#000' : '#fff',
+                }
+            }}
+        >
             <Tab.Screen name={language ? 'Result' : ScreenKey.All} component={SearchAllScreen} />
         </Tab.Navigator>
     );

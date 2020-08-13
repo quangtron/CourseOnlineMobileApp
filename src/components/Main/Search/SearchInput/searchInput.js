@@ -15,7 +15,7 @@ import { ArraySelect } from "../../../../global/constants";
 import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const SearchInput = (props) => {
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
   const [search, setSearch] = useState("");
   const [opt, setOpt] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
@@ -71,7 +71,7 @@ const SearchInput = (props) => {
           onChangeText={(search) => setSearch(search)}
         />
         <TouchableOpacity style={styles.btnSearch} onPress={() => onSearch()}>
-          <Ionicons name="md-search" size={35} color="black" />
+          <Ionicons name="md-search" size={35} color={theme ? '#fff' : '#000'} />
         </TouchableOpacity>
       </View>
       <View style={styles.sortFilterBox}>
@@ -79,7 +79,7 @@ const SearchInput = (props) => {
           onValueChange={(value) => onSort(value)}
           items={ArraySelect(language)}
           placeholder={{
-            label: language ? "Sort" : "Chọn kiểu sắp xếp",
+            label: language ? "Sort" : "Sắp xếp",
             value: null,
           }}
           style={{
@@ -88,7 +88,7 @@ const SearchInput = (props) => {
               top: 20,
             },
             placeholder: {
-              color: '#000'
+              color: theme ? '#fff' : '#000'
             }
           }}
           Icon={() => (

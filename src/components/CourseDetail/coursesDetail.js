@@ -18,7 +18,7 @@ import { SettingCommonContext } from "../../provider/settingCommon-provider";
 
 const CoursesDetail = (props) => {
   const { item } = props.route.params;
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
   const authenticationContext = useContext(AuthenticationContext);
   const coursesContext = useContext(CoursesContext);
   const [linkVideo, setLinkVideo] = useState("");
@@ -53,7 +53,7 @@ const CoursesDetail = (props) => {
   // console.log("item: ", item.id);
 
   return (
-    <View>
+    <View style={styles.container(theme)}>
       <TouchableOpacity style={styles.back} onPress={onPressLeft}>
         <Ionicons name="ios-arrow-back" size={24} color="tomato" />
       </TouchableOpacity>
@@ -98,6 +98,11 @@ const CoursesDetail = (props) => {
 };
 
 const styles = StyleSheet.create({
+  container: (bool) => {
+    return {
+        backgroundColor: bool ? '#212121' : '#fff',
+    }
+  },
   back: {
     margin: 20,
     marginTop: 40,

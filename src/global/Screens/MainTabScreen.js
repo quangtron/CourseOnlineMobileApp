@@ -12,7 +12,7 @@ import { SettingCommonContext } from '../../provider/settingCommon-provider';
 const Tab = createBottomTabNavigator();
 
 const mainTabScreen = _ => {
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
 
   return(
     <Tab.Navigator
@@ -37,11 +37,14 @@ const mainTabScreen = _ => {
         })}
         tabBarOptions = {{
           activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
+          inactiveTintColor: theme ? '#fff' : 'gray',
           labelStyle: {
             fontWeight: 'bold',
             fontSize: 15,
           },
+          style: {
+            backgroundColor: theme ? '#000' : '#fff',
+          }
         }}
         initialRouteName={language ? ScreenKey.Home : 'Trang chủ'}
       >

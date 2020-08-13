@@ -10,32 +10,40 @@ import { ScreenKey } from '../../../global/constants';
 import { SettingCommonContext } from '../../../provider/settingCommon-provider';
 
 const Setting = props => {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     const onSignOut = _ => {
         props.navigation.navigate(ScreenKey.Login);
     }
 
     return(
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-            <AccountSetting navigation={props.navigation} />
-            <Separator />
-            <RequireWifi />
-            <Separator />
-            {/* <OthersSetting /> */}
-            {/* <Separator /> */}
-            <View style={styles.appVersion}>
-                <Text style={Styles.text(18, '#000', 'normal')}>{language ? 'App Version' : 'Phiên bản'}</Text>
-                <Text style={Styles.text(18, '#000', 'normal')}>2.9.5</Text>
-            </View>
-            <TouchableOpacity style={styles.btnLayout} onPress={onSignOut}>
-                <Text style={Styles.text(18, '#00B0FF', 'normal')}>{language ? 'Sign Out' : 'Đăng xuất'}</Text>
-            </TouchableOpacity>
-        </ScrollView>
+        <View style={styles.container(theme)}>
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+                <AccountSetting navigation={props.navigation} />
+                <Separator />
+                <RequireWifi />
+                <Separator />
+                {/* <OthersSetting /> */}
+                {/* <Separator /> */}
+                <View style={styles.appVersion}>
+                    <Text style={Styles.text(18, theme ? '#fff' : '#000', 'normal')}>{language ? 'App Version' : 'Phiên bản'}</Text>
+                    <Text style={Styles.text(18, theme ? '#fff' : '#000', 'normal')}>2.9.5</Text>
+                </View>
+                <TouchableOpacity style={styles.btnLayout} onPress={onSignOut}>
+                    <Text style={Styles.text(18, '#fff', 'normal')}>{language ? 'Sign Out' : 'Đăng xuất'}</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: (bool) => {
+        return {
+            flex: 1,
+            backgroundColor: bool ? '#212121' : '#fff',
+        }
+    },
     scrollView: {
         margin: 20,
         marginTop: 0,
@@ -47,14 +55,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     btnLayout: {
-        marginTop: 50,
+        marginTop: 150,
         justifyContent: 'center',
         alignItems: 'center',
 
         height: 50,
-        backgroundColor: '#fff',
-        borderWidth: 2,
-        borderColor: '#00B0FF',
+        backgroundColor: '#00B0FF',
         borderRadius: 10,
     },
 })

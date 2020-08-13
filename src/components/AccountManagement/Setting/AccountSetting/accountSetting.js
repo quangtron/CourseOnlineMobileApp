@@ -8,7 +8,7 @@ import { SettingCommonContext } from "../../../../provider/settingCommon-provide
 
 const AccountSetting = (props) => {
   const authenticationContext = useContext(AuthenticationContext);
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
 
   const onPressAccount = (_) => {
     props.navigation.navigate(ScreenKey.Profile);
@@ -26,7 +26,7 @@ const AccountSetting = (props) => {
           source={{uri: authenticationContext.state.user.avatar}}
         />
         <View style={{ marginLeft: 10 }}>
-          <Text style={Styles.text(18, "#000", "normal")}>
+          <Text style={Styles.text(18, theme ? '#fff' : '#000', "normal")}>
             {authenticationContext.state.user.name}
           </Text>
           <Text style={Styles.text(16, "#9E9E9E", "normal")}>
@@ -35,7 +35,7 @@ const AccountSetting = (props) => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={onPressAccount}>
-        <Text style={Styles.text(18, "#000", "normal")}>{language ? 'Setting profile' : 'Quản lý tài khoản'}</Text>
+        <Text style={Styles.text(18, theme ? '#fff' : '#000', "normal")}>{language ? 'Setting profile' : 'Quản lý tài khoản'}</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity style={styles.button} onPress={onPressSub}>
         <Text style={Styles.text(18, "#000", "normal")}>Subscription</Text>

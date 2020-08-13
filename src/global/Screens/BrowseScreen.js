@@ -15,16 +15,22 @@ import { SettingCommonContext } from '../../provider/settingCommon-provider';
 const BrowseStack = createStackNavigator();
 
 function BrowseScreen(props) {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     return(
         <BrowseStack.Navigator
             initialRouteName={language ? ScreenKey.Browse : 'Nổi bật'}
             mode="modal"
-            screenOptions={{headerTitleStyle: {
-                fontWeight: 'bold',
-                fontSize: 22,
-            }}}
+            screenOptions={{
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 22,
+                    color: theme ? '#fff' : '#000'
+                },
+                headerStyle: {
+                    backgroundColor: theme ? '#000' : '#fff',
+                }
+            }}
         >
             <BrowseStack.Screen 
                 name={language ? ScreenKey.Browse : 'Nổi bật'} 
@@ -45,12 +51,12 @@ function BrowseScreen(props) {
             <BrowseStack.Screen
                 name={ScreenKey.Setting} 
                 component={Setting} 
-                options={{title: 'Setting', headerShown: false}} 
+                options={{title: language ? 'Setting' : 'Cài đặt', headerShown: false}} 
             />
             <BrowseStack.Screen
                 name={ScreenKey.Profile} 
                 component={Profile} 
-                options={{title: 'Setting Account'}} 
+                options={{title: language ? 'Profile' : 'Thông tin tài khoản'}} 
             />
             <BrowseStack.Screen
                 name={ScreenKey.Subscription} 

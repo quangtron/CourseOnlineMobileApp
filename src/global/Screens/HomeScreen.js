@@ -15,16 +15,22 @@ import { SettingCommonContext } from '../../provider/settingCommon-provider';
 const HomeStack = createStackNavigator();
 
 function HomeScreen(props) {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     return(
         <HomeStack.Navigator
             initialRouteName={language ? ScreenKey.Home : 'Trang chủ'}
             mode="modal"
-            screenOptions={{headerTitleStyle: {
-                fontWeight: 'bold',
-                fontSize: 19,
-            }}}
+            screenOptions={{
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 22,
+                    color: theme ? '#fff' : '#000'
+                },
+                headerStyle: {
+                    backgroundColor: theme ? '#000' : '#fff',
+                }
+            }}
         >
             <HomeStack.Screen
                 name={language ? ScreenKey.Home : 'Trang chủ'} 
@@ -49,12 +55,12 @@ function HomeScreen(props) {
             <HomeStack.Screen
                 name={ScreenKey.Setting} 
                 component={Setting} 
-                options={{title: 'Setting', headerShown: false}} 
+                options={{title: language ? 'Setting' : 'Cài đặt', headerShown: false}} 
             />
             <HomeStack.Screen
                 name={ScreenKey.Profile} 
                 component={Profile} 
-                options={{title: 'Setting Account'}} 
+                options={{title: language ? 'Profile' : 'Thông tin tài khoản'}} 
             />
             <HomeStack.Screen
                 name={ScreenKey.Subscription} 

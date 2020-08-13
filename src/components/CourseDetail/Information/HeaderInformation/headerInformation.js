@@ -8,7 +8,7 @@ import { ScreenKey } from "../../../../global/constants";
 import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const HeaderInformation = (props) => {
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
   const { name, avatar, intro, totalCourse, averagePoint, id } = props.authorInfo;
   const {
     title,
@@ -41,7 +41,7 @@ const HeaderInformation = (props) => {
 
   return (
     <View>
-      <Text style={Styles.text(22, "#000", "bold")}>{title}</Text>
+      <Text style={Styles.text(22, theme ? "#fff" : "#000", "bold")}>{title}</Text>
       <View style={styles.subInfo}>
         <Text>{subtitle}</Text>
         <Text style={{ marginTop: 15 }}>

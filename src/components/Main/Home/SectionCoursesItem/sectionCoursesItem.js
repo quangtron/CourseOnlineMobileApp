@@ -26,7 +26,7 @@ const SectionCoursesItem = (props) => {
     soldNumber,
   } = props.item;
 
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
 
   const onPressItem = (item) => {
     props.navigation.navigate(ScreenKey.CourseDetail, { item });
@@ -48,7 +48,7 @@ const SectionCoursesItem = (props) => {
 
   return (
     <TouchableOpacity
-      style={styles.item}
+      style={styles.item(theme)}
       onPress={() => onPressItem(props.item)}
     >
       <Image
@@ -56,7 +56,7 @@ const SectionCoursesItem = (props) => {
         style={styles.image}
       />
       <View style={styles.course}>
-        <Text style={{ marginBottom: 20 }}>
+        <Text style={{ marginBottom: 20, color: theme ? '#fff' : '#000' }}>
           {courseTitle || title}
         </Text>
         <View>
@@ -66,20 +66,20 @@ const SectionCoursesItem = (props) => {
           {latestLearnTime ? null :
           <View style={styles.flexDirectionRow}>
             {renderStar(courseAveragePoint || sumPoint)}
-            <Text style={Styles.text(14, "#616161", "normal")}>
+            <Text style={Styles.text(14, theme ? '#fff' : '#000', "normal")}>
               <Text style={{color: 'tomato'}}>{soldNumber || courseSoldNumber}</Text>{language ? " students" : " học viên"}
             </Text>
           </View>}
           {price >= 0 || coursePrice >= 0 ? (
-            price === 0 || coursePrice === 0 ? <Text>{language ? "Free" : "Miễn phí"}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
+            price === 0 || coursePrice === 0 ? <Text style={{color: theme ? '#fff' : '#000'}}>{language ? "Free" : "Miễn phí"}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
           ) : null}
           {latestLearnTime ? (
             <View style={{marginTop: 10}}>
-              <Text>{language ? "Time payment:" : "Thời gian thanh toán:"}</Text>
-              <Text style={Styles.text(14, "#616161", "normal")}>
+              <Text style={{color: theme ? '#fff' : '#000'}}>{language ? "Time payment:" : "Thời gian thanh toán:"}</Text>
+              <Text style={Styles.text(14, theme ? '#9E9E9E' : '#000', "normal")}>
                 {moment(latestLearnTime).format("DD/MM/YYYY, h:mm:ss")}
               </Text>
-              <Text style={{marginTop: 10}}>{total}{language ? " courses" : " bài học"}</Text>
+              <Text style={{marginTop: 10, color: theme ? '#fff' : '#000'}}>{total}{language ? " courses" : " bài học"}</Text>
             </View>
           ) : null}
         </View>
@@ -89,11 +89,13 @@ const SectionCoursesItem = (props) => {
 };
 
 const styles = StyleSheet.create({
-  item: {
-    margin: 5,
-    width: 200,
-    height: null,
-    backgroundColor: "#EEEEEE",
+  item: (bool) => {
+    return {
+      margin: 5,
+      width: 200,
+      height: null,
+      backgroundColor: bool ? '#000' : '#fff',
+    }
   },
   image: {
     width: 200,

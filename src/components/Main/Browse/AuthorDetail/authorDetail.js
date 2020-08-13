@@ -10,7 +10,7 @@ import { SettingCommonContext } from "../../../../provider/settingCommon-provide
 
 const AuthorDetail = (props) => {
   const authorContext = useContext(AuthorsContext);
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
 
   const showSkills = (data) => {
     return data.map((item, index) => (
@@ -28,7 +28,7 @@ const AuthorDetail = (props) => {
   props.navigation.setOptions({title: authorContext.state.author ? authorContext.state.author.name : 'Chi tiết' });
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor: theme ? '#212121' : '#fff'}}>
       {authorContext.state.author ? (
         <View style={styles.mainStyle}>
           {/* info basic */}
@@ -39,7 +39,7 @@ const AuthorDetail = (props) => {
             />
             <View style={styles.infoMain}>
               <View>
-                <Text style={Styles.text(18, "#000", "normal")}>
+                <Text style={Styles.text(18, theme ? "#fff" : "#000", "normal")}>
                   {authorContext.state.author.name}
                 </Text>
                 <Text style={Styles.text(16, "#9E9E9E", "normal")}>
@@ -52,7 +52,7 @@ const AuthorDetail = (props) => {
                     {`${authorContext.state.author.soldNumber} `}
                     <Ionicons name="md-people" size={18} color="#FDD835" />
                   </Text>
-                  <Text>{language ? 'Students' : 'Học viên'}</Text>
+                  <Text style={{color: theme ? "#fff" : "#000"}}>{language ? 'Students' : 'Học viên'}</Text>
                 </View>
                 <View style={styles.infoCourse}>
                   <Text style={Styles.text(20, "tomato", "normal")}>
@@ -63,15 +63,15 @@ const AuthorDetail = (props) => {
                       color="#FDD835"
                     />
                   </Text>
-                  <Text>{language ? 'Courses' : 'Khoá học'}</Text>
+                  <Text style={{color: theme ? "#fff" : "#000"}}>{language ? 'Courses' : 'Khoá học'}</Text>
                 </View>
                 <View style={styles.infoCourse}>
                   <Text style={Styles.text(20, "tomato", "normal")}>
                     {`${authorContext.state.author.averagePoint.toFixed(1)} `}
-                    <Text style={Styles.text(16, "#000", "normal")}> / 5 </Text>
+                    <Text style={Styles.text(16, theme ? "#fff" : "#000", "normal")}> / 5 </Text>
                     <Ionicons name="ios-star" size={18} color="#FDD835" />
                   </Text>
-                  <Text>
+                  <Text style={{color: theme ? "#fff" : "#000"}}>
                     {authorContext.state.author.countRating} {language ? 'rating' : 'lượt đánh giá'}
                   </Text>
                 </View>

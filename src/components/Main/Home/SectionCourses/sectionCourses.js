@@ -8,7 +8,7 @@ import { ScreenKey } from '../../../../global/constants';
 import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 
 const SectionCourses = props => {
-    const {language, setLanguage} = useContext(SettingCommonContext);
+    const {language, theme} = useContext(SettingCommonContext);
 
     const showListCoursesItem = items => {
         let result = null;
@@ -25,7 +25,7 @@ const SectionCourses = props => {
     return(
         <View style={styles.sectonCourses}>
             <View style={styles.headerSection}>
-                <Text style={Styles.text(16, '#000', 'bold')}>{props.title ? props.title : 'title'}</Text>
+                <Text style={Styles.text(16, theme ? '#fff' : '#000', 'bold')}>{props.title ? props.title : 'title'}</Text>
                 <TouchableOpacity
                     style={Styles.btnLayout(90, 20, '#E0E0E0')}
                     onPress={() => onPress(props.dataSection)}
@@ -33,7 +33,7 @@ const SectionCourses = props => {
                     <Text style={{fontSize: 13}}>{language ? "See all" : "Xem tất cả"}</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView style={styles.shadowBox} horizontal={true} showsHorizontalScrollIndicator={false}>
+            <ScrollView style={styles.shadowBox(theme)} horizontal={true} showsHorizontalScrollIndicator={false}>
                 {showListCoursesItem(props.dataSection)}
             </ScrollView>
         </View>
@@ -44,14 +44,16 @@ const styles = StyleSheet.create({
     sectonCourses: {
         marginTop: 30,
     },
-    shadowBox: {
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 4,
-            height: 3,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4.5,
+    shadowBox: (bool) => {
+        return {
+            shadowColor: bool ? '#fff' : '#000',
+            shadowOffset: {
+                width: 4,
+                height: 3,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 4.5,
+        }
     },
     headerSection: {
         flexDirection: 'row',

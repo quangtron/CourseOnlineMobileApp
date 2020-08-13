@@ -4,9 +4,11 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet, ImageBackground }
 import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
 import { CoursesContext } from '../../../../provider/courses-provider';
+import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 
 const SectionPopularSkills = props => {
     const courseContext = useContext(CoursesContext);
+    const {theme} = useContext(SettingCommonContext);
     const [title, setTitle] = useState('Danh sách khoá học');
     const [isShow, setShow] = useState(false);
 
@@ -44,7 +46,7 @@ const SectionPopularSkills = props => {
 
     return(
         <View style={{margin: 15, marginRight: 0}}>
-            <Text style={[Styles.text(16, '#000', 'bold'), {marginBottom: 15}]}>{props.title}</Text>
+            <Text style={[Styles.text(16, theme ? '#fff' : '#000', 'bold'), {marginBottom: 15}]}>{props.title}</Text>
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                 <View style={styles.flewrap}>
                     {showListItems(props.items)}

@@ -8,7 +8,7 @@ import { ScreenKey } from "../../../../global/constants";
 import { SettingCommonContext } from "../../../../provider/settingCommon-provider";
 
 const DownloadItem = (props) => {
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
   const {
     title,
     imageUrl,
@@ -48,7 +48,7 @@ const DownloadItem = (props) => {
     <TouchableOpacity style={styles.item} onPress={() => onPress(props.item)}>
       <Image source={{ uri: imageUrl || courseImage }} style={styles.image} />
       <View style={styles.text}>
-        <Text style={Styles.text(16, "#000", "normal")}>
+        <Text style={Styles.text(16, theme ? "#fff" : "#000", "normal")}>
           {title || courseTitle}
         </Text>
         <Text style={[Styles.text(14, "#2196F3", "normal"), { marginTop: 10 }]}>
@@ -71,7 +71,7 @@ const DownloadItem = (props) => {
               </Text>
             </View>
             {price >= 0 || coursePrice >= 0 ? (
-              price === 0 || coursePrice === 0 ? <Text>{language ? 'Free' : 'Miễn phí'}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
+              price === 0 || coursePrice === 0 ? <Text style={{color: theme ? "#fff" : "#000"}}>{language ? 'Free' : 'Miễn phí'}</Text> : <Text style={Styles.text(14, "#616161", "normal")}>{price || coursePrice} VND</Text>
             ) : null}
           </View>
         )}
