@@ -34,3 +34,9 @@ export const apiGetMyCourses = (token) => {
 export const apiSearchCourse = (keyword, opt, offset, limit) => {
     return axios.post('https://api.itedu.me/course/search', { keyword, opt, offset, limit })
 }
+
+export const apiGetLesson = (token, lessonId) => {
+    return axios.post('https://api.itedu.me/exercise/student/list-exercise-lesson', { lessonId }, {
+        headers: { Authorization: `Bearer ${token}`}
+    })
+}

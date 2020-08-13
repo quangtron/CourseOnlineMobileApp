@@ -1,4 +1,4 @@
-import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo, apiGetMyCourses, apiSearchCourse } from "../core/services/courses-services";
+import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo, apiGetMyCourses, apiSearchCourse, apiGetLesson } from "../core/services/courses-services";
 
 export const NEW_COURSES_REQUEST = 'NEW_COURSES_REQUEST';
 export const NEW_COURSES_SUCCESSED = 'NEW_COURSES_SUCCESSED';
@@ -26,6 +26,9 @@ export const SEARCH_COURSE_FAILED = 'SEARCH_COURSE_FAILED';
 
 export const GET_COURSES_CATEGORY_REQUEST = 'GET_COURSES_CATEGORY_REQUEST';
 export const GET_COURSES_CATEGORY = 'GET_COURSES_CATEGORY';
+
+export const GET_LESSON_REQUEST = 'GET_LESSON_REQUEST';
+export const GET_LESSON = 'GET_LESSON';
 
 const getNewCoursesSuccessed = (data) => ({
     type: NEW_COURSES_SUCCESSED,
@@ -77,6 +80,11 @@ const searchCourseFailed = () => ({
 
 const getCoursesCategorySuccessed = (data) => ({
     type: GET_COURSES_CATEGORY,
+    data
+})
+
+const getLessonSuccessed = (data) => ({
+    type: GET_LESSON,
     data
 })
 
@@ -203,5 +211,23 @@ export const getCoursesCategory = (dispatch) => (keyword, opt, offset, limit) =>
         .catch((err) => {
             console.log('error search: ', err);
             dispatch(getCoursesCategorySuccessed(null));
+        })
+}
+
+export const getLesson = (dispatch) => (token, lessonId) => {
+    dispatch({type: GET_LESSON_REQUEST});
+
+    apiGetLesson(token, lessonId)
+        .then((res) => {
+            if(res.status === 200) {
+                console.log('data: ', res.data);
+                dispatch(getLessonSuccessed(res.data.payload));
+            } else {
+                dispatch(getLessonSuccessed(null));
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(getLessonSuccessed(null));
         })
 }

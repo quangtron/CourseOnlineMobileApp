@@ -9,6 +9,7 @@ import {
   getMyCourses,
   searchCourse,
   getCoursesCategory,
+  getLesson,
 } from "../actions/courses-action";
 
 const CoursesContext = React.createContext();
@@ -33,6 +34,7 @@ const initialState = {
   myCourses: null,
   resultSearch: null,
   coursesCategory: null,
+  lesson: null
 };
 
 const CoursesProvider = (props) => {
@@ -49,6 +51,7 @@ const CoursesProvider = (props) => {
         getMyCourses: getMyCourses(dispatch),
         searchCourse: searchCourse(dispatch),
         coursesCategory: getCoursesCategory(dispatch),
+        getLesson: getLesson(dispatch),
       }}
     >
       {props.children}

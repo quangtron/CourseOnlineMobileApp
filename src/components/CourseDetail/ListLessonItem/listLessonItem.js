@@ -3,11 +3,13 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import Styles from "../../Common/Styles";
 import { AuthenticationContext } from "../../../provider/authentication-provider";
+import { CoursesContext } from "../../../provider/courses-provider";
 
 const ListLessonItem = (props) => {
   const [check, setCheck] = useState(false);
   const [checkOwnCourse, setCheckOwnCourse] = useState(false);
   const authenticationContext = useContext(AuthenticationContext);
+  const coursesContext = useContext(CoursesContext);
 
   useEffect(() => {
     if (props.videoLesson === props.data.videoUrl) {
@@ -24,6 +26,7 @@ const ListLessonItem = (props) => {
   const onCheck = (_) => {
     setCheck(true);
     props.onHandleSwitchVideo(props.data.videoUrl);
+    coursesContext.getLesson(authenticationContext.state.access_token, props.data.id);
   };
 
   return (

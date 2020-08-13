@@ -1,17 +1,26 @@
 import "react-native-gesture-handler";
-import React, { useContext } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import ListLessonItem from "../ListLessonItem/listLessonItem";
 import HeaderLesson from "./HeaderLesson/headerLesson";
 import Separator from "../../Common/Separator";
 import { SettingCommonContext } from "../../../provider/settingCommon-provider";
+import { CoursesContext } from "../../../provider/courses-provider";
 
 const ListLesson = (props) => {
-  const {language, setLanguage} = useContext(SettingCommonContext);
+  const coursesContext = useContext(CoursesContext);
+  const {language} = useContext(SettingCommonContext);
+  const [lesson, setLesson] = useState([]);
   const { data } = props;
   const Tab = createMaterialTopTabNavigator();
+
+  useEffect(() => {
+    if(coursesContext.state.lesson) {
+      setLesson(coursesContext.state.lesson.exercises)
+    }
+  }, [coursesContext.state.lesson])
 
   const renderListLessons = (data) => {
     return data.map((item, index) => (
@@ -40,17 +49,16 @@ const ListLesson = (props) => {
     });
   };
 
+  const renderListExercises = (data) => {
+    return data.map((item, index) => <Text style={{fontSize: 16}} key={index}>{language ? 'Exercise ' : 'Bài tập '}{index + 1}:  {item.title}</Text>)
+  }
+
   function TranscriptScreen() {
-    return (
-      <View style={styles.transcriptScreen}>
-        <TextInput
-          style={styles.inputSearch}
-          autoFocus={true}
-          clearButtonMode="always"
-          placeholder="Search Transcript"
-        />
+    return(
+      <View style={styles.exercises}>
+        <Text style={{fontSize: 16}}>{lesson.length <= 0 ? (language ? 'Exercise is empty' : 'Không có bài tập nào') : renderListExercises(lesson)}</Text>
       </View>
-    );
+    )
   }
 
   const onHandleSwitchVideo = (video) => {
@@ -66,7 +74,7 @@ const ListLesson = (props) => {
   return (
     <Tab.Navigator>
       <Tab.Screen name={language ? 'Content' : "Nội dung"} component={ContentsScreen} />
-      <Tab.Screen name="Transcript" component={TranscriptScreen} />
+      <Tab.Screen name={language ? 'Lesson' : 'Bài tập'} component={TranscriptScreen} />
     </Tab.Navigator>
   );
 };
@@ -89,6 +97,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  exercises: {
+    margin: 20,
+    marginBottom: 10,
+    flexDirection: 'column',
+  }
 });
 
 export default ListLesson;
