@@ -20,14 +20,14 @@ const SearchTabResults = props => {
     return(
         <Tab.Navigator
             tabBarOptions = {{
-                activeTintColor: '#fff',
+                activeTintColor: theme ? '#fff' : '#000',
                 inactiveTintColor: theme ? '#fff' : 'gray',
                 labelStyle: {
                     fontWeight: 'bold',
                     fontSize: 15,
                 },
                 style: {
-                    backgroundColor: theme ? '#000' : '#fff',
+                    backgroundColor: theme ? '#000' : '#EEEEEE',
                 }
             }}
         >

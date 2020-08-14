@@ -15,6 +15,7 @@ import { CoursesContext } from "../../provider/courses-provider";
 import { AuthenticationContext } from "../../provider/authentication-provider";
 import SectionCourses from "../Main/Home/SectionCourses/sectionCourses";
 import { SettingCommonContext } from "../../provider/settingCommon-provider";
+import Comment from "./Comment/comment";
 
 const CoursesDetail = (props) => {
   const { item } = props.route.params;
@@ -82,6 +83,9 @@ const CoursesDetail = (props) => {
             videoLesson={linkVideo}
             data={coursesContext.state.courseInfo}
           />
+          <View>
+            <Comment data={coursesContext.state.courseInfo.ratings} />
+          </View>
           <View style={{ marginLeft: 20, marginBottom: 20 }}>
             <SectionCourses
               dataSection={coursesContext.state.courseInfo.coursesLikeCategory}
