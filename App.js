@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import mainStackScreen from "./src/global/Screens/MainStackScreen";
 import { AuthenticationProvider } from "./src/provider/authentication-provider";
 import { AuthorsProvider } from "./src/provider/authors-provider";
-import { SearchProvider } from "./src/provider/search-provider";
 import { VerifyEmailProvider } from "./src/provider/verify-email-provider";
 import { RegisterProvider } from "./src/provider/register-provider";
 import { CoursesProvider } from "./src/provider/courses-provider";
