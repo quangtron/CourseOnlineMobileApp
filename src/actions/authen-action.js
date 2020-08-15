@@ -1,4 +1,4 @@
-import { apiLogin, apiCheckOwnCourse, apiLikeCourse, apiCheckLikeStatus, apiGetCoursesLiked, apiChangeInfoUser } from "../core/services/authentication-services";
+import { apiLogin, apiCheckOwnCourse, apiLikeCourse, apiCheckLikeStatus, apiGetCoursesLiked, apiChangeInfoUser, apiRatingCourse } from "../core/services/authentication-services";
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESSED = 'LOGIN_SUCCESSED';
@@ -23,6 +23,9 @@ export const GET_COURSES_LIKED_FAILED = 'GET_COURSES_LIKED_FAILED';
 export const CHANGE_INFO_USER_REQUEST = 'CHANGE_INFO_USER_REQUEST';
 export const CHANGE_INFO_USER_SUCCESSED = 'CHANGE_INFO_USER_SUCCESSED';
 export const CHANGE_INFO_USER_FAILED = 'CHANGE_INFO_USER_FAILED';
+
+export const RATING_COURSE_REQUEST = 'RATING_COURSE_REQUEST';
+export const RATING_COURSE = 'RATING_COURSE';
 
 const loginSuccessed = (data) => ({
     type: LOGIN_SUCCESSED,
@@ -71,6 +74,11 @@ const changeInfoUserSuccessed = (data) => ({
 })
 const changeInfoUserFailed = () => ({
     type: CHANGE_INFO_USER_FAILED,
+})
+
+const ratingCourseSuccessed = (data) => ({
+    type: RATING_COURSE,
+    data
 })
 
 export const login = (dispatch) => (email, password) => {
@@ -177,5 +185,23 @@ export const changeInfoUser = (dispatch) => (name, avatar, phone, token) => {
         .catch((err) => {
             console.log('error: ', err.response);
             dispatch(changeInfoUserFailed());
+        })
+}
+
+export const ratingCourse = (dispatch) => (token, courseId, formalityPoint, contentPoint, presentationPoint, content) => {
+    dispatch({type: RATING_COURSE_REQUEST});
+
+    apiRatingCourse(token, courseId, formalityPoint, contentPoint, presentationPoint, content)
+        .then((res) => {
+            if(res.status === 200) {
+                // console.log('data: ', res.data.payload);
+                dispatch(ratingCourseSuccessed(res.data.payload));
+            } else {
+                dispatch(ratingCourseSuccessed(null));
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(ratingCourseSuccessed(null));
         })
 }

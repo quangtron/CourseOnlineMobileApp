@@ -16,6 +16,8 @@ import {
   GET_COURSES_LIKED_FAILED,
   CHANGE_INFO_USER_REQUEST,
   CHANGE_INFO_USER_SUCCESSED,
+  RATING_COURSE_REQUEST,
+  RATING_COURSE,
 } from "../actions/authen-action";
 
 export const authenReducer = (preState, action) => {
@@ -57,6 +59,10 @@ export const authenReducer = (preState, action) => {
       return {...preState, isChanging: false, isChanged: true, user: action.data}
     case CHANGE_INFO_USER_SUCCESSED:
       return {...preState, isChanging: false, isChanged: false}
+    case RATING_COURSE_REQUEST:
+      return {...preState}
+    case RATING_COURSE:
+      return {...preState, ratingCourse: action.data}
 
     default:
       // throw new Error();

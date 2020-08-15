@@ -40,3 +40,9 @@ export const apiChangeInfoUser = (name, avatar, phone, token) => {
     headers: { Authorization: `Bearer ${token}` }
   })
 }
+
+export const apiRatingCourse = (token, courseId, formalityPoint, contentPoint, presentationPoint, content) => {
+  return axios.post('https://api.itedu.me/course/rating-course', { courseId, formalityPoint, contentPoint, presentationPoint, content}, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+}

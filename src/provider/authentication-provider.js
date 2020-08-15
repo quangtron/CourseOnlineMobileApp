@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { authenReducer } from "../reducers/authen-reducer";
-import { login, checkOwnCourse, likeCourse, checkLikeCourse, getCoursesLiked, changeInfoUser } from "../actions/authen-action";
+import { login, checkOwnCourse, likeCourse, checkLikeCourse, getCoursesLiked, changeInfoUser, ratingCourse } from "../actions/authen-action";
 
 const AuthenticationContext = React.createContext();
 
@@ -11,6 +11,7 @@ const initialState = {
   checkOwnCourse: {},
   likeStatus: false,
   coursesLiked: null,
+  ratingCourse: null,
   isLogining: false,
   isLogined: false,
   isChecking: false,
@@ -36,6 +37,7 @@ const AuthenticationProvider = (props) => {
         checkLikeCourse: checkLikeCourse(dispatch),
         getCoursesLiked: getCoursesLiked(dispatch),
         changeInfoUser: changeInfoUser(dispatch),
+        ratingCourse: ratingCourse(dispatch),
       }}
     >
       {props.children}

@@ -51,7 +51,6 @@ const CoursesDetail = (props) => {
   const onHandleSwitchVideo = (video) => {
     setLinkVideo(video);
   };
-  // console.log("item: ", item.id);
 
   return (
     <View style={styles.container(theme)}>
@@ -84,7 +83,7 @@ const CoursesDetail = (props) => {
             data={coursesContext.state.courseInfo}
           />
           <View>
-            <Comment data={coursesContext.state.courseInfo.ratings} />
+            <Comment courseId={item.id} data={coursesContext.state.courseInfo.ratings} />
           </View>
           <View style={{ marginLeft: 20, marginBottom: 20 }}>
             <SectionCourses

@@ -6,6 +6,8 @@ import { ScreenKey } from '../constants';
 import CoursesDetail from '../../components/CourseDetail/coursesDetail';
 import ListCourses from '../../components/Courses/ListCourses/listCourses';
 import { SettingCommonContext } from '../../provider/settingCommon-provider';
+import AuthorDetail from '../../components/Main/Browse/AuthorDetail/authorDetail';
+import DownloadItem from '../../components/Main/Download/DownloadItem/downloadItem';
 
 const SearchStack = createStackNavigator();
 
@@ -31,6 +33,11 @@ function SearchScreen() {
                 name={ScreenKey.ListCourses} 
                 component={ListCourses} 
                 options={{title: 'List Courses'}} 
+            />
+            <SearchStack.Screen
+                name={ScreenKey.AuthorDetail}
+                component={AuthorDetail}
+                options={{title: 'Chi tiết'}}
             />
         </SearchStack.Navigator>
     );

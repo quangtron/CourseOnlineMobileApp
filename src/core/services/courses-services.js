@@ -31,12 +31,24 @@ export const apiGetMyCourses = (token) => {
     })
 }
 
-export const apiSearchCourse = (keyword, opt, offset, limit) => {
-    return axios.post('https://api.itedu.me/course/search', { keyword, opt, offset, limit })
+export const apiSearchCourse = (token, keyword, opt, offset, limit) => {
+    return axios.post('https://api.itedu.me/course/searchV2', { token, keyword, opt, offset, limit })
+}
+
+export const apiSearchHistory = (token) => {
+    return axios.get('https://api.itedu.me/course/search-history', {
+        headers: { Authorization: `Bearer ${token}`}
+    })
 }
 
 export const apiGetLesson = (token, lessonId) => {
     return axios.post('https://api.itedu.me/exercise/student/list-exercise-lesson', { lessonId }, {
+        headers: { Authorization: `Bearer ${token}`}
+    })
+}
+
+export const apiDeleteSearchHistory = (token, id) => {
+    return axios.delete(`https://api.itedu.me/course/delete-search-history/${id}`, {
         headers: { Authorization: `Bearer ${token}`}
     })
 }

@@ -1,4 +1,4 @@
-import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo, apiGetMyCourses, apiSearchCourse, apiGetLesson } from "../core/services/courses-services";
+import { apiNewCourses, apiTopSell, apiTopRate, apiGetCourseInfo, apiGetMyCourses, apiSearchCourse, apiGetLesson, apiSearchHistory, apiDeleteSearchHistory } from "../core/services/courses-services";
 
 export const NEW_COURSES_REQUEST = 'NEW_COURSES_REQUEST';
 export const NEW_COURSES_SUCCESSED = 'NEW_COURSES_SUCCESSED';
@@ -29,6 +29,12 @@ export const GET_COURSES_CATEGORY = 'GET_COURSES_CATEGORY';
 
 export const GET_LESSON_REQUEST = 'GET_LESSON_REQUEST';
 export const GET_LESSON = 'GET_LESSON';
+
+export const GET_SEARCH_HISTORY_REQUEST = 'GET_SEARCH_HISTORY_REQUEST';
+export const GET_SEARCH_HISTORY = 'GET_SEARCH_HISTORY';
+
+export const DELETE_SEARCH_HISTORY_REQUEST = 'DELETE_SEARCH_HISTORY_REQUEST';
+export const DELETE_SEARCH_HISTORY = 'DELETE_SEARCH_HISTORY';
 
 const getNewCoursesSuccessed = (data) => ({
     type: NEW_COURSES_SUCCESSED,
@@ -85,6 +91,16 @@ const getCoursesCategorySuccessed = (data) => ({
 
 const getLessonSuccessed = (data) => ({
     type: GET_LESSON,
+    data
+})
+
+const getSearchHistorySuccessed = (data) => ({
+    type: GET_SEARCH_HISTORY,
+    data
+})
+
+const deleteSearchHistorySuccessed = (data) => ({
+    type: DELETE_SEARCH_HISTORY,
     data
 })
 
@@ -178,10 +194,10 @@ export const getMyCourses = (dispatch) => (token) => {
         })
 }
 
-export const searchCourse = (dispatch) => (keyword, opt, offset, limit) => {
+export const searchCourse = (dispatch) => (token, keyword, opt, offset, limit) => {
     dispatch({type: GET_MY_COURSES_REQUEST});
 
-    apiSearchCourse(keyword, opt, offset, limit)
+    apiSearchCourse(token, keyword, opt, offset, limit)
         .then((res) => {
             if(res.status === 200){
                 // console.log('data', res.data);
@@ -220,7 +236,7 @@ export const getLesson = (dispatch) => (token, lessonId) => {
     apiGetLesson(token, lessonId)
         .then((res) => {
             if(res.status === 200) {
-                console.log('data: ', res.data);
+                // console.log('data: ', res.data);
                 dispatch(getLessonSuccessed(res.data.payload));
             } else {
                 dispatch(getLessonSuccessed(null));
@@ -229,5 +245,40 @@ export const getLesson = (dispatch) => (token, lessonId) => {
         .catch((err) => {
             console.log('error: ', err);
             dispatch(getLessonSuccessed(null));
+        })
+}
+
+export const getSearchHistory = (dispatch) => (token) => {
+    dispatch({type: GET_SEARCH_HISTORY_REQUEST});
+
+    apiSearchHistory(token)
+        .then((res) => {
+            if(res.status === 200){
+                // console.log('data: ', res.data);
+                dispatch(getSearchHistorySuccessed(res.data.payload.data));
+            } else {
+                dispatch(getSearchHistorySuccessed(null));
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(getSearchHistorySuccessed(null));
+        })
+}
+
+export const deleteSearchHistory = (dispatch) => (token, id) => {
+    dispatch({type: DELETE_SEARCH_HISTORY_REQUEST});
+
+    apiDeleteSearchHistory(token, id)
+        .then((res) => {
+            if(res.status === 200) {
+                dispatch(deleteSearchHistorySuccessed(true));
+            } else {
+                dispatch(deleteSearchHistorySuccessed(false));
+            }
+        })
+        .catch((err) => {
+            console.log('error: ', err);
+            dispatch(deleteSearchHistorySuccessed(false));
         })
 }

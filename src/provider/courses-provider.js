@@ -10,6 +10,8 @@ import {
   searchCourse,
   getCoursesCategory,
   getLesson,
+  getSearchHistory,
+  deleteSearchHistory,
 } from "../actions/courses-action";
 
 const CoursesContext = React.createContext();
@@ -34,7 +36,9 @@ const initialState = {
   myCourses: null,
   resultSearch: null,
   coursesCategory: null,
-  lesson: null
+  lesson: null,
+  searchHistory: null,
+  isDelete: false,
 };
 
 const CoursesProvider = (props) => {
@@ -52,6 +56,8 @@ const CoursesProvider = (props) => {
         searchCourse: searchCourse(dispatch),
         coursesCategory: getCoursesCategory(dispatch),
         getLesson: getLesson(dispatch),
+        getSearchHistory: getSearchHistory(dispatch),
+        deleteSearchHistory: deleteSearchHistory(dispatch),
       }}
     >
       {props.children}

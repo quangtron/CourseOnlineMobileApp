@@ -10,7 +10,7 @@ export const ScreenKey = {
     CourseDetail: 'CourseDetail',
     Setting: 'Setting',
     SkillDetail: 'SkillDetail',
-    All: 'Kết quả',
+    All: 'All',
     Courses: 'Courses',
     Paths: 'Paths',
     Authors: 'Authors',
