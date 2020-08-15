@@ -212,10 +212,10 @@ export const searchCourse = (dispatch) => (token, keyword, opt, offset, limit) =
         })
 }
 
-export const getCoursesCategory = (dispatch) => (keyword, opt, offset, limit) => {
+export const getCoursesCategory = (dispatch) => (token, keyword, opt, offset, limit) => {
     dispatch({type: GET_COURSES_CATEGORY_REQUEST});
 
-    apiSearchCourse(keyword, opt, offset, limit)
+    apiSearchCourse(token, keyword, opt, offset, limit)
         .then((res) => {
             if(res.status === 200){
                 // console.log('data', res.data);

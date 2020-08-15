@@ -5,21 +5,23 @@ import Styles from '../../../Common/Styles';
 import { ScreenKey } from '../../../../global/constants';
 import { CoursesContext } from '../../../../provider/courses-provider';
 import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
+import { AuthenticationContext } from '../../../../provider/authentication-provider';
 
 const SectionPopularSkills = props => {
     const courseContext = useContext(CoursesContext);
+    const authenContext = useContext(AuthenticationContext)
     const {theme} = useContext(SettingCommonContext);
     const [title, setTitle] = useState('Danh sách khoá học');
     const [isShow, setShow] = useState(false);
 
     useEffect(() => {
         if(courseContext.state.coursesCategory){
-            props.navigation.navigate(ScreenKey.ListCourses, {items: courseContext.state.coursesCategory , title: title });
+            props.navigation.navigate(ScreenKey.ListCourses, {dataCat: courseContext.state.coursesCategory , title: title });
         }
     }, [courseContext.state.coursesCategory])
 
     const onPressSkill = (item) => {
-        courseContext.coursesCategory("", {category: [item.id]}, 0, 11);
+        courseContext.coursesCategory(authenContext.state.access_token, "", {category: [item.id]}, 0, 11);
         setTitle(item.name);
         // setShow(!isShow);
     }

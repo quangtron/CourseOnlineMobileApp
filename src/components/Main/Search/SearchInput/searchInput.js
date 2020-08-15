@@ -33,7 +33,6 @@ const SearchInput = (props) => {
 
   useEffect(() => {
     if(isShowDropdown){
-      console.log('asdfasdfasdf');
       courseContext.getSearchHistory(authContext.state.access_token);
     }
   }, [checkStatus])
