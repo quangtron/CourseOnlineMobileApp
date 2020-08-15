@@ -35,7 +35,7 @@ const SearchByName = props => {
     return(
         <View style={styles.courses}>
             <View style={styles.results}>
-                <Text style={Styles.text(18, '#000', 'bold')}>{data.length} {language ? 'results' : 'kết quả'}</Text>
+                <Text style={Styles.text(18, theme ? '#fff' : '#000', 'bold')}>{data.length} {language ? 'results' : 'kết quả'}</Text>
             </View>
             <ScrollView style={styles.listCourses}>
                 {renderItem()}

@@ -12,6 +12,7 @@ const Information = props => {
     return(
         <View style={{margin: 20}}>
             <HeaderInformation authorInfo={authorInfo} navigation={props.navigation} info={infor} />
+            <Separator />
             <View style={styles.btn}>
                 <ButtonInformation data={infor} />
             </View>
@@ -23,7 +24,6 @@ const Information = props => {
 
 const styles = StyleSheet.create({
     btn: {
-        marginTop: 30,
         marginBottom: 20,
         flexDirection: 'row',
     },

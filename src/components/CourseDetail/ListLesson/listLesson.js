@@ -11,7 +11,7 @@ import { CoursesContext } from "../../../provider/courses-provider";
 
 const ListLesson = (props) => {
   const coursesContext = useContext(CoursesContext);
-  const {language} = useContext(SettingCommonContext);
+  const {language, theme} = useContext(SettingCommonContext);
   const [lesson, setLesson] = useState([]);
   const { data } = props;
   const Tab = createMaterialTopTabNavigator();
@@ -72,7 +72,19 @@ const ListLesson = (props) => {
   };
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions = {{
+        activeTintColor: theme ? '#fff' : '#000',
+        inactiveTintColor: theme ? '#fff' : 'gray',
+        labelStyle: {
+            fontWeight: 'bold',
+            fontSize: 15,
+        },
+        style: {
+            backgroundColor: theme ? '#000' : '#E0E0E0',
+        }
+      }}
+    >
       <Tab.Screen name={language ? 'Content' : "Nội dung"} component={ContentsScreen} />
       <Tab.Screen name={language ? 'Lesson' : 'Bài tập'} component={TranscriptScreen} />
     </Tab.Navigator>

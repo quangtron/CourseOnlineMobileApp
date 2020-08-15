@@ -1,9 +1,9 @@
 import { Share } from 'react-native';
 
-const ShareScreen = _ => {
+const ShareScreen = (title) => {
     return(
         Share.share({
-            message: 'React native'
+            message: `https://itedu.me/course-detail/${title}`
         })
     )
 }

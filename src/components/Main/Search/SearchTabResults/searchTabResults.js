@@ -5,6 +5,7 @@ import SearchAll from '../SearchAll/searchAll';
 import { ScreenKey } from '../../../../global/constants';
 import { SettingCommonContext } from '../../../../provider/settingCommon-provider';
 import SearchByName from '../searchByName/searchByName';
+import { View } from 'react-native';
 
 
 const SearchTabResults = props => {
@@ -12,13 +13,17 @@ const SearchTabResults = props => {
 
     const SearchAuthorsScreen = () => {
         return(
-            <SearchByName name={ScreenKey.Authors} navigation={props.navigation} />
+            <View style={{backgroundColor: theme ? '#212121' : '#fff',}}>
+                <SearchByName name={ScreenKey.Authors} navigation={props.navigation} />
+            </View>
         );
     }
 
     const SearchCoursesScreen = () => {
         return(
-            <SearchByName name={ScreenKey.Courses} navigation={props.navigation} />
+            <View style={{backgroundColor: theme ? '#212121' : '#fff',}}>
+                <SearchByName name={ScreenKey.Courses} navigation={props.navigation} />
+            </View>
         );
     }
 

@@ -40,7 +40,7 @@ const HeaderInformation = (props) => {
   }
 
   return (
-    <View>
+    <View style={{marginBottom: 20}}>
       <Text style={Styles.text(22, theme ? "#fff" : "#000", "bold")}>{title}</Text>
       <View style={styles.subInfo}>
         <Text>{subtitle}</Text>
